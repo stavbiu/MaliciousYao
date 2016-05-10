@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\primitives">
+      <UniqueIdentifier>{c8da142f-be82-4d08-962f-c01945a5e9b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\primitives">
+      <UniqueIdentifier>{83c83a28-dafa-4c48-a052-122fed145aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\assets">
+      <UniqueIdentifier>{02248d9c-dd28-4488-ba44-f20f9716bc8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\assets\conf">
+      <UniqueIdentifier>{e2236d8e-2dd5-4a48-9cf5-3019532589c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\assets\circuits">
+      <UniqueIdentifier>{a31cf03f-8bd8-49a2-89f8-9b2def036ff9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\conf\PartiesConfig.txt">
+      <Filter>Resource Files\assets\conf</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\primitives\CommunicationConfig.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\primitives\UnlockP1InputCircuitCreator.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\primitives\CheatingRecoveryCircuitCreator.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\primitives\CommunicationConfig.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\CryptoPrimitives.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\UnlockP1InputCircuitCreator.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\CheatingRecoveryCircuitCreator.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
