@@ -2,6 +2,7 @@
 #include <boost/algorithm/string.hpp>
 #include <MaliciousYao/include/primitives/CommunicationConfig.hpp>
 #include <MaliciousYao/include/primitives/CryptoPrimitives.hpp>
+#include <MaliciousYao/include/primitives/CheatingRecoveryCircuitCreator.hpp>
 #include <libscapi/include/circuits/GarbledCircuitFactory.hpp>
 
 using namespace std;
@@ -37,8 +38,10 @@ int main(int argc, char* argv[]) {
 	CommunicationConfig  * commConfig = new CommunicationConfig(COMM_CONFIG_FILENAME, PARTY, io_service);
 	CommParty * commParty = commConfig->getCommParty();
 	
+	cout << "\nP1 start communication\n";
+
 	//make connection
-	//commParty->join(500, 5000);
+	commParty->join(500, 5000);
 
 	//set crypto primitives
 	CryptoPrimitives primitives(NISTEC_FILE_NAME);
@@ -47,15 +50,20 @@ int main(int argc, char* argv[]) {
 	GarbledBooleanCircuit* mainCircuit = GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,
 		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
 	//cheating recovery circuit
-
+	//TODO - input
+	//GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, input.size())).create()
 
 
 	//end commenication
 	io_service.stop();
 	t.join();
 
+	cout << "\nP1 end communication\n";
+	//enter for out
+	cin.ignore();
 	//release memory
-	//delete mainCircuit;
+	delete mainCircuit;
+	//delete crCircuit;
 
 	return 0;
 }

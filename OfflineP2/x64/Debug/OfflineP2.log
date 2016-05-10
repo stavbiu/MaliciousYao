@@ -1,2 +1,2 @@
 ﻿  AppOfflineP2.cpp
-LINK : fatal error LNK1104: cannot open file 'c:\users\stav\documents\visual studio 2015\Projects\MaliciousYao\x64\Debug\MaliciousYao.lib'
+  OfflineP2.vcxproj -> c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\OfflineP2.exe

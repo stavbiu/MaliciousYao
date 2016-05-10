@@ -3,6 +3,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 #include <libscapi/include/circuits/GarbledCircuitFactory.hpp>
+#include "UnlockP1InputCircuitCreator.hpp"
 
 using namespace std;
 
@@ -29,5 +30,5 @@ public:
 	 output:
 	 A garble boolean circuit that represents the cheating recovery circuit.
 	*/
-	GarbledBooleanCircuit create();
+	GarbledBooleanCircuit* create();
 };

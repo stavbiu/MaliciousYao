@@ -44,6 +44,9 @@
     <ClCompile Include="src\primitives\CheatingRecoveryCircuitCreator.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\primitives\CircuitInput.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\primitives\CommunicationConfig.hpp">
@@ -56,6 +59,9 @@
       <Filter>Header Files\primitives</Filter>
     </ClInclude>
     <ClInclude Include="include\primitives\CheatingRecoveryCircuitCreator.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\CircuitInput.hpp">
       <Filter>Header Files\primitives</Filter>
     </ClInclude>
   </ItemGroup>
