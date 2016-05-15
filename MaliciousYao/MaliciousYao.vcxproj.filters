@@ -28,6 +28,12 @@
     <Filter Include="Resource Files\assets\circuits">
       <UniqueIdentifier>{a31cf03f-8bd8-49a2-89f8-9b2def036ff9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{4f1819e2-2360-4089-9bc6-846039fbd481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{8a4262d5-d26d-4fc9-ab3f-450aac3ec94f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\conf\PartiesConfig.txt">
@@ -47,6 +53,9 @@
     <ClCompile Include="src\primitives\CircuitInput.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\common\CommonMaliciousYao.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\primitives\CommunicationConfig.hpp">
@@ -63,6 +72,12 @@
     </ClInclude>
     <ClInclude Include="include\primitives\CircuitInput.hpp">
       <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\CommonMaliciousYao.hpp">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Preconditions.hpp">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

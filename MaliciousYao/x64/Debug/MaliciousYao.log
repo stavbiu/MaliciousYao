@@ -2,5 +2,6 @@
   CommunicationConfig.cpp
   CircuitInput.cpp
   CheatingRecoveryCircuitCreator.cpp
+  CommonMaliciousYao.cpp
   Generating Code...
   MaliciousYao.vcxproj -> c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\MaliciousYao.lib

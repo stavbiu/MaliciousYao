@@ -22,4 +22,14 @@ TEST_CASE("Common methods", "[]") {
 		REQUIRE(v[0] == 0);
 		REQUIRE(v.size() == 5);
 	}
+
+	SECTION("copy_vector_to_shared_ptr_vector") {
+		vector<int> indices = {1,2,3,4,5};
+		shared_ptr<vector<int>> intArr(new vector<int>(indices.size()));
+		copy(indices.begin(), indices.end(), inserter(*intArr.get(), intArr->begin()));
+
+		for (int i = 0; i < indices.size(); i++) {
+			REQUIRE(indices[i] == (*intArr)[i]);
+		}
+	}
 }
