@@ -4,6 +4,7 @@
 #include <boost/range/algorithm_ext/push_back.hpp>
 #include <libscapi/include/infra/Common.hpp>
 #include <libscapi/include/circuits/GarbledCircuitFactory.hpp>
+#include <libscapi/include/CryptoInfra/Key.hpp>
 #include <vector>
 #include "../../include/common/Preconditions.hpp"
 #include "../../include/common/CommonMaliciousYao.hpp"
@@ -16,10 +17,10 @@ using namespace std;
 
  It contains the wires' indices the input bytes for each wire index.
 */
-class CircuitInput : public NetworkSerialized {
+class CircuitInput {
 private:
 	shared_ptr<vector<byte>> input;
-	shared_ptr<vector<int>> labels;
+	int sizeCircuit;
 
 public:
 	/**
@@ -28,16 +29,8 @@ public:
 	 inputBits The input for each wire.
 	 wireLabels The indices of the wires.
 	*/
-	CircuitInput(shared_ptr<vector<byte>> inputBits, shared_ptr<vector<int>> wireLabels);
+	CircuitInput(shared_ptr<vector<byte>> inputBits);
 
-	/**
-	 Alternative constructor.
-	 It creates new CircuitInput object with the given input and a new wire indices array such as the indices are [0, ..., input.length].
-	 input:
-		 inputArray  The input for each wire.
-		 the created CircuitInput object.
-	*/
-	static CircuitInput* fromByteArray(shared_ptr<vector<byte>> inputArray);
 
 	/**
 	 Alternative constructor.
@@ -49,19 +42,59 @@ public:
 	 return:
 		 the created CircuitInput object.
 	*/
-	static CircuitInput* fromFile(string filename, GarbledBooleanCircuit* gbc, int party);
+	static CircuitInput* fromFile(string filename);
 
 	/**
 	 Alternative constructor.
 	 It creates new CircuitInput object and sets random inputs.
-	  Inputs:
+	 Inputs:
 		 labels The indices of the wires.
+		 random maker.
+	 Return:
 		 the created CircuitInput object.
 	*/
-	static CircuitInput* randomInput(shared_ptr<vector<int>> labels);
+	static CircuitInput* randomInput(int sizeCircuit, mt19937* mt);
 
+	/**
+	 Alternative constructor. 
+	 It creates new CircuitInput object and sets the inputs from the given key.
+	 Inputs:
+		inputKey The key that used to get the inputs.
+	 Return:
+		the created CircuitInput object.
+	*/
+	static CircuitInput* fromSecretKey(SecretKey inputKey);
 
-	// Inherited via NetworkSerialized
-	virtual string toString() override;
-	virtual void initFromString(const string & raw) override;
+	/**
+	 Returns the size of the inputs.
+	*/
+	int size() { return this->sizeCircuit; }
+
+	/**
+	 Returns the N'th input bit.
+	 Input:
+		 n the index of the wire to get the input of.
+	*/
+	byte getNthBit(int n) { return (*this->input)[n]; }
+
+	/**
+	 Return pointer for vector inputs for wires.
+	*/
+	vector<byte>* getInputVector() { return this->input.get(); }
+
+	/*
+	 Return shared pointer for vector inputs for wires.
+	*/
+	shared_ptr<vector<byte>> getInputVectorShared() { return this->input; }
+
+	/**
+	 Returns the xor of the inputs in the two given CircuitInputs objects.
+	 Inputs:
+		 x1 The first input to xor with the other.
+		 x2 The second input to xor with the other.
+	 Return:
+		 the xor result.
+	*/
+	static vector<byte> xor (CircuitInput* x1, CircuitInput* x2);
+
 };

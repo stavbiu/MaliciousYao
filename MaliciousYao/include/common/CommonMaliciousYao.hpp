@@ -55,3 +55,8 @@ shared_ptr<vector<T>> copyVectorToSharedPtr(vector<T> vec);
 	vector size
 */
 vector<byte>* makeRandomBitByteVector(mt19937* mt, int size);
+
+/*
+ Returns a byte array that is the binary representation of the given byte[].
+*/
+vector<byte>* getBinaryByteArray(vector<byte> bytes);

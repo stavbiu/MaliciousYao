@@ -6,30 +6,20 @@ input:
 inputBits The input for each wire.
 wireLabels The indices of the wires.
 */
-CircuitInput::CircuitInput(shared_ptr<vector<byte>> inputBits, shared_ptr<vector<int>> wireLabels)
+CircuitInput::CircuitInput(shared_ptr<vector<byte>> inputBits)
 {
 	// check input is correct
 	Preconditions::checkNotZero(inputBits->size());
-	Preconditions::checkArgument(inputBits->size() == wireLabels->size());
 
 	this->input = inputBits;
 	// check that all the bits are 0 or 1
 	for (const auto& b : *inputBits) {
 		Preconditions::checkBinary(b);
 	}
-	this->labels = wireLabels;
+
+	this->sizeCircuit = inputBits->size();
 }
 
-CircuitInput* CircuitInput::fromByteArray(shared_ptr<vector<byte>> inputArray)
-{
-	shared_ptr<vector<int>> wireLabels(new vector<int>);
-
-	//Crate an indices array from 0 to inputArray size
-	boost::push_back(*wireLabels, boost::irange(0, int(inputArray->size())));
-
-	//Create a new CircuitInput object and return it.
-	return new CircuitInput(inputArray, wireLabels);
-}
 
 /**
  Alternative constructor.
@@ -41,9 +31,9 @@ CircuitInput* CircuitInput::fromByteArray(shared_ptr<vector<byte>> inputArray)
  return:
 		the created CircuitInput object.
 */
-CircuitInput* CircuitInput::fromFile(string filename, GarbledBooleanCircuit* gbc, int party)
+CircuitInput* CircuitInput::fromFile(string filename)
 {
-	return new CircuitInput(shared_ptr<vector<byte>> (readInputAsVector(filename)), copyVectorToSharedPtr(circuitGetLabels(gbc, party)));
+	return new CircuitInput(shared_ptr<vector<byte>> (readInputAsVector(filename)));
 }
 
 /**
@@ -55,25 +45,50 @@ CircuitInput* CircuitInput::fromFile(string filename, GarbledBooleanCircuit* gbc
  Return:
 		the created CircuitInput object.
 */
-CircuitInput * CircuitInput::randomInput(shared_ptr<vector<int>> labels, mt19937* mt)
+CircuitInput * CircuitInput::randomInput(int sizeCircuit, mt19937* mt)
 {
-	return new CircuitInput(shared_ptr<vector<byte>>(makeRandomBitByteVector(mt, labels->size())), labels);
+	return new CircuitInput(shared_ptr<vector<byte>>(makeRandomBitByteVector(mt, sizeCircuit)));
 }
 
-/*
-Inherited via NetworkSerialized
+/**
+Alternative constructor.
+It creates new CircuitInput object and sets the inputs from the given key.
+Inputs:
+inputKey The key that used to get the inputs.
+Return:
+the created CircuitInput object.
 */
-string CircuitInput::toString()
+CircuitInput * CircuitInput::fromSecretKey(SecretKey inputKey)
 {
+	shared_ptr<vector<byte>> inputBinaryArray(getBinaryByteArray(inputKey.getEncoded()));
 
-	//TODO - toString of CircuitInput
-	return string();
+	//Create a new CircuitInput object from the inputs and indices arrays and return it.
+	return new CircuitInput(inputBinaryArray);
 }
 
-/*
-Inherited via NetworkSerialized
+
+/**
+Returns the xor of the inputs in the two given CircuitInputs objects.
+Inputs:
+	x1 The first input to xor with the other.
+	x2 The second input to xor with the other.
+Return:
+	the xor result.
 */
-void CircuitInput::initFromString(const string & raw)
+vector<byte> CircuitInput:: xor (CircuitInput* x1, CircuitInput* x2)
 {
-	//TODO - initFromString of CircuitInput
+	//Check if the sizes of inputs are equal.
+	Preconditions::checkArgument(x1->size() == x2->size());
+
+	int sizeCir = x1->size();
+	shared_ptr<vector<byte>> vec1 = x1->getInputVectorShared();
+	shared_ptr<vector<byte>> vec2 = x2->getInputVectorShared();
+	vector<byte> res(sizeCir);
+
+	// Xor the inputs arrays.
+	for (int i = 0 ; i < sizeCir ; i++) {
+		res[i] = byte(vec1->at(i) ^ vec2->at(i));
+	}
+
+	return res;
 }

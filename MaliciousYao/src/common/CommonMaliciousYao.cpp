@@ -76,8 +76,31 @@ vector<byte>* makeRandomBitByteVector(mt19937 * mt, int size)
 	auto vec = new vector<byte>(size);
 
 	for (int i = 0; i < size; i++) {
-		(*vec)[i] = byte(dis(mt));
+		vec->at(i) = byte(dis(*mt));
 	}
 
 	return vec;
+}
+/*
+Returns a byte array that is the binary representation of the given byte[].
+*/
+vector<byte>* getBinaryByteArray(vector<byte> bytes)
+{
+	int numBits = sizeof(byte)*bytes.size();
+	vector<byte>* binary = new vector<byte>(numBits);
+	// Mask the entire value up to this bit.
+	int mask = 0x80;
+
+	for (int i = 0; i < numBits; i++)
+	{
+		// Take the byte the current bit belongs to.
+		byte currentByte = bytes[i / sizeof(byte)];
+		// Shift by the current bit's index within the byte.
+		int shiftBy = i % sizeof(byte);
+		// If the bit is zero the entire value will be zero.
+		// Cast the result back to byte (numbers are int by default).
+		(*binary)[i] = (byte)((currentByte << shiftBy & mask) == 0 ? 0 : 1);
+	}
+
+	return binary;
 }

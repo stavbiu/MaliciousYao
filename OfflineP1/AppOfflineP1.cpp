@@ -4,6 +4,7 @@
 #include <MaliciousYao/include/primitives/CryptoPrimitives.hpp>
 #include <MaliciousYao/include/primitives/CheatingRecoveryCircuitCreator.hpp>
 #include <libscapi/include/circuits/GarbledCircuitFactory.hpp>
+#include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 
 using namespace std;
 
@@ -50,8 +51,8 @@ int main(int argc, char* argv[]) {
 	GarbledBooleanCircuit* mainCircuit = GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,
 		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
 	//cheating recovery circuit
-	//TODO - input
-	//GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, input.size())).create()
+	int numOfInputs = mainCircuit->getNumberOfInputs(1) + mainCircuit->getNumberOfInputs(2);
+	GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, numOfInputs)).create();
 
 
 	//end commenication
