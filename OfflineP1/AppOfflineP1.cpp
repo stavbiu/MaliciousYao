@@ -54,6 +54,68 @@ int main(int argc, char* argv[]) {
 	int numOfInputs = mainCircuit->getNumberOfInputs(1) + mainCircuit->getNumberOfInputs(2);
 	GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, numOfInputs)).create();
 
+	//TODO - OTExtensionMaliciousSender otSender = initMaliciousOtSender(mainCircuit.getNumberOfInputs(2), commConfig);
+
+
+	//			int N1 = 10;
+	//			int B1 = 10;
+	//			int s1 = 40;
+	//			double p1 = 0.64;
+	//			
+	//			int N2 = 10; //32;
+	//			int B2 = 10; //31;
+	//			int s2 = 40;
+	//			double p2 = 0.64; //0.6;
+
+
+	//			int N1 = 8;
+	//			int B1 = 10;
+	//			int s1 = 40;
+	//			double p1 = 0.59;
+	//			
+	//			int N2 = 8;
+	//			int B2 = 74;
+	//			int s2 = 40;
+	//			double p2 = 0.85;
+
+	int N1 = 32;
+	int B1 = 7;
+	int s1 = 40;
+	double p1 = 0.62;
+
+	int N2 = 32;
+	int B2 = 20;
+	int s2 = 40;
+	double p2 = 0.71;
+
+	//			int N1 = 128;
+	//			int B1 = 12;
+	//			int s1 = 80;
+	//			double p1 = 0.77;
+	//			
+	//			int N2 = 128;
+	//			int B2 = 28;
+	//			int s2 = 80;
+	//			double p2 = 0.75; 
+
+	//			int N1 = 1024;
+	//			int B1 = 4;
+	//			int s1 = 40;
+	//			double p1 = 0.72;
+	//			
+	//			int N2 = 1024;
+	//			int B2 = 10;
+	//			int s2 = 40;
+	//			double p2 = 0.85;
+
+	//no thread implemention
+	GarbledBooleanCircuit* mainGbc = GarbledCircuitFactory::createCircuit(CIRCUIT_FILENAME,
+		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
+	GarbledBooleanCircuit* crGbc = GarbledCircuitFactory::createCircuit(CIRCUIT_CHEATING_RECOVERY,
+		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
+
+
+
 
 	//end commenication
 	io_service.stop();
@@ -63,8 +125,7 @@ int main(int argc, char* argv[]) {
 	//enter for out
 	cin.ignore();
 	//release memory
-	delete mainCircuit;
-	//delete crCircuit;
+	delete mainCircuit, crCircuit;
 
 	return 0;
 }
