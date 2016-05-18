@@ -3,6 +3,7 @@
 #include <MaliciousYao/include/primitives/CommunicationConfig.hpp>
 #include <MaliciousYao/include/primitives/CryptoPrimitives.hpp>
 #include <MaliciousYao/include/primitives/CheatingRecoveryCircuitCreator.hpp>
+#include <MaliciousYao/include/primitives/ExecutionParameters.hpp>
 #include <libscapi/include/circuits/GarbledCircuitFactory.hpp>
 #include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 
@@ -114,7 +115,9 @@ int main(int argc, char* argv[]) {
 	GarbledBooleanCircuit* crGbc = GarbledCircuitFactory::createCircuit(CIRCUIT_CHEATING_RECOVERY,
 		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
 
-
+	//TODO - put ExecutionParameters in OfflineProtocolP1 directly, with out adding varibles.
+	ExecutionParameters mainExecution(mainCircuit, mainGbc, N1, s1, B1, p1);
+	ExecutionParameters crExecution(crCircuit, crGbc, N2, s2, B2, p2);
 
 
 	//end commenication
