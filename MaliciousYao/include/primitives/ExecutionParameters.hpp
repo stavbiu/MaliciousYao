@@ -53,12 +53,12 @@ public:
 	 Getters
 	*/
 	GarbledBooleanCircuit* getCircuit() { return this->gbc; }
-	int numberOfExecutions() { return this->numExecutions; }
-	int bucketSize() { return this->bucketSize; }
-	double evaluationProbability() { return this->evaluationProbability; }
-	int numCircuits() { return this->numCircuits; }
-	int evalCircuits() { return this->evalCircuits; }
-	int checkCircuits() { return this->checkCircuits; }
+	int getNumberOfExecutions() { return this->numExecutions; }
+	int getBucketSize() { return this->bucketSize; }
+	double getEvaluationProbability() { return this->evaluationProbability; }
+	int getNumCircuits() { return this->numCircuits; }
+	int getEvalCircuits() { return this->evalCircuits; }
+	int getCheckCircuits() { return this->checkCircuits; }
 	GarbledBooleanCircuit* getBooleanCircuit() { return this->bc; }
 	
 };

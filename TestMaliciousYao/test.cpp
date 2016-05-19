@@ -2,8 +2,11 @@
 
 #include "catch.hpp"
 #include <vector>
+#include <string>
 #include <boost/range/irange.hpp>
 #include <boost/range/algorithm_ext/push_back.hpp>
+
+#include <MaliciousYao/include/common/CommonMaliciousYao.hpp>
 
 using namespace std;
 
@@ -32,4 +35,33 @@ TEST_CASE("Common methods", "[]") {
 			REQUIRE(indices[i] == (*intArr)[i]);
 		}
 	}
+
+	SECTION("write byte string to file and read") {
+		// clean and create the test file
+		remove("byte_string_test.txt");
+		std::ofstream outfile("byte_string_test.txt");
+		vector<byte> vec = { (byte)0, (byte)1, (byte)0, (byte)0, (byte)1 };
+		string toSend = vectorToString(vec);
+		outfile << toSend << std::endl;
+		outfile.close();
+
+		// read the file as config file
+		std::ifstream infile("byte_string_test.txt");
+		string line;
+		getline(infile, line);
+
+		/*vector<byte>* inputVector = new vector<byte>(5);
+		auto fromLine = explode(line, ' ');
+		for (int i = 0; i < 5; i++)
+			(*inputVector)[i] = fromLine[i][0];
+		*/
+		auto inputVector = readFromString(line);
+
+		for (int i = 0; i < 5; i++) {
+			REQUIRE(vec[i] == (*inputVector)[i]);
+		}
+		infile.close();
+
+	}
+
 }

@@ -7,6 +7,8 @@
 #include <libscapi/include/circuits/GarbledCircuitFactory.hpp>
 #include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 
+#include <MaliciousYao/include/common/CommonMaliciousYao.hpp>
+
 using namespace std;
 
 //party number
@@ -56,8 +58,7 @@ int main(int argc, char* argv[]) {
 	GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, numOfInputs)).create();
 
 	//TODO - OTExtensionMaliciousSender otSender = initMaliciousOtSender(mainCircuit.getNumberOfInputs(2), commConfig);
-
-
+	
 	//			int N1 = 10;
 	//			int B1 = 10;
 	//			int s1 = 40;

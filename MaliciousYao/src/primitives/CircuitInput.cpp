@@ -33,7 +33,13 @@ CircuitInput::CircuitInput(shared_ptr<vector<byte>> inputBits)
 */
 CircuitInput* CircuitInput::fromFile(string filename)
 {
-	return new CircuitInput(shared_ptr<vector<byte>> (readInputAsVector(filename)));
+	auto sc = scannerpp::Scanner(new scannerpp::File(filename));
+	int inputsNumber = sc.nextInt();
+	vector<byte>* inputVector = new vector<byte>(inputsNumber);
+	for (int i = 0; i < inputsNumber; i++)
+		(*inputVector)[i] = (byte)sc.nextInt();
+
+	return new CircuitInput(shared_ptr<vector<byte>> (inputVector));
 }
 
 /**

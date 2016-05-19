@@ -40,7 +40,7 @@ public:
 	OpenSSLDlogECF2m* getDlog() { return this->dlog; }
 	OpenSSLSHA256* getHash() { return &(this->hash); }
 	HKDF* getHKDF() { return &(this->kdf); }
-	OpenSSLAES* getAES(){ return &(this->aes); }
+	AES* getAES(){ return &(this->aes); }
 
 
 };

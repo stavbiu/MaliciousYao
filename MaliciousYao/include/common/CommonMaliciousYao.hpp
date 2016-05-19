@@ -15,6 +15,10 @@
 
 typedef unsigned char byte;
 
+typedef __m128i block;
+
+#define SIZE_OF_BLOCK 16//size in bytes
+
 using namespace std;
 
 /********************************************
@@ -25,13 +29,24 @@ using namespace std;
  Basic function that take vector and make it in to a string with "," between evry element.
 */
 template <typename T>
-string vectorToString(const vector<T>& vec);
+string vectorToString(const vector<T>& vec) 
+{
+	std::ostringstream oss;
 
-/*
- Read from file vector of bytes.
- The first number is the number of inputs.
-*/
-vector<byte>* readInputAsVector(string input_file);
+	if (!vec.empty()) {
+		// Convert all but the last element to avoid a trailing " "
+		std::copy(vec.begin(), vec.end() - 1,
+			std::ostream_iterator<T>(oss, " "));
+
+		// Now add the last element with no delimiter
+		oss << vec.back();
+	}
+	else {
+		oss << "";
+	}
+
+	return oss.str();
+}
 
 /**
  Returns the input indices of the given party in the given circuit.
@@ -46,7 +61,14 @@ vector<int> circuitGetLabels(GarbledBooleanCircuit* gbc, int party);
  Return shared_ptr to the new vector
 */
 template <typename T>
-shared_ptr<vector<T>> copyVectorToSharedPtr(vector<T> vec);
+shared_ptr<vector<T>> copyVectorToSharedPtr(vector<T> vec)
+{
+	shared_ptr<vector<T>> arr(new vector<T>(vec.size()));
+
+	copy(vec.begin(), vec.end(), inserter(*arr.get(), arr->begin()));
+
+	return arr;
+}
 
 /*
  Make vector of random bits, save as bytes.
@@ -57,6 +79,18 @@ shared_ptr<vector<T>> copyVectorToSharedPtr(vector<T> vec);
 vector<byte>* makeRandomBitByteVector(mt19937* mt, int size);
 
 /*
+Make random bit, as byte.
+inputs:
+random generator
+*/
+byte getRandomBit(mt19937 * mt);
+
+/*
  Returns a byte array that is the binary representation of the given byte[].
 */
 vector<byte>* getBinaryByteArray(vector<byte> bytes);
+
+/*
+ Read string that was made with vectorToString() to vector<byte>
+*/
+vector<byte>* readFromString(string str);

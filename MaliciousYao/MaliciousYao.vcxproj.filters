@@ -34,6 +34,18 @@
     <Filter Include="Source Files\common">
       <UniqueIdentifier>{8a4262d5-d26d-4fc9-ab3f-450aac3ec94f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OfflineOnline">
+      <UniqueIdentifier>{b73f8e29-ac88-4f0b-9042-a41fd1f96904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OfflineOnline\specs">
+      <UniqueIdentifier>{8d814e9a-9318-483a-98a1-1c49894de513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OfflineOnline">
+      <UniqueIdentifier>{b7af4761-ab25-42ae-a0c5-b3ac241c3cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OfflineOnline\specs">
+      <UniqueIdentifier>{232a053b-97e7-4f89-8ca3-d9a6fab84271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\conf\PartiesConfig.txt">
@@ -55,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="src\common\CommonMaliciousYao.cpp">
       <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OfflineOnline\specs\OfflineProtocolP1.cpp">
+      <Filter>Source Files\OfflineOnline\specs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\primitives\KProbeResistantMatrix.cpp">
+      <Filter>Source Files\primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +96,15 @@
     </ClInclude>
     <ClInclude Include="include\common\Preconditions.hpp">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\ExecutionParameters.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OfflineOnline\specs\OfflineProtocolP1.hpp">
+      <Filter>Header Files\OfflineOnline\specs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\KProbeResistantMatrix.hpp">
+      <Filter>Header Files\primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
