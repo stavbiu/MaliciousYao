@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../../include/common/CommonMaliciousYao.hpp"
 #include "../../../include/primitives/CommunicationConfig.hpp"
 #include "../../../include/primitives/ExecutionParameters.hpp"
 #include "../../../include/primitives/CryptoPrimitives.hpp"
+#include "../../../include/primitives/KProbeResistantMatrix.hpp"
 
 using namespace std;
 
@@ -20,7 +22,8 @@ private:
 	CryptoPrimitives primitives;			// Contains the low level instances to use.
 	CommParty * channel;						// The channel used communicate between the parties.
 
-
+	KProbeResistantMatrix mainMatrix;			//The probe-resistant matrix that used to extend the main circuit's keys.
+	KProbeResistantMatrix crMatrix;				//The probe-resistant matrix that used to extend the ceating recovery circuit's keys.
 
 public:
 
