@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	commParty->join(500, 5000);
 
 	//set crypto primitives
-	shared_ptr<CryptoPrimitives> primitives(CryptoPrimitives(NISTEC_FILE_NAME));
+	shared_ptr<CryptoPrimitives> primitives(new CryptoPrimitives(NISTEC_FILE_NAME));
 
 	//make circuit
 	GarbledBooleanCircuit* mainCircuit = GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,

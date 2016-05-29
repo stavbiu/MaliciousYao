@@ -20,8 +20,6 @@ private:
 	int n;							//Number of matrix's rows.
 	int m;							//Number of matrix's columns.
 
-	//TODO - transformKeys from JNI
-	void transformKeys(const vector<byte>& originalKeys, vector<byte>& probeResistantKeys, vector<byte>& seed, int n, int m, shared_ptr<vector<vector<byte>>> matrix);
 
 public:
 	/**

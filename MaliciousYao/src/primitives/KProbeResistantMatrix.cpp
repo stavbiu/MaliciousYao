@@ -32,7 +32,9 @@ vector<byte> KProbeResistantMatrix::transformKeys(const vector<byte>& originalKe
 
 	//Call the native function that transform the keys.
 	//TODO - fix call when transformKeys will be ready
-	transformKeys(originalKeys, probeResistantKeys, seed, n, m, matrix);
+	//TODO - transformKeys from JNI
+	//void transformKeys(const vector<byte>& originalKeys, vector<byte>& probeResistantKeys, vector<byte>& seed, int n, int m, shared_ptr<vector<vector<byte>>> matrix);
+	//transformKeys(originalKeys, probeResistantKeys, seed, n, m, matrix);
 
 	return probeResistantKeys;
 }

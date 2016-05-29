@@ -1,3 +1,2 @@
 ﻿  AppOfflineP2.cpp
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\offlinep2\appofflinep2.cpp(51): warning C4930: 'std::shared_ptr<CryptoPrimitives> primitives(CryptoPrimitives)': prototyped function not called (was a variable definition intended?)
   OfflineP2.vcxproj -> c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\OfflineP2.exe
