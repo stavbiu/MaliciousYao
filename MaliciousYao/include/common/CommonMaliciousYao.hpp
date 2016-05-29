@@ -17,6 +17,9 @@ typedef unsigned char byte;
 
 typedef __m128i block;
 
+
+typedef pair<byte*, int> vec_byte;
+
 #define SIZE_OF_BLOCK 16//size in bytes
 
 using namespace std;
@@ -94,3 +97,26 @@ vector<byte>* getBinaryByteArray(vector<byte> bytes);
  Read string that was made with vectorToString() to vector<byte>
 */
 vector<byte>* readFromString(string str);
+
+
+/*
+	Class VecBlock save block* align and size
+*/
+class VecBlock {
+	shared_ptr<block> blockArray;
+	int size;
+
+public:
+	VecBlock(int size) {
+		this->blockArray = shared_ptr<block>((block *)_mm_malloc(sizeof(block) * size, 16));
+		this->size = size;
+	}
+
+	shared_ptr<block> getBlock() { return this->blockArray; }
+	int getSize() { return this->size; }
+
+	void setBlock(shared_ptr<block> newBlock, int newSize) {
+		this->blockArray = newBlock;
+		this->size = newSize;
+	}
+};

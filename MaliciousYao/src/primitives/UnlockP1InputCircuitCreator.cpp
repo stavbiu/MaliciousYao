@@ -103,8 +103,9 @@ void UnlockP1InputCircuitCreator::create()
 
 	//For each gate, print the number of inputs of this gate, number of outputs of this gate, 
 	//indices of input wires, indices of output wires and the gate truth table. 
+	int sizeNum = inputLabelsP1.size();
 
-	for (int i = 0; i < inputLabelsP1.size(); i++) { // inputLabelsP1.size() == outputLabels.size() == numberOfGates
+	for (int i = 0; i < sizeNum; i++) { // inputLabelsP1.size() == outputLabels.size() == numberOfGates
 		outfile << numInputsWiresForGate << " " << numOutputsWiresForGate << " " << inputLabelsP1[i] <<
 			" " << this->masterKeyLabel << " " << this->outputLabels[i] << " " << truthTableANDGate << endl;
 	}

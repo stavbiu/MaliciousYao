@@ -18,13 +18,10 @@ private:
 
 	shared_ptr<vector<vector<byte>>> matrix;	//The K probe-resistant matrix.
 	int n;							//Number of matrix's rows.
-	int m;							//Number of matrix's .
+	int m;							//Number of matrix's columns.
 
 	//TODO - transformKeys from JNI
 	void transformKeys(const vector<byte>& originalKeys, vector<byte>& probeResistantKeys, vector<byte>& seed, int n, int m, shared_ptr<vector<vector<byte>>> matrix);
-
-	//TODO - restoreKeys from JNI
-	void restoreKeys(const vector<byte>& receivedKeys, shared_ptr<vector<vector<byte>>> matrix, int n, int m, vector<byte>& retoredKeys);
 
 public:
 	/**
@@ -69,7 +66,7 @@ public:
 	 Return:
 		 the original restored keys.
 	*/
-	vector<byte> restoreKeys(const vector<byte>& receivedKeys);
+	VecBlock restoreKeys(VecBlock receivedKeys);
 
 	/**
 	 Saves the matrix to a file.

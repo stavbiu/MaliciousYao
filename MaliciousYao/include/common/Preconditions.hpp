@@ -15,6 +15,7 @@ public:
 		Expression To check.
 	*/
 	static void checkArgument(bool expression) {
+		//assert
 		if (!expression) {
 			throw invalid_argument("Illegal Argument Exception");
 		}

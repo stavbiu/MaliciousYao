@@ -89,20 +89,15 @@ CircuitInput* KProbeResistantMatrix::transformInput(CircuitInput& originalInput,
 	return new CircuitInput(shared_ptr<vector<byte>>(newInput));
 }
 
-vector<byte> KProbeResistantMatrix::restoreKeys(const vector<byte>& receivedKeys)
+VecBlock KProbeResistantMatrix::restoreKeys(VecBlock receivedKeys)
 {
-	Preconditions::checkArgument(receivedKeys.size() / 16 == this->m);
+	Preconditions::checkArgument(receivedKeys.getSize() / 16 == this->m);
 
 	//Allocate space for the original keys.
-	vector<byte> restoredKeysArray(16 * this->n);
 
-	//Call the native function that computes the restoring.
-	restoreKeys(receivedKeys, matrix, n, m, restoredKeysArray);
+	VecBlock restoredKeysArray(n);
 
-	//************************************************************************************************************************************
-	//TODO - restoreKeys() block __m128i to byte? WHAT TO DO?
-	//************************************************************************************************************************************
-	/*block xorOfShares;
+	block xorOfShares;
 	for (int i = 0; i < n; i++) {
 
 		xorOfShares = _mm_setzero_si128();
@@ -113,14 +108,14 @@ vector<byte> KProbeResistantMatrix::restoreKeys(const vector<byte>& receivedKeys
 				continue; // insignificant share
 			}
 
-			xorOfShares = _mm_xor_si128(xorOfShares, (block)receivedKeys[j]);
+			xorOfShares = _mm_xor_si128(xorOfShares, receivedKeys.getBlock().get()[j]);
 		}
 
-		restoredKeysArray[i] = xorOfShares;
-	}*/
+		restoredKeysArray.getBlock().get()[i] = xorOfShares;
+	}
 
 
-	return vector<byte>();
+	return restoredKeysArray;
 }
 
 void KProbeResistantMatrix::saveToFile(KProbeResistantMatrix matrix, string filename)

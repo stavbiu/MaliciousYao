@@ -19,7 +19,7 @@ const  string HOME_DIR = "C:/Users/stav/Documents/Visual Studio 2015/Projects/Ma
 const string CIRCUIT_FILENAME = HOME_DIR + string("/assets/circuits/AES/NigelAes.txt");
 const string CIRCUIT_INPUT_FILENAME = HOME_DIR + string("/assets/circuits/AES/AESPartyTwoInputs.txt");
 const string COMM_CONFIG_FILENAME = HOME_DIR + string("/assets/conf/PartiesConfig.txt");
-const string CIRCUIT_CHEATING_RECOVERY = HOME_DIR + string("/assets/circuits/CheatingRecovery/UnlockP1Input.txt");
+const string CIRCUIT_CHEATING_RECOVERY = HOME_DIR + string("/assets/circuits/CheatingRecovery/UnlockP2Input.txt");
 const string BUCKETS_PREFIX_MAIN = HOME_DIR + string("/data/P2/aes");
 const string BUCKETS_PREFIX_CR = HOME_DIR + string("/data/P2/cr");
 const string MAIN_MATRIX = HOME_DIR + "/data/P2/aes.matrix";
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	commParty->join(500, 5000);
 
 	//set crypto primitives
-	CryptoPrimitives primitives(NISTEC_FILE_NAME);
+	shared_ptr<CryptoPrimitives> primitives(CryptoPrimitives(NISTEC_FILE_NAME));
 
 	//make circuit
 	GarbledBooleanCircuit* mainCircuit = GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,
