@@ -86,14 +86,16 @@ void UnlockP1InputCircuitCreator::create()
 		}
 		outfile << endl;
 
-		// Output wires section.
-		// The number of output wires, followed by the indices of the output wires.
-		outfile << this->numberOfOutputWires << endl;
-		for (const auto& j : this->outputLabels) {
-			outfile << j << endl;
-		}
-		outfile << endl;
 	}
+
+
+	// Output wires section.
+	// The number of output wires, followed by the indices of the output wires.
+	outfile << this->numberOfOutputWires << endl;
+	for (const auto& j : this->outputLabels) {
+		outfile << j << endl;
+	}
+	outfile << endl;
 
 	// Gates section.
 	int numInputsWiresForGate = 2;

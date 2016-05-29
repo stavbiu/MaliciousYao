@@ -54,8 +54,9 @@ int main(int argc, char* argv[]) {
 	GarbledBooleanCircuit* mainCircuit = GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,
 		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
 	//cheating recovery circuit
-	int numOfInputs = mainCircuit->getNumberOfInputs(1) + mainCircuit->getNumberOfInputs(2);
-	GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, numOfInputs)).create();
+	//int numOfInputs = mainCircuit->getNumberOfInputs(1) + mainCircuit->getNumberOfInputs(2);
+	//GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, numOfInputs)).create();
+	GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, mainCircuit->getNumberOfGates())).create();
 
 	//TODO - OTExtensionMaliciousReceiver otReceiver = initMaliciousOtReceiver(mainCircuit.getNumberOfInputs(2), commConfig);
 
