@@ -61,3 +61,15 @@ vector<byte>* readFromString(string str)
 
 	return resVec;
 }
+
+bool equalBlocks(block & a, block & b)
+{
+	long *ap = (long*)&a;
+	long *bp = (long*)&b;
+	if ((ap[0] == bp[0]) && (ap[1] == bp[1])) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}

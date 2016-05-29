@@ -20,6 +20,9 @@ private:
 	int n;							//Number of matrix's rows.
 	int m;							//Number of matrix's columns.
 
+	void allocateKeys(VecBlock & probeResistantKeys, block &originalKey0, block &originalKey1, int i, block &newKey);
+
+	int getNumberOfShares(int i, VecBlock &probeResistantKeys, int* shares, int* lastShare);
 
 public:
 	/**
@@ -45,7 +48,7 @@ public:
 	 Return
 		 the transformed keys, that matched the columns of the matrix.
 	*/
-	vector<byte> transformKeys(const vector<byte>& originalKeys, AES* mes);
+	VecBlock transformKeys(VecBlock originalKeys, AES* mes);
 
 	/**
 	 Gets a original inputs and transform them into inputs that corresponds to the matrix columns.

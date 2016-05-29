@@ -1,5 +1,75 @@
 #include "../../include/primitives/KProbeResistantMatrix.hpp"
 
+void KProbeResistantMatrix::allocateKeys(VecBlock & probeResistantKeys, block & originalKey0, block & originalKey1, int i, block & newKey)
+{
+	//Get the delta between the keys.
+	block delta = _mm_xor_si128(originalKey0, originalKey1);
+	int shares = 0;
+	int lastShare = 0;
+	//Get the number of shares (the number of times that "1" is shows) of the row i in the matrix.
+	// This might fail if the matrix is not probe resistant, with negligible probability.
+	int res = getNumberOfShares(i, probeResistantKeys, &shares, &lastShare);
+	if (res == 0) {
+		cout << "error!!!" << endl;
+		return;
+	}
+	block zero = _mm_setzero_si128();
+	block xorOfShares = originalKey0;
+	for (int j = 0; j < m; j++) {
+		if (((*this->matrix)[i][j] == 0) || (j == lastShare)) {
+			// Skip on zeros and skip the last share.
+			continue;
+		}
+
+		//Check if the keys are not set yet.
+		if ((equalBlocks(probeResistantKeys[j * 2], zero) == 0) &&
+			(equalBlocks(probeResistantKeys[j * 2 + 1], zero) == 0)) {
+			probeResistantKeys[j * 2] = newKey;
+			probeResistantKeys[j * 2 + 1] = _mm_xor_si128(newKey, delta);
+		}
+
+		block key0 = probeResistantKeys[j * 2];
+		xorOfShares = _mm_xor_si128(xorOfShares, key0);
+
+		shares--;
+		if (0 == shares) {
+			// All but the last share has been allocated
+			break;
+		}
+	}
+
+	//The last pair of keys are the xor of all shares and the xor of it with delta.
+	probeResistantKeys[lastShare * 2] = xorOfShares;
+	probeResistantKeys[lastShare * 2 + 1] = _mm_xor_si128(xorOfShares, delta);
+
+}
+
+int KProbeResistantMatrix::getNumberOfShares(int i, VecBlock &probeResistantKeys, int* shares, int* lastShare)
+{
+	bool allSharesAreAlreadyAssigned = true;
+	block zero = _mm_setzero_si128();
+
+	for (int j = 0; j < m; j++) {
+		// Count the shares of bit i, and also try to find one that has not been assigned a key yet 
+		// (otherwise we cannot complete the xor of all the keys).
+		if ((*this->matrix)[i][j] == 1) {
+			(*shares)++;
+
+			//Check if the keys are not set yet.
+			if ((equalBlocks(probeResistantKeys[j * 2], zero) == 0) &&
+				(equalBlocks(probeResistantKeys[j * 2 + 1], zero) == 0)) {
+				allSharesAreAlreadyAssigned = false;
+				*lastShare = j;
+			}
+		}
+	}
+
+	if (allSharesAreAlreadyAssigned) {
+		return 0;
+	}
+	return 1;
+}
+
 KProbeResistantMatrix::KProbeResistantMatrix(shared_ptr<vector<vector<byte>>> newMatrix)
 {
 	Preconditions::checkNotNull(newMatrix.get());
@@ -19,22 +89,21 @@ vector<int> KProbeResistantMatrix::getProbeResistantLabels()
 	return res;
 }
 
-vector<byte> KProbeResistantMatrix::transformKeys(const vector<byte>& originalKeys, AES* mes)
+VecBlock KProbeResistantMatrix::transformKeys(VecBlock originalKeys, AES* mes)
 {
 	int keySize = mes->getBlockSize();
-	Preconditions::checkArgument(originalKeys.size()/keySize/2 == this->n);
+	Preconditions::checkArgument(originalKeys.getSize()/keySize/2 == this->n);
 
 	//Create vector to hold the new keys. There are two keys for each of the matrix columns.
-	vector<byte> probeResistantKeys(m * 2 * keySize);
+	VecBlock probeResistantKeys(m * 2 * keySize);
 
 	//Generate new keys using the encryption scheme.
-	vector<byte> seed = mes->generateKey(KEY_SIZE).getEncoded();
+	VecBlock seed(mes->generateKey(KEY_SIZE).getEncoded());
 
-	//Call the native function that transform the keys.
-	//TODO - fix call when transformKeys will be ready
-	//TODO - transformKeys from JNI
-	//void transformKeys(const vector<byte>& originalKeys, vector<byte>& probeResistantKeys, vector<byte>& seed, int n, int m, shared_ptr<vector<vector<byte>>> matrix);
-	//transformKeys(originalKeys, probeResistantKeys, seed, n, m, matrix);
+	//For each pair of original keys allocate new keys and put them in the probeResistantKeys array.
+	for (int i = 0; i < n; i++) {
+		allocateKeys(probeResistantKeys, originalKeys[i * 2], originalKeys[i * 2 + 1], i, seed[i]);
+	}
 
 	return probeResistantKeys;
 }

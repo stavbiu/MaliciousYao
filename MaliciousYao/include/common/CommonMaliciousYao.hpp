@@ -107,9 +107,22 @@ class VecBlock {
 	int size;
 
 public:
-	VecBlock(int size) {
-		this->blockArray = shared_ptr<block>((block *)_mm_malloc(sizeof(block) * size, 16));
-		this->size = size;
+	/*
+	 Create block* aligned to block size (16) in given size.
+	*/
+	VecBlock(int num) {
+		this->size = num;
+		this->blockArray = shared_ptr<block>((block *)_mm_malloc(sizeof(block) * num, SIZE_OF_BLOCK));
+	}
+
+	/*
+	 Create block* from vector of bytes
+	*/
+	VecBlock(vector<byte>& vec) {
+		this->size = vec.size();
+		this->blockArray = shared_ptr<block>((block *)_mm_malloc(sizeof(block) * this->size, SIZE_OF_BLOCK));
+		//copy bytes to block
+		memcpy(this->blockArray.get(), &vec[0], sizeof(block) * this->size);
 	}
 
 	shared_ptr<block> getBlock() { return this->blockArray; }
@@ -119,4 +132,23 @@ public:
 		this->blockArray = newBlock;
 		this->size = newSize;
 	}
+
+	/*
+	 A function that checks if two blocks are equal by casting to double size long array and check each half of a block
+	*/
+	/*inline bool operator==(const VecBlock& b) {
+		long *ap = (long*)this->blockArray.get();
+		long *bp = (long*)b.blockArray.get();
+		if ((ap[0] == bp[0]) && (ap[1] == bp[1])) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}*/
+
+	block& operator[](std::size_t idx) { return this->blockArray.get()[idx]; }
 };
+
+//A function that checks if two blocks are equal by casting to double size long array and check each half of a block
+bool equalBlocks(block &a, block &b);
