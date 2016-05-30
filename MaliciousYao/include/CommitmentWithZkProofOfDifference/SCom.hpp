@@ -19,6 +19,9 @@ private:
 	shared_ptr<CmtCDecommitmentMessage> d1;			//decommitment on r.
 
 public:
+
+	SCom(){}
+
 	/**
 	* A constructor that computes the commitment and decommitment messages of x xor r and r.
 	* @param committer Used to commit and decommit the values.

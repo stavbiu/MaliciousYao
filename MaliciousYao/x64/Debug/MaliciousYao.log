@@ -1,23 +1,8 @@
-﻿  CommitmentBundle.cpp
-  Bundle.cpp
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\bundle.cpp(10): error C2143: syntax error: missing ';' before 'Bundle::Builder::circuit'
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\bundle.cpp(10): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\bundle.cpp(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\bundle.cpp(11): error C2556: 'int Bundle::Builder::circuit(GarbledBooleanCircuit *,block *)': overloaded function differs only by return type from 'Bundle::Builder Bundle::Builder::circuit(GarbledBooleanCircuit *,block *)'
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\include\primitives\bundle.hpp(64): note: see declaration of 'Bundle::Builder::circuit'
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\bundle.cpp(11): error C2371: 'Bundle::Builder::circuit': redefinition; different basic types
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\include\primitives\bundle.hpp(64): note: see declaration of 'Bundle::Builder::circuit'
+﻿  SC.cpp
   Generating Code...
   Compiling...
-  KProbeResistantMatrix.cpp
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(182): error C2228: left of '.get' must have class/struct/union
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(182): note: type is 'block *'
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(182): note: did you intend to use '->' instead?
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(182): error C2660: '_mm_xor_si128': function does not take 1 arguments
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(185): error C2228: left of '.get' must have class/struct/union
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(185): note: type is 'block *'
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\primitives\kproberesistantmatrix.cpp(185): note: did you intend to use '->' instead?
-  CircuitInput.cpp
-  OfflineProtocolP1.cpp
-  CommonMaliciousYao.cpp
+  SCom.cpp
+  DifferenceCommitmentCommitterBundle.cpp
   Generating Code...
+Bundle.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+  MaliciousYao.vcxproj -> c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\MaliciousYao.lib
