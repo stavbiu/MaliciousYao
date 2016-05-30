@@ -7,14 +7,14 @@ vector<int> circuitGetLabels(GarbledBooleanCircuit* gbc, int party)
 	return gbc->getInputWireIndices(party);
 }
 
-vector<byte>* makeRandomBitByteVector(mt19937 * mt, int size)
+vector<byte> makeRandomBitByteVector(mt19937 * mt, int size)
 {
 	uniform_int_distribution<> dis(0, 1);
 
-	auto vec = new vector<byte>(size);
+	vector<byte> vec(size);
 
 	for (int i = 0; i < size; i++) {
-		vec->at(i) = byte(dis(*mt));
+		vec[i] = byte(dis(*mt));
 	}
 
 	return vec;

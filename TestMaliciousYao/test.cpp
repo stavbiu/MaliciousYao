@@ -64,4 +64,41 @@ TEST_CASE("Common methods", "[]") {
 
 	}
 
+	SECTION("print dynamic format") {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 2; j++) {
+				boost::format fmter("i: %1%, j: %2%\n");
+				fmter % i;
+				fmter % j;
+				cout << fmter.str();
+			}
+		}
+	}
+
+	SECTION("copy vector") {
+		//make matrix a
+		vector<vector<int>> a(3);
+		int num = 0;
+		int size = 2;
+		for (int i = 0; i < 3; i++) {
+			a[i] = vector<int>(size);
+			for (int j = 0; j < size; j++) {
+				a[i][j] = num;
+				num++;
+			}
+		}
+
+		//copy to one vector test
+		vector<int> test(3*size);
+		int t = 0;
+		for (int i = 0; i < 3; i++) {
+			std::copy_n(a[i].begin(), size, &test[t]);
+			t += size;
+		}
+		//test
+		for (int i = 0; i < 3 * size; i++) {
+			REQUIRE(test[i] == i);
+		}
+	}
+
 }

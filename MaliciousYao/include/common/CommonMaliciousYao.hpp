@@ -22,6 +22,11 @@ typedef pair<byte*, int> vec_byte;
 
 #define SIZE_OF_BLOCK 16//size in bytes
 
+#ifdef _WIN32
+#else
+#include <libscapi/include/circuits/Compat.h>
+#endif
+
 using namespace std;
 
 /********************************************
@@ -79,7 +84,7 @@ shared_ptr<vector<T>> copyVectorToSharedPtr(vector<T> vec)
 	random generator
 	vector size
 */
-vector<byte>* makeRandomBitByteVector(mt19937* mt, int size);
+vector<byte> makeRandomBitByteVector(mt19937* mt, int size);
 
 /*
 Make random bit, as byte.
@@ -103,7 +108,7 @@ vector<byte>* readFromString(string str);
 	Class VecBlock save block* align and size
 */
 class VecBlock {
-	shared_ptr<block> blockArray;
+	block* blockArray;
 	int size;
 
 public:
@@ -112,42 +117,31 @@ public:
 	*/
 	VecBlock(int num) {
 		this->size = num;
-		this->blockArray = shared_ptr<block>((block *)_mm_malloc(sizeof(block) * num, SIZE_OF_BLOCK));
+		this->blockArray =(block *)_mm_malloc(sizeof(block) * num, SIZE_OF_BLOCK);
 	}
 
+	~VecBlock() {
+		_aligned_free(this->blockArray);
+	}
 	/*
 	 Create block* from vector of bytes
 	*/
 	VecBlock(vector<byte>& vec) {
 		this->size = vec.size();
-		this->blockArray = shared_ptr<block>((block *)_mm_malloc(sizeof(block) * this->size, SIZE_OF_BLOCK));
+		this->blockArray = (block *)_mm_malloc(sizeof(block) * this->size, SIZE_OF_BLOCK);
 		//copy bytes to block
-		memcpy(this->blockArray.get(), &vec[0], sizeof(block) * this->size);
+		memcpy(this->blockArray, &vec[0], sizeof(block) * this->size);
 	}
 
-	shared_ptr<block> getBlock() { return this->blockArray; }
+	block* getBlock() { return this->blockArray; }
 	int getSize() { return this->size; }
 
-	void setBlock(shared_ptr<block> newBlock, int newSize) {
+	void setBlock(block* newBlock, int newSize) {
 		this->blockArray = newBlock;
 		this->size = newSize;
 	}
-
-	/*
-	 A function that checks if two blocks are equal by casting to double size long array and check each half of a block
-	*/
-	/*inline bool operator==(const VecBlock& b) {
-		long *ap = (long*)this->blockArray.get();
-		long *bp = (long*)b.blockArray.get();
-		if ((ap[0] == bp[0]) && (ap[1] == bp[1])) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}*/
-
-	block& operator[](std::size_t idx) { return this->blockArray.get()[idx]; }
+	
+	block& operator[](std::size_t idx) { return this->blockArray[idx]; }
 };
 
 //A function that checks if two blocks are equal by casting to double size long array and check each half of a block

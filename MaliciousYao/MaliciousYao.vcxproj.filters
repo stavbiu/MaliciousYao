@@ -46,6 +46,12 @@
     <Filter Include="Source Files\OfflineOnline\specs">
       <UniqueIdentifier>{232a053b-97e7-4f89-8ca3-d9a6fab84271}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CommitmentWithZkProofOfDifference">
+      <UniqueIdentifier>{b6cb9eb1-a189-46e5-af19-b2666030fdb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CommitmentWithZkProofOfDifference">
+      <UniqueIdentifier>{f9d3eb7d-ec50-40c3-91e5-7656882ece2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\conf\PartiesConfig.txt">
@@ -73,6 +79,21 @@
     </ClCompile>
     <ClCompile Include="src\primitives\KProbeResistantMatrix.cpp">
       <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\primitives\CommitmentBundle.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\primitives\Bundle.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.cpp">
+      <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CommitmentWithZkProofOfDifference\SCom.cpp">
+      <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CommitmentWithZkProofOfDifference\SC.cpp">
+      <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +126,21 @@
     </ClInclude>
     <ClInclude Include="include\primitives\KProbeResistantMatrix.hpp">
       <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\Bundle.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\primitives\CommitmentBundle.hpp">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.hpp">
+      <Filter>Header Files\CommitmentWithZkProofOfDifference</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CommitmentWithZkProofOfDifference\SCom.hpp">
+      <Filter>Header Files\CommitmentWithZkProofOfDifference</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CommitmentWithZkProofOfDifference\SC.hpp">
+      <Filter>Header Files\CommitmentWithZkProofOfDifference</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

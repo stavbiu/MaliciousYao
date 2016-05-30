@@ -53,7 +53,7 @@ CircuitInput* CircuitInput::fromFile(string filename)
 */
 CircuitInput * CircuitInput::randomInput(int sizeCircuit, mt19937* mt)
 {
-	return new CircuitInput(shared_ptr<vector<byte>>(makeRandomBitByteVector(mt, sizeCircuit)));
+	return new CircuitInput(shared_ptr<vector<byte>>(&makeRandomBitByteVector(mt, sizeCircuit)));
 }
 
 /**

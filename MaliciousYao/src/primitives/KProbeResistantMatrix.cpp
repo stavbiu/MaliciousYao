@@ -179,10 +179,10 @@ VecBlock KProbeResistantMatrix::restoreKeys(VecBlock receivedKeys)
 				continue; // insignificant share
 			}
 
-			xorOfShares = _mm_xor_si128(xorOfShares, receivedKeys.getBlock().get()[j]);
+			xorOfShares = _mm_xor_si128(xorOfShares, receivedKeys[j]);
 		}
 
-		restoredKeysArray.getBlock().get()[i] = xorOfShares;
+		restoredKeysArray[i] = xorOfShares;
 	}
 
 

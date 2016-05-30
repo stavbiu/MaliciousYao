@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../../include/common/CommonMaliciousYao.hpp"
+#include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
+#include <libscapi/include/infra/Common.hpp>
 
 /**
  A CommitmentBundle is a struct that holds the parameters pf the commitments on the keys. 
@@ -45,7 +47,7 @@ public:
 		 wireIndex The index of the wire to get the commitment on.
 		 sigma A boolean that indicates which commitment to return.
 	 */
-	 //TODO - CmtCCommitmentMsg getCommitment(int wireIndex, int sigma);
+	CmtCCommitmentMsg* getCommitment(int wireIndex, int sigma) const;
 
 	 /**
 	  Returns the decommitment that matches the given sigma of the given wire index.
@@ -53,7 +55,7 @@ public:
 		 wireIndex The index of the wire to get the decommitment on.
 		 sigma A boolean that indicates which decommitment to return.
 	 */
-	 //TODO -  CmtCDecommitmentMessage getDecommitment(int wireIndex, int sigma);
+	 CmtCDecommitmentMessage* getDecommitment(int wireIndex, int sigma);
 
 	
 	 shared_ptr<vector<byte>> getCommitments() { return this->commitments; }
@@ -73,8 +75,9 @@ public:
 
 	 /**
 	  Verifies that this commitment bundle and the given one are equal.
-	  Inpur:
+	  Input:
 		 other Another CommitmentBundle to check equality.
+	  @throws CheatAttemptException in case the given bundle is different than this one.
 	 */
-	 void verifyCommitmentsAreEqual(CommitmentBundle other);
+	 bool operator==(const CommitmentBundle& b);
 };

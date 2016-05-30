@@ -156,20 +156,30 @@
     <Text Include="assets\conf\PartiesConfig.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.cpp" />
+    <ClCompile Include="src\CommitmentWithZkProofOfDifference\SC.cpp" />
+    <ClCompile Include="src\CommitmentWithZkProofOfDifference\SCom.cpp" />
     <ClCompile Include="src\common\CommonMaliciousYao.cpp" />
     <ClCompile Include="src\OfflineOnline\specs\OfflineProtocolP1.cpp" />
+    <ClCompile Include="src\primitives\Bundle.cpp" />
     <ClCompile Include="src\primitives\CheatingRecoveryCircuitCreator.cpp" />
     <ClCompile Include="src\primitives\CircuitInput.cpp" />
+    <ClCompile Include="src\primitives\CommitmentBundle.cpp" />
     <ClCompile Include="src\primitives\CommunicationConfig.cpp" />
     <ClCompile Include="src\primitives\KProbeResistantMatrix.cpp" />
     <ClCompile Include="src\primitives\UnlockP1InputCircuitCreator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.hpp" />
+    <ClInclude Include="include\CommitmentWithZkProofOfDifference\SC.hpp" />
+    <ClInclude Include="include\CommitmentWithZkProofOfDifference\SCom.hpp" />
     <ClInclude Include="include\common\CommonMaliciousYao.hpp" />
     <ClInclude Include="include\common\Preconditions.hpp" />
     <ClInclude Include="include\OfflineOnline\specs\OfflineProtocolP1.hpp" />
+    <ClInclude Include="include\primitives\Bundle.hpp" />
     <ClInclude Include="include\primitives\CheatingRecoveryCircuitCreator.hpp" />
     <ClInclude Include="include\primitives\CircuitInput.hpp" />
+    <ClInclude Include="include\primitives\CommitmentBundle.hpp" />
     <ClInclude Include="include\primitives\CommunicationConfig.hpp" />
     <ClInclude Include="include\primitives\CryptoPrimitives.hpp" />
     <ClInclude Include="include\primitives\ExecutionParameters.hpp" />
