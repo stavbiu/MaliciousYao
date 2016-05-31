@@ -61,13 +61,6 @@ public:
 	CmtCCommitmentMsg* getMaskCmt() { //TODO - return new CmtSimpleHashCommitmentMessage(maskCmt, maskIds);
 	}
 
-	/*
-	Create new CmtCCommitmentMsg.
-	*** Caller needs to Delete. ***
-	*/
-	CmtCCommitmentMsg* getMaskCmt() { //TODO - return new CmtSimpleHashCommitmentMessage(maskCmt, maskIds);
-	}
-
 	vector<byte> getCommitmentsX() { return this->commitmentsX; }
 
 	vector<long> getCommitmentXIds() { return this->commitmentsXIds; }
@@ -105,12 +98,12 @@ public:
 	 Create and return a CmtCCommitmentMsg[][] from the diffCommitments and diffCommitmentsIds members.
 	 *** Caller needs to Delete. ***
 	*/
-	vector<vector<CmtCCommitmentMsg>>* getDiffCommitments();
+	vector<vector<CmtCCommitmentMsg*>> getDiffCommitments();
 
 	/*
 	 Set the given commitmentsX in the diffCommitments and diffCommitmentsIds members.
 	*/
-	void setDiffCommitments(vector<vector<CmtCCommitmentMsg>>* diffCommitments);
+	void setDiffCommitments(vector<vector<CmtCCommitmentMsg*>> diffCommitments);
 
 	// Inherited via NetworkSerialized
 	virtual string toString() override;

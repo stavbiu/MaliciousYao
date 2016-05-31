@@ -39,10 +39,10 @@ void CommitmentsPackage::setCommitmentsY2(vector<byte> commitmentsY2, vector<lon
 }
 
 
-vector<vector<CmtCCommitmentMsg>>* CommitmentsPackage::getDiffCommitments()
+vector<vector<CmtCCommitmentMsg*>> CommitmentsPackage::getDiffCommitments()
 {
 	int size = diffCommitments.size() / (2 * s) / this->cmtSize;
-	auto commitments = new vector<vector<CmtCCommitmentMsg>>(size);
+	vector<vector<CmtCCommitmentMsg*>> commitments (size);
 	for (int k = 0; k < size; k++) {
 		//TODO - CmtSimpleHashCommitmentMessage[] innerComs = new CmtSimpleHashCommitmentMessage[2*s];
 		for (int i = 0; i < 2 * s; i++) {
@@ -56,18 +56,18 @@ vector<vector<CmtCCommitmentMsg>>* CommitmentsPackage::getDiffCommitments()
 	return commitments;
 }
 
-void CommitmentsPackage::setDiffCommitments(vector<vector<CmtCCommitmentMsg>>* diffCommitments)
+void CommitmentsPackage::setDiffCommitments(vector<vector<CmtCCommitmentMsg*>> diffCommitments)
 {
-	int size = diffCommitments->size();
+	int size = diffCommitments.size();
 	this->diffCommitments = vector<byte>(size * 2 * this->s*this->cmtSize);
 	this->diffCommitmentsIds = vector<long>(size * 2 * this->s);
 
 	for (int i = 0; i < size; i++) {
-		vector<CmtCCommitmentMsg> com = diffCommitments->at(i);
+		vector<CmtCCommitmentMsg*> com = diffCommitments[i];
 		int cSize = com.size();
 		for (int k = 0; k < cSize; k++) {
 			//TODO - System.arraycopy(((CmtSimpleHashCommitmentMessage)com[k]).getCommitment(), 0, this.diffCommitments, i*s * 2 * cmtSize + k*cmtSize, cmtSize);
-			this->diffCommitmentsIds[i * 2 * s + k] = com[k].getId();
+			this->diffCommitmentsIds[i * 2 * s + k] = com[k]->getId();
 		}
 	}
 }
