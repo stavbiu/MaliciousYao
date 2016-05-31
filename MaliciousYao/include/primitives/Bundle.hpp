@@ -3,6 +3,7 @@
 #include "../../include/common/CommonMaliciousYao.hpp"
 #include "../../include/primitives/CommitmentBundle.hpp"
 #include "../../include/CommitmentWithZkProofOfDifference/DifferenceCommitmentCommitterBundle.hpp"
+#include "../../include/OfflineOnline/primitives/CommitmentsPackage.hpp"
 #include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 #include <libscapi/include/CryptoInfra/Key.hpp>
 
@@ -13,7 +14,7 @@
 
  The bundle is used during the offline and the online phases of the protocol.
 */
-class Bundle{
+class Bundle : public NetworkSerialized {
 private:
 	vector<byte> seed;
 	block* garbledTables;  	// The underlying garbled circuit.
@@ -97,6 +98,16 @@ public:
 	* Put in the commitment package the commitments on X, Y1Extended, Y2 and ouptut keys.
 	* @param pack CommitmentsPackage that should be filled with the commitments.
 	*/
-	//TODO - void getCommitments(CommitmentsPackage pack);
+	void getCommitments(CommitmentsPackage* pack);
+
+	DifferenceCommitmentCommitterBundle getDifferenceCommitmentBundle() { return this->diffCommitments; }
+
+	SecretKey* getSecret() { return this->secret; }
+
+
+	// Inherited via NetworkSerialized
+	virtual string toString() override;
+
+	virtual void initFromString(const string & raw) override;
 
 };

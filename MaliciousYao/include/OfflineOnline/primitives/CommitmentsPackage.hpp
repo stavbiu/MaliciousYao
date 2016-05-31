@@ -22,15 +22,15 @@ class CommitmentsPackage: public NetworkSerialized {
 	long seedIds;
 	shared_ptr<vector<byte>> maskCmt;
 	long maskIds;
-	vector<byte> commitmentsX;
-	vector<long> commitmentsXIds;
-	vector<byte> commitmentsY1Extended;
-	vector<long> commitmentsY1ExtendedIds;
-	vector<byte> commitmentsY2;
-	vector<long> commitmentsY2Ids;
-	vector<byte> commitmentsOutputKeys;
-	vector<byte> diffCommitments;
-	vector<long> diffCommitmentsIds;
+	shared_ptr<vector<byte>> commitmentsX;
+	shared_ptr<vector<long>> commitmentsXIds;
+	shared_ptr<vector<byte>> commitmentsY1Extended;
+	shared_ptr<vector<long>> commitmentsY1ExtendedIds;
+	shared_ptr<vector<byte>> commitmentsY2;
+	shared_ptr<vector<long>> commitmentsY2Ids;
+	shared_ptr<vector<byte>> commitmentsOutputKeys;
+	shared_ptr<vector<byte>> diffCommitments;
+	shared_ptr<vector<long>> diffCommitmentsIds;
 
 public:
 	/**
@@ -61,23 +61,23 @@ public:
 	CmtCCommitmentMsg* getMaskCmt() { //TODO - return new CmtSimpleHashCommitmentMessage(maskCmt, maskIds);
 	}
 
-	vector<byte> getCommitmentsX() { return this->commitmentsX; }
+	shared_ptr<vector<byte>> getCommitmentsX() { return this->commitmentsX; }
 
-	vector<long> getCommitmentXIds() { return this->commitmentsXIds; }
+	shared_ptr<vector<long>> getCommitmentXIds() { return this->commitmentsXIds; }
 
-	void setCommitmentsX(vector<byte> commitmentsX, vector<long> commitmentsXIds);
+	void setCommitmentsX(shared_ptr<vector<byte>> commitmentsX, shared_ptr<vector<long>> commitmentsXIds);
 
-	vector<byte> getCommitmentsY1Extended() { return this->commitmentsY1Extended; }
+	shared_ptr<vector<byte>> getCommitmentsY1Extended() { return this->commitmentsY1Extended; }
 
-	vector<long> getCommitmentY1ExtendedIds() { return this->commitmentsY1ExtendedIds; }
+	shared_ptr<vector<long>> getCommitmentY1ExtendedIds() { return this->commitmentsY1ExtendedIds; }
 
-	void setCommitmentsY1Extended(vector<byte> commitmentsY1Extended, vector<long> commitmentsY1ExtendedIds);
+	void setCommitmentsY1Extended(shared_ptr<vector<byte>> commitmentsY1Extended, shared_ptr<vector<long>> commitmentsY1ExtendedIds);
 
-	vector<byte> getCommitmentsY2() { return this->commitmentsY2; }
+	shared_ptr<vector<byte>> getCommitmentsY2() { return this->commitmentsY2; }
 
-	vector<long> getCommitmentY2Ids() { return this->commitmentsY2Ids; }
+	shared_ptr<vector<long>> getCommitmentY2Ids() { return this->commitmentsY2Ids; }
 
-	void setCommitmentsY2(vector<byte> commitmentsY2, vector<long> commitmentsY2Ids);
+	void setCommitmentsY2(shared_ptr<vector<byte>> commitmentsY2, shared_ptr<vector<long>> commitmentsY2Ids);
 
 	/*
 	Create and return a CmtCCommitmentMsg from the commitmentsOutputKeys.

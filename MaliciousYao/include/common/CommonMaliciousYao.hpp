@@ -56,6 +56,26 @@ string vectorToString(const vector<T>& vec)
 	return oss.str();
 }
 
+template <typename T>
+string vectorToString(const vector<T>* vec)
+{
+	std::ostringstream oss;
+
+	if (!vec->empty()) {
+		// Convert all but the last element to avoid a trailing " "
+		std::copy(vec->begin(), vec->end() - 1,
+			std::ostream_iterator<T>(oss, " "));
+
+		// Now add the last element with no delimiter
+		oss << vec->back();
+	}
+	else {
+		oss << "";
+	}
+
+	return oss.str();
+}
+
 /**
  Returns the input indices of the given party in the given circuit.
  Inputs:

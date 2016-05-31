@@ -30,3 +30,22 @@ Bundle::Bundle(vector<byte>& seed, GarbledBooleanCircuit * garbledCircuit, block
 
 	this->keySize = keySize;
 }
+
+void Bundle::getCommitments(CommitmentsPackage* pack)
+{
+	pack->setCommitmentsX(this->commitmentsX->getCommitments(), this->commitmentsX->getCommitmentsIds());
+	pack->setCommitmentsY1Extended(this->commitmentsY1Extended->getCommitments(), this->commitmentsY1Extended->getCommitmentsIds());
+	pack->setCommitmentsY2(this->commitmentsY2->getCommitments(), this->commitmentsY2->getCommitmentsIds());
+	pack->setCommitmentsOutputKeys(this->commitment);
+}
+
+string Bundle::toString()
+{
+	//TODO - toString in Bundle
+	return string();
+}
+
+void Bundle::initFromString(const string & raw)
+{
+	//TODO - initFromString in Bundle
+}

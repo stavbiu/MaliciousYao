@@ -64,6 +64,34 @@ TEST_CASE("Common methods", "[]") {
 
 	}
 
+	SECTION("write long string to file and read") {
+		// clean and create the test file
+		remove("long_string_test.txt");
+		std::ofstream outfile("long_string_test.txt");
+		vector<long> vec = { 1, 222, 5, 3, 99959 };
+		string toSend = vectorToString(vec);
+		outfile << toSend << std::endl;
+		outfile.close();
+
+		// read the file as config file
+		std::ifstream infile("long_string_test.txt");
+		string line;
+		getline(infile, line);
+
+		/*vector<byte>* inputVector = new vector<byte>(5);
+		auto fromLine = explode(line, ' ');
+		for (int i = 0; i < 5; i++)
+		(*inputVector)[i] = fromLine[i][0];
+		*/
+		auto inputVector = readLongVectorFromString(line);
+
+		for (int i = 0; i < 5; i++) {
+			REQUIRE(vec[i] == inputVector[i]);
+		}
+		infile.close();
+
+	}
+
 	SECTION("print dynamic format") {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 2; j++) {
