@@ -48,15 +48,43 @@ vector<byte>* getBinaryByteArray(vector<byte> bytes)
 	return binary;
 }
 
-vector<byte>* readFromString(string str)
+vector<byte> readByteVectorFromString(string str)
 {
 	auto fromStr = explode(str, ' ');
 	int numBytes = fromStr.size();
-	auto resVec = new vector<byte>(numBytes);
+	vector<byte> resVec(numBytes);
 
 	//go over fromStr and set the first char in to resVec as byte
 	for (int i = 0; i < numBytes; i++) {
-		(*resVec)[i] = fromStr[i][0];
+		resVec[i] = fromStr[i][0];
+	}
+
+	return resVec;
+}
+
+vector<long> readLongVectorFromString(string str)
+{
+	auto fromStr = explode(str, ' ');
+	int num = fromStr.size();
+	vector<long> resVec(num);
+
+	//go over fromStr and set the first char in to resVec as byte
+	for (int i = 0; i < num; i++) {
+		resVec[i] = std::stol(fromStr[i]);
+	}
+
+	return resVec;
+}
+
+vector<int> readIntVectorFromString(string str)
+{
+	auto fromStr = explode(str, ' ');
+	int num = fromStr.size();
+	vector<int> resVec(num);
+
+	//go over fromStr and set the first char in to resVec as byte
+	for (int i = 0; i < num; i++) {
+		resVec[i] = std::stoi(fromStr[i]);
 	}
 
 	return resVec;

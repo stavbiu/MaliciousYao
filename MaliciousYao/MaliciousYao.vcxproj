@@ -160,6 +160,7 @@
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\SC.cpp" />
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\SCom.cpp" />
     <ClCompile Include="src\common\CommonMaliciousYao.cpp" />
+    <ClCompile Include="src\OfflineOnline\primitives\CommitmentsPackage.cpp" />
     <ClCompile Include="src\OfflineOnline\specs\OfflineProtocolP1.cpp" />
     <ClCompile Include="src\primitives\Bundle.cpp" />
     <ClCompile Include="src\primitives\CheatingRecoveryCircuitCreator.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\SCom.hpp" />
     <ClInclude Include="include\common\CommonMaliciousYao.hpp" />
     <ClInclude Include="include\common\Preconditions.hpp" />
+    <ClInclude Include="include\OfflineOnline\primitives\CommitmentsPackage.hpp" />
     <ClInclude Include="include\OfflineOnline\specs\OfflineProtocolP1.hpp" />
     <ClInclude Include="include\primitives\Bundle.hpp" />
     <ClInclude Include="include\primitives\CheatingRecoveryCircuitCreator.hpp" />

@@ -13,14 +13,14 @@
 */
 class SCom {
 private:
-	shared_ptr<CmtCCommitmentMsg> c0;				//commitment on x xor r.
-	shared_ptr<CmtCCommitmentMsg> c1;				//commitment on  r.		
-	shared_ptr<CmtCDecommitmentMessage> d0;			//decommitment on x xor r.
-	shared_ptr<CmtCDecommitmentMessage> d1;			//decommitment on r.
+	shared_ptr<CmtCCommitmentMsg> c0 = NULL;				//commitment on x xor r.
+	shared_ptr<CmtCCommitmentMsg> c1 = NULL;				//commitment on  r.		
+	shared_ptr<CmtCDecommitmentMessage> d0 = NULL;			//decommitment on x xor r.
+	shared_ptr<CmtCDecommitmentMessage> d1 = NULL;			//decommitment on r.
 
 public:
 
-	SCom(){}
+	SCom() {}
 
 	/**
 	* A constructor that computes the commitment and decommitment messages of x xor r and r.

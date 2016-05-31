@@ -52,6 +52,12 @@
     <Filter Include="Source Files\CommitmentWithZkProofOfDifference">
       <UniqueIdentifier>{f9d3eb7d-ec50-40c3-91e5-7656882ece2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OfflineOnline\primitives">
+      <UniqueIdentifier>{a0ab05c4-af5c-4b70-939f-4e86e63dfbca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OfflineOnline\primitives">
+      <UniqueIdentifier>{dd8238f8-c5f1-4450-8000-2ee0b189d7a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\conf\PartiesConfig.txt">
@@ -94,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\SC.cpp">
       <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OfflineOnline\primitives\CommitmentsPackage.cpp">
+      <Filter>Source Files\OfflineOnline\primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\SC.hpp">
       <Filter>Header Files\CommitmentWithZkProofOfDifference</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OfflineOnline\primitives\CommitmentsPackage.hpp">
+      <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

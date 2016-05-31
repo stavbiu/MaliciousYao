@@ -18,11 +18,13 @@ using namespace std;
 */
 class DifferenceCommitmentCommitterBundle {
 private:
-	shared_ptr<vector<byte>> x;							//The committed value.
-	shared_ptr<CmtCCommitmentMsg> wCommitment;			//Sigma array.
-	shared_ptr<SC> c;								//The pairs of commitments on the committed value.
+	shared_ptr<vector<byte>> x = NULL;							//The committed value.
+	shared_ptr<CmtCCommitmentMsg> wCommitment = NULL;			//Sigma array.
+	shared_ptr<SC> c = NULL;								//The pairs of commitments on the committed value.
 
 public:
+
+	DifferenceCommitmentCommitterBundle(){}
 
 	/**
 	* A constructor that sets the parameters.

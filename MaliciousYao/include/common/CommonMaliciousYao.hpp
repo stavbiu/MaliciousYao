@@ -34,7 +34,7 @@ using namespace std;
 *********************************************/
 
 /*
- Basic function that take vector and make it in to a string with "," between evry element.
+ Basic function that take vector and make it in to a string with " " between every element.
 */
 template <typename T>
 string vectorToString(const vector<T>& vec) 
@@ -101,14 +101,24 @@ vector<byte>* getBinaryByteArray(vector<byte> bytes);
 /*
  Read string that was made with vectorToString() to vector<byte>
 */
-vector<byte>* readFromString(string str);
+vector<byte> readByteVectorFromString(string str);
+
+/*
+Read string that was made with vectorToString() to vector<long>
+*/
+vector<long> readLongVectorFromString(string str);
+
+/*
+Read string that was made with vectorToString() to vector<int>
+*/
+vector<int> readIntVectorFromString(string str);
 
 
 /*
 	Class VecBlock save block* align and size
 */
 class VecBlock {
-	block* blockArray;
+	block* blockArray = NULL;
 	int size;
 
 public:
@@ -137,6 +147,10 @@ public:
 	int getSize() { return this->size; }
 
 	void setBlock(block* newBlock, int newSize) {
+		if (blockArray != NULL) {
+			_aligned_free(this->blockArray);
+		}
+
 		this->blockArray = newBlock;
 		this->size = newSize;
 	}

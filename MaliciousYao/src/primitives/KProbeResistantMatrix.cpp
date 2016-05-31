@@ -226,9 +226,9 @@ KProbeResistantMatrix KProbeResistantMatrix::loadFromFile(string filename)
 		//read line
 		getline(infile, line);
 		//get vector<byte> out of the line
-		auto inputVector = readFromString(line);
+		auto inputVector = readByteVectorFromString(line);
 		//set in matrix
-		(*matrix)[i] = *inputVector;
+		(*matrix)[i] = inputVector;
 	}
 
 	return KProbeResistantMatrix(matrix);

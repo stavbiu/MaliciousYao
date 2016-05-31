@@ -55,10 +55,10 @@ TEST_CASE("Common methods", "[]") {
 		for (int i = 0; i < 5; i++)
 			(*inputVector)[i] = fromLine[i][0];
 		*/
-		auto inputVector = readFromString(line);
+		auto inputVector = readByteVectorFromString(line);
 
 		for (int i = 0; i < 5; i++) {
-			REQUIRE(vec[i] == (*inputVector)[i]);
+			REQUIRE(vec[i] == inputVector[i]);
 		}
 		infile.close();
 
