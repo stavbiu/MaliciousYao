@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../include/common/CommonMaliciousYao.hpp"
-#include "../../include/primitives/CommitmentBundle.hpp"
-#include "../../include/CommitmentWithZkProofOfDifference/DifferenceCommitmentCommitterBundle.hpp"
-#include "../../include/OfflineOnline/primitives/CommitmentsPackage.hpp"
+#include "../../../include/common/CommonMaliciousYao.hpp"
+#include "../../../include/primitives/CommitmentBundle.hpp"
+#include "../../../include/CommitmentWithZkProofOfDifference/DifferenceCommitmentCommitterBundle.hpp"
+#include "../../../include/OfflineOnline/primitives/CommitmentsPackage.hpp"
 #include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 #include <libscapi/include/CryptoInfra/Key.hpp>
 

@@ -89,9 +89,6 @@
     <ClCompile Include="src\primitives\CommitmentBundle.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\primitives\Bundle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.cpp">
       <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
     </ClCompile>
@@ -102,6 +99,9 @@
       <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
     </ClCompile>
     <ClCompile Include="src\OfflineOnline\primitives\CommitmentsPackage.cpp">
+      <Filter>Source Files\OfflineOnline\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OfflineOnline\primitives\Bundle.cpp">
       <Filter>Source Files\OfflineOnline\primitives</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,9 +136,6 @@
     <ClInclude Include="include\primitives\KProbeResistantMatrix.hpp">
       <Filter>Header Files\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="include\primitives\Bundle.hpp">
-      <Filter>Header Files\primitives</Filter>
-    </ClInclude>
     <ClInclude Include="include\primitives\CommitmentBundle.hpp">
       <Filter>Header Files\primitives</Filter>
     </ClInclude>
@@ -152,6 +149,9 @@
       <Filter>Header Files\CommitmentWithZkProofOfDifference</Filter>
     </ClInclude>
     <ClInclude Include="include\OfflineOnline\primitives\CommitmentsPackage.hpp">
+      <Filter>Header Files\OfflineOnline\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OfflineOnline\primitives\Bundle.hpp">
       <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
   </ItemGroup>

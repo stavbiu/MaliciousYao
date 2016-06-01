@@ -1,4 +1,4 @@
-#include "../../include/primitives/Bundle.hpp"
+#include "../../../include/OfflineOnline/primitives/Bundle.hpp"
 
 Bundle::Bundle(vector<byte>& seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues, vector<byte>& placementMask, vector<byte>& commitmentMask, vector<int>& inputLabelsX, vector<int>& inputLabelsY1Extended, vector<int>& inputLabelsY2, vector<int>& outputLabels, vector<byte>& inputWiresX, vector<byte>& inputWiresY1Extended, vector<byte>& inputWiresY2, CommitmentBundle * commitmentsX, CommitmentBundle * commitmentsY1Extended, CommitmentBundle * commitmentsY2, CmtCCommitmentMsg * commitment, CmtCDecommitmentMessage * decommit, SecretKey * secret, int keySize)
 {
