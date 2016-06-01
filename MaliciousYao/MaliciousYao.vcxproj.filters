@@ -107,6 +107,9 @@
     <ClCompile Include="src\OfflineOnline\primitives\BucketMapping.cpp">
       <Filter>Source Files\OfflineOnline\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\OfflineOnline\primitives\BucketBundleList.cpp">
+      <Filter>Source Files\OfflineOnline\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\primitives\CommunicationConfig.hpp">
@@ -160,7 +163,10 @@
     <ClInclude Include="include\OfflineOnline\primitives\BucketMapping.hpp">
       <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="include\OfflineOnline\primitives\BucketList.hpp">
+    <ClInclude Include="include\OfflineOnline\primitives\BucketBundle.hpp">
+      <Filter>Header Files\OfflineOnline\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OfflineOnline\primitives\BucketBundleList.hpp">
       <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
   </ItemGroup>

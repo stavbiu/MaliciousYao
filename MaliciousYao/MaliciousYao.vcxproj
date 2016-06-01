@@ -160,6 +160,7 @@
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\SC.cpp" />
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\SCom.cpp" />
     <ClCompile Include="src\common\CommonMaliciousYao.cpp" />
+    <ClCompile Include="src\OfflineOnline\primitives\BucketBundleList.cpp" />
     <ClCompile Include="src\OfflineOnline\primitives\BucketMapping.cpp" />
     <ClCompile Include="src\OfflineOnline\primitives\Bundle.cpp" />
     <ClCompile Include="src\OfflineOnline\primitives\CommitmentsPackage.cpp" />
@@ -177,7 +178,8 @@
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\SCom.hpp" />
     <ClInclude Include="include\common\CommonMaliciousYao.hpp" />
     <ClInclude Include="include\common\Preconditions.hpp" />
-    <ClInclude Include="include\OfflineOnline\primitives\BucketList.hpp" />
+    <ClInclude Include="include\OfflineOnline\primitives\BucketBundle.hpp" />
+    <ClInclude Include="include\OfflineOnline\primitives\BucketBundleList.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\BucketMapping.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\Bundle.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\CommitmentsPackage.hpp" />
