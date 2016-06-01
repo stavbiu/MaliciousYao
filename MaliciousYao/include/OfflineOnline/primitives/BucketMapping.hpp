@@ -13,7 +13,7 @@
 class BucketMapping {
 private:
 	vector<int> shuffledCircuits;
-	vector<vector<int>> buckets;
+	vector<shared_ptr<vector<int>>> buckets;
 	map<int,int>  mapping;
 
 public:
@@ -24,5 +24,21 @@ public:
 	* @param numBuckets The number of required buckets.
 	* @param bucketSize The number of circuit in each bucket.
 	*/
-	BucketMapping(vector<int> &circuits, vector<byte> &seed, int numBuckets, int bucketSize);
+	BucketMapping(vector<int> &circuits, int numBuckets, int bucketSize, mt19937* random = &get_seeded_random());
+
+	/**
+	* Returns the bucket id of the given circuit.
+	* @param circuitId The id of the circuit that its bucket should returned.
+	*/
+	int bucketOf(int circuitId) {
+		//check that circuitId exist
+		Preconditions::checkArgument(std::find(shuffledCircuits.begin(), shuffledCircuits.end(),circuitId) != shuffledCircuits.end());
+		return mapping[circuitId];
+	}
+
+	/**
+	* Returns the array represents this bucket.
+	* @param bucketIndex The id of the bucket that should be returned.
+	*/
+	shared_ptr<vector<int>> getBucket(int bucketIndex) { return this->buckets[bucketIndex]; }
 };

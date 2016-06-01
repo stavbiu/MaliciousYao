@@ -160,5 +160,8 @@
     <ClInclude Include="include\OfflineOnline\primitives\BucketMapping.hpp">
       <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
+    <ClInclude Include="include\OfflineOnline\primitives\BucketList.hpp">
+      <Filter>Header Files\OfflineOnline\primitives</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

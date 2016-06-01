@@ -177,6 +177,7 @@
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\SCom.hpp" />
     <ClInclude Include="include\common\CommonMaliciousYao.hpp" />
     <ClInclude Include="include\common\Preconditions.hpp" />
+    <ClInclude Include="include\OfflineOnline\primitives\BucketList.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\BucketMapping.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\Bundle.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\CommitmentsPackage.hpp" />
