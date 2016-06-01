@@ -15,10 +15,10 @@ using namespace std;
 class CommunicationConfig {
 private:
 		int partyNum;					//The current party number (1 or 2);
-		SocketPartyData* me;				//The current running party.
-		SocketPartyData* otherParty;		//The other party to communicate with.
-		SocketPartyData* maliciousOTServer;	//The server data in the malicious OT protocol.
-		CommParty * commParty;			//the connection between two parties
+		shared_ptr<SocketPartyData> me;				//The current running party.
+		shared_ptr<SocketPartyData> otherParty;		//The other party to communicate with.
+		shared_ptr<SocketPartyData> maliciousOTServer;	//The server data in the malicious OT protocol.
+		shared_ptr<CommParty> commParty;			//the connection between two parties
 
 public:
 	/*
@@ -27,15 +27,9 @@ public:
 	*/
 	CommunicationConfig(string config_file, int thisPartyNum, boost::asio::io_service& io_service);
 
-	/*
-	dcons - free memory
-	*/
-	~CommunicationConfig();
-
-
 	//get sockets
-	SocketPartyData* getMe() { return this->me; }
-	SocketPartyData* getOtherParty() { return this->otherParty; }
-	SocketPartyData* getMaliciousOTServer() { return this->maliciousOTServer; }
-	CommParty* getCommParty() { return this->commParty; }
+	shared_ptr<SocketPartyData> getMe() { return this->me; }
+	shared_ptr<SocketPartyData> getOtherParty() { return this->otherParty; }
+	shared_ptr<SocketPartyData> getMaliciousOTServer() { return this->maliciousOTServer; }
+	shared_ptr<CommParty> getCommParty() { return this->commParty; }
 };

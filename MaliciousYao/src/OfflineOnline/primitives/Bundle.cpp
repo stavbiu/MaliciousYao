@@ -1,11 +1,17 @@
 #include "../../../include/OfflineOnline/primitives/Bundle.hpp"
 
-Bundle::Bundle(vector<byte>& seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues, vector<byte>& placementMask, vector<byte>& commitmentMask, vector<int>& inputLabelsX, vector<int>& inputLabelsY1Extended, vector<int>& inputLabelsY2, vector<int>& outputLabels, vector<byte>& inputWiresX, vector<byte>& inputWiresY1Extended, vector<byte>& inputWiresY2, CommitmentBundle * commitmentsX, CommitmentBundle * commitmentsY1Extended, CommitmentBundle * commitmentsY2, CmtCCommitmentMsg * commitment, CmtCDecommitmentMessage * decommit, SecretKey * secret, int keySize)
+Bundle::Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues,
+	shared_ptr<vector<byte>> placementMask, shared_ptr<vector<byte>> commitmentMask, shared_ptr<vector<int>> inputLabelsX,
+	shared_ptr<vector<int>> inputLabelsY1Extended, shared_ptr<vector<int>> inputLabelsY2, shared_ptr<vector<int>> outputLabels,
+	shared_ptr<vector<byte>> inputWiresX, shared_ptr<vector<byte>> inputWiresY1Extended, shared_ptr<vector<byte>> inputWiresY2,
+	shared_ptr<CommitmentBundle> commitmentsX, shared_ptr<CommitmentBundle> commitmentsY1Extended,
+	shared_ptr<CommitmentBundle> commitmentsY2, shared_ptr<CmtCCommitmentMsg> commitment, shared_ptr< CmtCDecommitmentMessage> decommit,
+	shared_ptr<SecretKey> secret, int keySize)
 {
 	this->seed = seed;
 
 	this->garbledTables = garbledCircuit->getGarbledTables();
-	this->translationTable = garbledCircuit->getTranslationTable();
+	this->translationTable = shared_ptr<vector<byte>>(&garbledCircuit->getTranslationTable());
 
 	this->placementMask = placementMask;
 	this->commitmentMask = commitmentMask;
@@ -31,12 +37,12 @@ Bundle::Bundle(vector<byte>& seed, GarbledBooleanCircuit * garbledCircuit, block
 	this->keySize = keySize;
 }
 
-void Bundle::getCommitments(CommitmentsPackage* pack)
+void Bundle::getCommitments(shared_ptr<CommitmentsPackage> pack)
 {
 	pack->setCommitmentsX(this->commitmentsX->getCommitments(), this->commitmentsX->getCommitmentsIds());
 	pack->setCommitmentsY1Extended(this->commitmentsY1Extended->getCommitments(), this->commitmentsY1Extended->getCommitmentsIds());
 	pack->setCommitmentsY2(this->commitmentsY2->getCommitments(), this->commitmentsY2->getCommitmentsIds());
-	pack->setCommitmentsOutputKeys(this->commitment);
+	pack->setCommitmentsOutputKeys(this->commitment.get());
 }
 
 string Bundle::toString()

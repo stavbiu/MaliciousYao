@@ -19,11 +19,11 @@ class OfflineProtocolP1
 private:
 	ExecutionParameters mainExecution;		// Parameters of the main circuit.
 	ExecutionParameters crExecution;		// Parameters of the cheating recovery circuit.
-	CryptoPrimitives primitives;			// Contains the low level instances to use.
+	shared_ptr<CryptoPrimitives> primitives;			// Contains the low level instances to use.
 	CommParty * channel;						// The channel used communicate between the parties.
 
-	KProbeResistantMatrix mainMatrix;			//The probe-resistant matrix that used to extend the main circuit's keys.
-	KProbeResistantMatrix crMatrix;				//The probe-resistant matrix that used to extend the ceating recovery circuit's keys.
+	shared_ptr<KProbeResistantMatrix> mainMatrix;			//The probe-resistant matrix that used to extend the main circuit's keys.
+	shared_ptr<KProbeResistantMatrix> crMatrix;				//The probe-resistant matrix that used to extend the ceating recovery circuit's keys.
 
 public:
 

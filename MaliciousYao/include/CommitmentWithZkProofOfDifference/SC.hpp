@@ -22,7 +22,7 @@ private:
 	long commitmentId;			//The id of the commitment object. This is given in the constructor and increased 
 								//during the creation of the commitments.
 								//After creating all commitment objects, it will contain the next available id for the next commitments.
-	vector<vector<byte>> r;		//Random values used in the commitment.
+	vector<shared_ptr<vector<byte>>> r;		//Random values used in the commitment.
 	vector<SCom> commitments;			//List of commitment pairs.
 
 public:
@@ -59,7 +59,7 @@ public:
 	* Returns the random value that placed in index i.
 	* @param i The index of the random value to return.
 	*/
-	vector<byte> getR(int i) { return this->r[i]; }
+	shared_ptr<vector<byte>> getR(int i) { return this->r[i]; }
 
 	/**
 	* Return a big array that contain all random values.

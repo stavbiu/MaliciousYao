@@ -16,7 +16,7 @@ Creates the cheating recovery circuit, if it does not exist.
 output:
 A garble boolean circuit that represents the cheating recovery circuit.
 */
-GarbledBooleanCircuit* CheatingRecoveryCircuitCreator::create()
+shared_ptr<GarbledBooleanCircuit> CheatingRecoveryCircuitCreator::create()
 {
 	//check if the file exists
 	//the file doesn't exists - create it
@@ -25,6 +25,6 @@ GarbledBooleanCircuit* CheatingRecoveryCircuitCreator::create()
 		UnlockP1InputCircuitCreator(this->circuitFilename, this->inputSize).create();
 	}
 
-	return GarbledCircuitFactory::createCircuit(this->circuitFilename,
-		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
+	return shared_ptr<GarbledBooleanCircuit>(GarbledCircuitFactory::createCircuit(this->circuitFilename,
+		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true));
 }

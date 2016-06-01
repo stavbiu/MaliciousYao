@@ -29,7 +29,7 @@ public:
 		 commitments Commitments on all wires' keys.
 		 decommitments Decommitments on all wires' keys.
 	*/
-	 CommitmentBundle(vector<byte>* commitmentsVec, vector<long>* commitmentsIdsVec, vector<byte>* decommitmentsVec, vector<byte>* decommitmentRandomsVec);
+	 CommitmentBundle(shared_ptr<vector<byte>> commitmentsVec, shared_ptr<vector<long>> commitmentsIdsVec, shared_ptr<vector<byte>> decommitmentsVec, shared_ptr<vector<byte>> decommitmentRandomsVec);
 
 	 /**
 	  A constructor that sets the given arguments.
@@ -37,7 +37,7 @@ public:
 		 labels The wires' indices.
 		 commitments Commitments on all wires' keys.
 	 */
-	 CommitmentBundle(vector<byte>* commitments, vector<long>* commitmentIds) {
+	 CommitmentBundle(shared_ptr<vector<byte>> commitments, shared_ptr<vector<long>> commitmentIds) {
 		 CommitmentBundle(commitments, commitmentIds, NULL, NULL);
 	 }
 
@@ -69,7 +69,7 @@ public:
 	 Output:
 		 A new created commitment bundle.
 	 */
-	 static CommitmentBundle setCommitments(vector<byte>* commitmentsArr, vector<long>* commitmentIds) {
+	 static CommitmentBundle setCommitments(shared_ptr<vector<byte>> commitmentsArr, shared_ptr<vector<long>> commitmentIds) {
 		 return CommitmentBundle(commitmentsArr, commitmentIds);
 	 }
 

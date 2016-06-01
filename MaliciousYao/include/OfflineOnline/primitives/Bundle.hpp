@@ -16,71 +16,71 @@
 */
 class Bundle : public NetworkSerialized {
 private:
-	vector<byte> seed;
+	shared_ptr<vector<byte>> seed;
 	block* garbledTables;  	// The underlying garbled circuit.
-	vector<byte> translationTable;			// Output from the garble function.
+	shared_ptr<vector<byte>> translationTable;			// Output from the garble function.
 
 	//Masks that are used in the protocol.
-	vector<byte> placementMask;
-	vector<byte> commitmentMask;
+	shared_ptr<vector<byte>> placementMask;
+	shared_ptr<vector<byte>>commitmentMask;
 
 	//Indices of x, y1 extended, y2 and output wires.
-	vector<int> inputLabelsX;
-	vector<int> inputLabelsY1Extended;
-	vector<int> inputLabelsY2;
-	vector<int> outputLabels;
+	shared_ptr<vector<int>> inputLabelsX;
+	shared_ptr<vector<int>> inputLabelsY1Extended;
+	shared_ptr<vector<int>> inputLabelsY2;
+	shared_ptr<vector<int>> outputLabels;
 
 	//Additional keys besides the above wires' indices.
-	vector<byte> inputWiresX;
-	vector<byte> inputWiresY1Extended;
-	vector<byte> inputWiresY2;
+	shared_ptr<vector<byte>> inputWiresX;
+	shared_ptr<vector<byte>> inputWiresY1Extended;
+	shared_ptr<vector<byte>> inputWiresY2;
 	block* outputWires;
 
 	//Commitments on the keys.
-	CommitmentBundle* commitmentsX;
-	CommitmentBundle* commitmentsY1Extended;
-	CommitmentBundle* commitmentsY2;
+	shared_ptr<CommitmentBundle> commitmentsX;
+	shared_ptr<CommitmentBundle> commitmentsY1Extended;
+	shared_ptr<CommitmentBundle> commitmentsY2;
 
-	SecretKey* secret;
+	shared_ptr<SecretKey> secret;
 
-	DifferenceCommitmentCommitterBundle diffCommitments;
+	shared_ptr<DifferenceCommitmentCommitterBundle> diffCommitments;
 
 	int keySize;	//Size of each key, in bytes.
 
-	CmtCCommitmentMsg* commitment;
-	CmtCDecommitmentMessage* decommit;
+	shared_ptr<CmtCCommitmentMsg> commitment;
+	shared_ptr<CmtCDecommitmentMessage> decommit;
 
 
 public:
 	/**
 	* A constructor.
 	*/
-	Bundle(vector<byte>& seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues, 
-		vector<byte>& placementMask, vector<byte>& commitmentMask, vector<int>& inputLabelsX, 
-		vector<int>& inputLabelsY1Extended, vector<int>& inputLabelsY2, vector<int>& outputLabels, 
-		vector<byte>& inputWiresX, vector<byte>& inputWiresY1Extended, vector<byte>& inputWiresY2, 
-		CommitmentBundle * commitmentsX, CommitmentBundle * commitmentsY1Extended, 
-		CommitmentBundle * commitmentsY2, CmtCCommitmentMsg * commitment, CmtCDecommitmentMessage * decommit, 
-		SecretKey * secret, int keySize);
+	Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues,
+		shared_ptr<vector<byte>> placementMask, shared_ptr<vector<byte>> commitmentMask, shared_ptr<vector<int>> inputLabelsX,
+		shared_ptr<vector<int>> inputLabelsY1Extended, shared_ptr<vector<int>> inputLabelsY2, shared_ptr<vector<int>> outputLabels,
+		shared_ptr<vector<byte>> inputWiresX, shared_ptr<vector<byte>> inputWiresY1Extended, shared_ptr<vector<byte>> inputWiresY2,
+		shared_ptr<CommitmentBundle> commitmentsX, shared_ptr<CommitmentBundle> commitmentsY1Extended,
+		shared_ptr<CommitmentBundle> commitmentsY2, shared_ptr<CmtCCommitmentMsg> commitment, shared_ptr< CmtCDecommitmentMessage> decommit,
+		shared_ptr<SecretKey> secret, int keySize);
 
 
-	vector<byte> getSeed() { return this->seed; }
-		vector<byte> getTranslationTable() { return this->translationTable;	}
-	vector<byte> getPlacementMask() { return this->placementMask; }
-	vector<byte> getCommitmentMask() {	return this->commitmentMask; }
-	vector<int> getInputLabelsX() {	return this->inputLabelsX; }
-	vector<int> getInputLabelsY1Extended() { return this->inputLabelsY1Extended; }
-	vector<int>getInputLabelsY2() { return this->inputLabelsY2; }
-	vector<int> getOutputLabels() { return this->outputLabels; }
-	vector<byte> getInputWiresX() { return this->inputWiresX; }
-	vector<byte> getInputWiresY1Extended() { return this->inputWiresY1Extended; }
-	vector<byte> getInputWiresY2() { return this->inputWiresY2; }
+	shared_ptr<vector<byte>> getSeed() { return this->seed; }
+	shared_ptr<vector<byte>> getTranslationTable() { return this->translationTable;	}
+	shared_ptr<vector<byte>> getPlacementMask() { return this->placementMask; }
+	shared_ptr<vector<byte>> getCommitmentMask() {	return this->commitmentMask; }
+	shared_ptr<vector<int>> getInputLabelsX() {	return this->inputLabelsX; }
+	shared_ptr<vector<int>> getInputLabelsY1Extended() { return this->inputLabelsY1Extended; }
+	shared_ptr<vector<int>>getInputLabelsY2() { return this->inputLabelsY2; }
+	shared_ptr<vector<int>> getOutputLabels() { return this->outputLabels; }
+	shared_ptr<vector<byte>> getInputWiresX() { return this->inputWiresX; }
+	shared_ptr<vector<byte>> getInputWiresY1Extended() { return this->inputWiresY1Extended; }
+	shared_ptr<vector<byte>> getInputWiresY2() { return this->inputWiresY2; }
 	block* getOutputWires() { return this->outputWires; }
-	CommitmentBundle* getCommitmentsX() { return this->commitmentsX; }
-	CommitmentBundle* getCommitmentsY1Extended() { return this->commitmentsY1Extended; }
-	CommitmentBundle* getCommitmentsY2() { return commitmentsY2; }
-	CmtCCommitmentMsg* getCommitmentsOutputKeys() { return this->commitment; }
-	CmtCDecommitmentMessage* getDecommitmentsOutputKeys() { return this->decommit; }
+	shared_ptr<CommitmentBundle> getCommitmentsX() { return this->commitmentsX; }
+	shared_ptr<CommitmentBundle> getCommitmentsY1Extended() { return this->commitmentsY1Extended; }
+	shared_ptr<CommitmentBundle> getCommitmentsY2() { return commitmentsY2; }
+	shared_ptr<CmtCCommitmentMsg> getCommitmentsOutputKeys() { return this->commitment; }
+	shared_ptr<CmtCDecommitmentMessage> getDecommitmentsOutputKeys() { return this->decommit; }
 
 	block* getGarbledTables() {
 		block* temp = this->garbledTables;
@@ -98,11 +98,13 @@ public:
 	* Put in the commitment package the commitments on X, Y1Extended, Y2 and ouptut keys.
 	* @param pack CommitmentsPackage that should be filled with the commitments.
 	*/
-	void getCommitments(CommitmentsPackage* pack);
+	void getCommitments(shared_ptr<CommitmentsPackage> pack);
 
-	DifferenceCommitmentCommitterBundle getDifferenceCommitmentBundle() { return this->diffCommitments; }
+	void setDifferenceCommitmentBundle(shared_ptr<DifferenceCommitmentCommitterBundle> bundle) { this->diffCommitments = bundle; }
 
-	SecretKey* getSecret() { return this->secret; }
+	shared_ptr<DifferenceCommitmentCommitterBundle> getDifferenceCommitmentBundle() { return this->diffCommitments; }
+
+	shared_ptr<SecretKey> getSecret() { return this->secret; }
 
 
 	// Inherited via NetworkSerialized

@@ -8,15 +8,15 @@ SC::SC(CmtCommitter* committer, vector<byte>& x, long id, int s, mt19937* random
 	this->commitmentId = id;
 
 	//Allocate space for the random values and commitments.
-	r = vector<vector<byte>>(s);
+	this->r = vector<shared_ptr<vector<byte>>>(s);
 	this->commitments = vector<SCom>(s);
 
 	//Create each commitment pair, s times.
 	for (int i = 0; i < s; i++) {
 		//generate random string.
-		this->r[i] = makeRandomBitByteVector(random, n);
+		this->r[i] = shared_ptr<vector<byte>>(new vector<byte>(makeRandomBitByteVector(random, n)));
 		//Create pair of commitments.
-		this->commitments[i] = SCom(committer, x, r[i], this->commitmentId);
+		this->commitments[i] = SCom(committer, x, *r[i].get(), this->commitmentId);
 		//Increase the id by 2, since two commitments were already created.
 		this->commitmentId += 2;
 	}
@@ -54,14 +54,14 @@ vector<shared_ptr<CmtCDecommitmentMessage>> SC::getDecommitments()
 vector<byte> SC::getR()
 {
 	//Allocate enough space for all random values.
-	int size = r[0].size();
+	int size = r[0].get()->size();
 	vector<byte> allR(r.size()*size);
 
 	//Copy each random value to the big array.
 	int row = r.size();
 	int countNum = 0;
 	for (int i = 0; i < row; i++) {
-		std::copy_n(this->r[i].begin(), size, &allR[countNum]);
+		std::copy_n(this->r[i].get()->begin(), size, &allR[countNum]);
 		countNum += size;
 	}
 

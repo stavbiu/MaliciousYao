@@ -68,7 +68,7 @@ public:
 	/**
 	 Returns the size of the inputs.
 	*/
-	int size() { return this->sizeCircuit; }
+	int size() const { return this->sizeCircuit; }
 
 	/**
 	 Returns the N'th input bit.
@@ -80,12 +80,12 @@ public:
 	/**
 	 Return pointer for vector inputs for wires.
 	*/
-	vector<byte>* getInputVector() { return this->input.get(); }
+	//vector<byte>* getInputVector() { return this->input.get(); }
 
 	/*
 	 Return shared pointer for vector inputs for wires.
 	*/
-	shared_ptr<vector<byte>> getInputVectorShared() { return this->input; }
+	shared_ptr<vector<byte>> getInputVectorShared() const { return this->input; }
 
 	/**
 	 Returns the xor of the inputs in the two given CircuitInputs objects.
@@ -95,6 +95,6 @@ public:
 	 Return:
 		 the xor result.
 	*/
-	static vector<byte> xor (CircuitInput* x1, CircuitInput* x2);
+	static vector<byte> xor (const CircuitInput* x1, const CircuitInput* x2);
 
 };

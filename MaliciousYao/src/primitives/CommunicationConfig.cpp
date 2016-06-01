@@ -21,28 +21,21 @@ CommunicationConfig::CommunicationConfig(string config_file, int thisPartyNum, b
 
 	//set partys IPs and ports to SockectPartyData
 	if (this->partyNum == 1) {
-		this->me = new SocketPartyData(IpAdress::from_string(party_1_ip), party_1_port);
-		this->otherParty = new SocketPartyData(IpAdress::from_string(party_2_ip), party_2_port);
+		this->me = shared_ptr<SocketPartyData>(new SocketPartyData(IpAdress::from_string(party_1_ip), party_1_port));
+		this->otherParty = shared_ptr<SocketPartyData>(new SocketPartyData(IpAdress::from_string(party_2_ip), party_2_port));
 	}
 	else {
-		this->me = new SocketPartyData(IpAdress::from_string(party_2_ip), party_2_port);
-		this->otherParty = new SocketPartyData(IpAdress::from_string(party_1_ip), party_1_port);
+		this->me = shared_ptr<SocketPartyData>(new SocketPartyData(IpAdress::from_string(party_2_ip), party_2_port));
+		this->otherParty = shared_ptr<SocketPartyData>(new SocketPartyData(IpAdress::from_string(party_1_ip), party_1_port));
 	}
 
 	//set communication between the two partys
-	this->commParty = new CommPartyTCPSynced(io_service, *(this->me), *(this->otherParty));
+	this->commParty = shared_ptr<CommParty>(new CommPartyTCPSynced(io_service, *(this->me), *(this->otherParty)));
 
 	//get OT IP and port
 	int malicious_OT_port = stoi(cf.Value("", "malicious_OT_port"));
 	string malicious_OT_address = cf.Value("", "malicious_OT_address");
 	//set to SockectPartyData
-	this->maliciousOTServer = new SocketPartyData(IpAdress::from_string(malicious_OT_address), malicious_OT_port);
+	this->maliciousOTServer = shared_ptr<SocketPartyData>(new SocketPartyData(IpAdress::from_string(malicious_OT_address), malicious_OT_port));
 }
 
-CommunicationConfig::~CommunicationConfig()
-{
-	delete this->me;
-	delete this->otherParty;
-	delete this->maliciousOTServer;
-	delete this->commParty;
-}

@@ -108,12 +108,12 @@ VecBlock KProbeResistantMatrix::transformKeys(VecBlock originalKeys, AES* mes)
 	return probeResistantKeys;
 }
 
-CircuitInput* KProbeResistantMatrix::transformInput(CircuitInput& originalInput, mt19937 * random)
+CircuitInput* KProbeResistantMatrix::transformInput(const CircuitInput& originalInput, mt19937 * random)
 {
 	int inputSize = originalInput.size();
 	Preconditions::checkArgument(this->n == inputSize);
 	
-	vector<byte>* input = originalInput.getInputVector();
+	shared_ptr<vector<byte>> input = originalInput.getInputVectorShared();
 	// Init the new vector with -1 values.
 	vector<byte>* newInput = new vector<byte>(m, -1);
 
@@ -145,7 +145,7 @@ CircuitInput* KProbeResistantMatrix::transformInput(CircuitInput& originalInput,
 		}
 		// At this point all the bits in the line were allocated, but we may have a mistake with the last bit.
 		// In that case we flip it to achieve the correct xor.
-		if (xorOfAllocatedBits != (*input)[i]) {
+		if (xorOfAllocatedBits != input->at(i)) {
 			(*newInput)[lastIndexInTheLine] = (byte)(1 - (*newInput)[lastIndexInTheLine]);
 		}
 	}
@@ -189,26 +189,26 @@ VecBlock KProbeResistantMatrix::restoreKeys(VecBlock receivedKeys)
 	return restoredKeysArray;
 }
 
-void KProbeResistantMatrix::saveToFile(KProbeResistantMatrix matrix, string filename)
+void KProbeResistantMatrix::saveToFile(shared_ptr<KProbeResistantMatrix> matrix, string filename)
 {
 	// clean the file
 	remove(filename.c_str());
 	//open file
 	std::ofstream outfile(filename.c_str());
 	//write n - number of rows
-	outfile << matrix.n << endl;
+	outfile << matrix->n << endl;
 	//write m - number of column
-	outfile << matrix.m << endl;
+	outfile << matrix->m << endl;
 
 	//go over the rows and write to file
-	for (const auto& a : (*matrix.matrix)) {
+	for (const auto& a : (*matrix->matrix)) {
 		outfile << vectorToString(a) << endl;
 	}
 
 	outfile.close();
 }
 
-KProbeResistantMatrix KProbeResistantMatrix::loadFromFile(string filename)
+shared_ptr<KProbeResistantMatrix> KProbeResistantMatrix::loadFromFile(string filename)
 {
 	//open file
 	ifstream infile(filename.c_str());
@@ -231,5 +231,5 @@ KProbeResistantMatrix KProbeResistantMatrix::loadFromFile(string filename)
 		(*matrix)[i] = inputVector;
 	}
 
-	return KProbeResistantMatrix(matrix);
+	return shared_ptr<KProbeResistantMatrix>( new KProbeResistantMatrix(matrix));
 }

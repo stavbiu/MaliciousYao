@@ -58,7 +58,7 @@ public:
 	 Returns:
 		 the transformed inputs, that matched the columns of the matrix.
 	*/
-	CircuitInput* transformInput(CircuitInput& originalInput, mt19937* random);
+	CircuitInput* transformInput(const CircuitInput& originalInput, mt19937* random);
 
 	/**
 	 Restores the original keys using the matrix from the transformed keys.
@@ -75,7 +75,7 @@ public:
 		 matrix The matrix to write to the file.
 		 filename The name of the file to write the matrix to.
 	*/
-	static void saveToFile(KProbeResistantMatrix matrix, string filename);
+	static void saveToFile(shared_ptr<KProbeResistantMatrix> matrix, string filename);
 
 	/**
 	 Loads the matrix from a file.
@@ -84,5 +84,5 @@ public:
 	 Return:
 		 The read matrix.
 	*/
-	static KProbeResistantMatrix loadFromFile(string filename);
+	static shared_ptr<KProbeResistantMatrix> loadFromFile(string filename);
 };

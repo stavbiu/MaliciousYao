@@ -39,8 +39,8 @@ int main(int argc, char* argv[]) {
 	boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
 
 	//read config file data and set communication config to make sockets.
-	CommunicationConfig  * commConfig = new CommunicationConfig(COMM_CONFIG_FILENAME, PARTY, io_service);
-	CommParty * commParty = commConfig->getCommParty();
+	shared_ptr<CommunicationConfig> commConfig(new CommunicationConfig(COMM_CONFIG_FILENAME, PARTY, io_service));
+	shared_ptr<CommParty> commParty = commConfig->getCommParty();
 
 	cout << "\nP2 start communication\n";
 
@@ -51,10 +51,10 @@ int main(int argc, char* argv[]) {
 	shared_ptr<CryptoPrimitives> primitives(new CryptoPrimitives(NISTEC_FILE_NAME));
 
 	//make circuit
-	GarbledBooleanCircuit* mainCircuit = GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,
-		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
+	shared_ptr<GarbledBooleanCircuit> mainCircuit (GarbledCircuitFactory::createCircuit(CIRCUIT_INPUT_FILENAME,
+		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true));
 	//cheating recovery circuit
-	GarbledBooleanCircuit* crCircuit = (CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, mainCircuit->getNumberOfGates())).create();
+	shared_ptr<GarbledBooleanCircuit> crCircuit ((CheatingRecoveryCircuitCreator(CIRCUIT_CHEATING_RECOVERY, mainCircuit->getNumberOfGates())).create());
 
 	//TODO - OTExtensionMaliciousReceiver otReceiver = initMaliciousOtReceiver(mainCircuit.getNumberOfInputs(2), commConfig);
 
@@ -111,10 +111,10 @@ int main(int argc, char* argv[]) {
 	//			double p2 = 0.85;
 
 	//no thread implemention
-	GarbledBooleanCircuit* mainGbc = GarbledCircuitFactory::createCircuit(CIRCUIT_FILENAME,
-		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
-	GarbledBooleanCircuit* crGbc = GarbledCircuitFactory::createCircuit(CIRCUIT_CHEATING_RECOVERY,
-		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true);
+	shared_ptr<GarbledBooleanCircuit> mainGbc (GarbledCircuitFactory::createCircuit(CIRCUIT_FILENAME,
+		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true));
+	shared_ptr<GarbledBooleanCircuit> crGbc (GarbledCircuitFactory::createCircuit(CIRCUIT_CHEATING_RECOVERY,
+		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true));
 
 	//TODO - put ExecutionParameters in OfflineProtocolP2 directly, with out adding varibles.
 	ExecutionParameters mainExecution(mainCircuit, mainGbc, N1, s1, B1, p1);
@@ -128,8 +128,6 @@ int main(int argc, char* argv[]) {
 	cout << "\nP2 end communication\n";
 	//enter for out
 	cin.ignore();
-	//release memory
-	delete mainCircuit, crCircuit;
 
 
 	return 0;

@@ -81,7 +81,7 @@ Inputs:
 Return:
 	the xor result.
 */
-vector<byte> CircuitInput:: xor (CircuitInput* x1, CircuitInput* x2)
+vector<byte> CircuitInput:: xor (const CircuitInput* x1,const CircuitInput* x2)
 {
 	//Check if the sizes of inputs are equal.
 	Preconditions::checkArgument(x1->size() == x2->size());

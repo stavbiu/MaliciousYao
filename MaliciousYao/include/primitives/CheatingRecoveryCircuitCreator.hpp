@@ -30,5 +30,5 @@ public:
 	 output:
 	 A garble boolean circuit that represents the cheating recovery circuit.
 	*/
-	GarbledBooleanCircuit* create();
+	shared_ptr<GarbledBooleanCircuit> create();
 };

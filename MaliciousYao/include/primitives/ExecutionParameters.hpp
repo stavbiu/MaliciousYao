@@ -17,8 +17,8 @@ using namespace std;
 class ExecutionParameters
 {
 private:
-	GarbledBooleanCircuit* bc;		// The boolean circuit to evaluate in the protocol.
-	GarbledBooleanCircuit* gbc;		// Array of garbled circuit from the above boolean circuit.
+	shared_ptr<GarbledBooleanCircuit> bc;		// The boolean circuit to evaluate in the protocol.
+	shared_ptr<GarbledBooleanCircuit> gbc;		// Array of garbled circuit from the above boolean circuit.
 									// We hold an array of the same circuit because when we use 
 									// thread, each one works on a different circuit.
 	int numExecutions;				// N
@@ -34,7 +34,7 @@ public:
 	/*
 	 Constructor that sets the parameters.
 	*/
-	ExecutionParameters(GarbledBooleanCircuit* bc, GarbledBooleanCircuit* mainGbc, 
+	ExecutionParameters(shared_ptr<GarbledBooleanCircuit> bc, shared_ptr<GarbledBooleanCircuit> mainGbc,
 		int numExecutions, int statisticalParameter, int bucketSize, double evaluationProbability)
 	{
 		this->bc = bc;
@@ -52,13 +52,13 @@ public:
 	/*
 	 Getters
 	*/
-	GarbledBooleanCircuit* getCircuit() { return this->gbc; }
+	shared_ptr<GarbledBooleanCircuit> getCircuit() { return this->gbc; }
 	int getNumberOfExecutions() { return this->numExecutions; }
 	int getBucketSize() { return this->bucketSize; }
 	double getEvaluationProbability() { return this->evaluationProbability; }
 	int getNumCircuits() { return this->numCircuits; }
 	int getEvalCircuits() { return this->evalCircuits; }
 	int getCheckCircuits() { return this->checkCircuits; }
-	GarbledBooleanCircuit* getBooleanCircuit() { return this->bc; }
+	shared_ptr<GarbledBooleanCircuit> getBooleanCircuit() { return this->bc; }
 	
 };
