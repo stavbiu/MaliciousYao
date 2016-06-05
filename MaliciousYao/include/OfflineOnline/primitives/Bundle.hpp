@@ -83,9 +83,11 @@ public:
 	shared_ptr<CmtCDecommitmentMessage> getDecommitmentsOutputKeys() { return this->decommit; }
 
 	block* getGarbledTables() {
-		block* temp = this->garbledTables;
+		//TODO - check delete
+		/*block* temp = this->garbledTables;
 		this->garbledTables = NULL;
-		return temp;
+		return temp;*/
+		return this->garbledTables;
 	}
 
 	//TODO - getProbeResistantWire() , SecretKeySpec ?

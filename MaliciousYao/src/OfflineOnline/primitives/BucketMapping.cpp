@@ -9,6 +9,14 @@ BucketMapping::BucketMapping(vector<int>& circuits, int numBuckets, int bucketSi
 	//TODO - check if random can replace vector<byte> seed
 	this->shuffledCircuits = circuits;
 	std::shuffle(this->shuffledCircuits.begin(), this->shuffledCircuits.end(), *random);
+	
+	//TODO - create seeded random
+	/*
+	mt19937 random1 = get_seeded_random();
+	 int seed = random1();
+	 mt19937 newRandom;
+	 newRandom.seed(seed);
+	 */
 
 	//init buckets
 	this->buckets = vector<shared_ptr<vector<int>>>(numBuckets);

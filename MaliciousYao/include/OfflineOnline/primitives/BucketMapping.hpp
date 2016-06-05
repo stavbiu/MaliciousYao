@@ -24,7 +24,7 @@ public:
 	* @param numBuckets The number of required buckets.
 	* @param bucketSize The number of circuit in each bucket.
 	*/
-	BucketMapping(vector<int> &circuits, int numBuckets, int bucketSize, mt19937* random = &get_seeded_random());
+	BucketMapping(vector<int> &circuits, int numBuckets, int bucketSize, mt19937* random);
 
 	/**
 	* Returns the bucket id of the given circuit.

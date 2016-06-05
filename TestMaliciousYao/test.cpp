@@ -5,6 +5,7 @@
 #include <string>
 #include <boost/range/irange.hpp>
 #include <boost/range/algorithm_ext/push_back.hpp>
+#include <cereal/archives/xml.hpp>
 
 #include <MaliciousYao/include/common/CommonMaliciousYao.hpp>
 
@@ -27,7 +28,7 @@ TEST_CASE("Common methods", "[]") {
 	}
 
 	SECTION("copy_vector_to_shared_ptr_vector") {
-		vector<int> indices = {1,2,3,4,5};
+		vector<int> indices = { 1,2,3,4,5 };
 		shared_ptr<vector<int>> intArr(new vector<int>(indices.size()));
 		copy(indices.begin(), indices.end(), inserter(*intArr.get(), intArr->begin()));
 
@@ -41,7 +42,7 @@ TEST_CASE("Common methods", "[]") {
 		remove("byte_string_test.txt");
 		std::ofstream outfile("byte_string_test.txt");
 		vector<byte> vec = { (byte)0, (byte)1, (byte)0, (byte)0, (byte)1 };
-		string toSend = vectorToString(vec);
+		string toSend = vectorToString(vec, ' ');
 		outfile << toSend << std::endl;
 		outfile.close();
 
@@ -55,7 +56,7 @@ TEST_CASE("Common methods", "[]") {
 		for (int i = 0; i < 5; i++)
 			(*inputVector)[i] = fromLine[i][0];
 		*/
-		auto inputVector = readByteVectorFromString(line);
+		auto inputVector = readByteVectorFromString(line, ' ');
 
 		for (int i = 0; i < 5; i++) {
 			REQUIRE(vec[i] == inputVector[i]);
@@ -69,7 +70,7 @@ TEST_CASE("Common methods", "[]") {
 		remove("long_string_test.txt");
 		std::ofstream outfile("long_string_test.txt");
 		vector<long> vec = { 1, 222, 5, 3, 99959 };
-		string toSend = vectorToString(vec);
+		string toSend = vectorToString(vec, ' ');
 		outfile << toSend << std::endl;
 		outfile.close();
 
@@ -83,7 +84,7 @@ TEST_CASE("Common methods", "[]") {
 		for (int i = 0; i < 5; i++)
 		(*inputVector)[i] = fromLine[i][0];
 		*/
-		auto inputVector = readLongVectorFromString(line);
+		auto inputVector = readLongVectorFromString(line, ' ');
 
 		for (int i = 0; i < 5; i++) {
 			REQUIRE(vec[i] == inputVector[i]);
@@ -117,7 +118,7 @@ TEST_CASE("Common methods", "[]") {
 		}
 
 		//copy to one vector test
-		vector<int> test(3*size);
+		vector<int> test(3 * size);
 		int t = 0;
 		for (int i = 0; i < 3; i++) {
 			std::copy_n(a[i].begin(), size, &test[t]);

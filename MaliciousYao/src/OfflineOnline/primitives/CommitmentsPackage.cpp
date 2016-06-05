@@ -8,15 +8,15 @@ CommitmentsPackage::CommitmentsPackage(int cmtSize, int s)
 
 void CommitmentsPackage::setSeedCmt(CmtCCommitmentMsg * seedCommitment)
 {
-	//TODO - seedCommitment->getCommitment() return shared_ptr<void> need casting to CmtSimpleHashCommitmentMessage
-	//this->seedCmt = seedCommitment->getCommitment();
+	//TODO - seedCommitment->getCommitment() CmtSimpleHashCommitmentMessage
+	//this->seedCmt = sdynamic_pointer_cast<CmtSimpleHashCommitmentMessage>eedCommitment->getCommitment();
 	this->seedIds = seedCommitment->getId();
 }
 
 void CommitmentsPackage::setMaskCmt(CmtCCommitmentMsg* maskCommitment)
 {
-	//TODO - seedCommitment->getCommitment() return shared_ptr<void> need casting to CmtSimpleHashCommitmentMessage
-	//this->maskCmt = maskCommitment->getCommitment();
+	//TODO - seedCommitment->getCommitment()  CmtSimpleHashCommitmentMessage
+	//this->maskCmt = dynamic_pointer_cast<CmtSimpleHashCommitmentMessage>( maskCommitment->getCommitment());
 	this->maskIds = maskCommitment->getId();
 }
 
