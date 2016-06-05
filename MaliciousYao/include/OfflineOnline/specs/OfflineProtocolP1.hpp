@@ -5,6 +5,8 @@
 #include "../../../include/primitives/ExecutionParameters.hpp"
 #include "../../../include/primitives/CryptoPrimitives.hpp"
 #include "../../../include/primitives/KProbeResistantMatrix.hpp"
+#include "../../../include/OfflineOnline/primitives/Bundle.hpp"
+#include "../../../include/OfflineOnline/primitives/BucketBundleList.hpp"
 
 using namespace std;
 
@@ -17,15 +19,76 @@ using namespace std;
 class OfflineProtocolP1
 {
 private:
-	ExecutionParameters mainExecution;		// Parameters of the main circuit.
-	ExecutionParameters crExecution;		// Parameters of the cheating recovery circuit.
-	shared_ptr<CryptoPrimitives> primitives;			// Contains the low level instances to use.
-	CommParty * channel;						// The channel used communicate between the parties.
+	shared_ptr<ExecutionParameters> mainExecution;						// Parameters of the main circuit.
+	shared_ptr<ExecutionParameters> crExecution;						// Parameters of the cheating recovery circuit.
+	shared_ptr<CryptoPrimitives> primitives;				// Contains the low level instances to use.
+	shared_ptr<CommParty> channel;									// The channel used communicate between the parties.
 
 	shared_ptr<KProbeResistantMatrix> mainMatrix;			//The probe-resistant matrix that used to extend the main circuit's keys.
 	shared_ptr<KProbeResistantMatrix> crMatrix;				//The probe-resistant matrix that used to extend the ceating recovery circuit's keys.
+	shared_ptr<BucketBundleList> mainBuckets;							//Contain the main circuits.
+	shared_ptr<BucketBundleList> crBuckets;				//Contain the cheating recovery circuits.
+	//***********************************
+	//TODO - OTExtensionMaliciousSender maliciousOtSender;	//The malicious OT used to transfer the keys.
 
 public:
+	/**
+	* Constructor that sets the parameters.
+	* @param mainExecution Parameters of the main circuit.
+	* @param crExecution Parameters of the cheating recovery circuit.
+	* @param primitives Contains the low level instances to use.
+	* @param communication Configuration of communication between parties.
+	*/
+	//TODO - add OTExtensionMaliciousSender and remove temp declertion
+	//OfflineProtocolP1(shared_ptr<ExecutionParameters> mainExecution, shared_ptr<ExecutionParameters> crExecution,
+	//	shared_ptr<CryptoPrimitives> primitives, shared_ptr<CommunicationConfig> communication, OTExtensionMaliciousSender maliciousOtSender);
+	//*************** temp declertion *************************
+	OfflineProtocolP1(shared_ptr<ExecutionParameters> mainExecution, shared_ptr<ExecutionParameters> crExecution,
+		shared_ptr<CryptoPrimitives> primitives, shared_ptr<CommunicationConfig> communication);
+
+	/**
+	* Runs the first party in the offline phase of the malicious Yao protocol.
+	*/
+	void run();
+
+	/**
+	* @return the buckets of the main circuit.
+	*/
+	shared_ptr<BucketBundleList> getMainBuckets() { return this->mainBuckets; }
+
+	/**
+	* @return the buckets of the cheating recovery circuit.
+	*/
+	shared_ptr<BucketBundleList> getCheatingRecoveryBuckets() { return this->crBuckets; }
+
+private:
+
+	/**
+	* Runs the Cut and Choose protocol on the given circuit (in the ExecutionParameters object).
+	* @param execution Contains parameters for the execution.
+	* @param bundleBuilders Contains values used in the circuit (such as keys, wires indices).
+	* @return list of buckets that holds the created circuits.
+	* @throws IOException
+	* @throws CheatAttemptException
+	*/
+	//TODO - shared_ptr<BucketBundleList> runCutAndChooseProtocol(shared_ptr<ExecutionParameters> execution, BundleBuilder[] bundleBuilders);
+
+	/**
+	* Receive KProbeResistantMatrix from P2.
+	* @return the received matrix.
+	* @throws CheatAttemptException
+	* @throws IOException
+	*/
+	shared_ptr<KProbeResistantMatrix> receiveProbeResistantMatrix(); 
+
+	/**
+	* Runs the Malicious OT protocol.
+	* @param execution Parameters of the circuit.
+	* @param matrix The matrix that used to extend the keys.
+	* @param buckets contains the circuits.
+	*/
+	void runObliviousTransferOnP2Keys(shared_ptr<ExecutionParameters> execution, 
+		shared_ptr<KProbeResistantMatrix> matrix, shared_ptr<BucketBundleList> buckets);
 
 
  };

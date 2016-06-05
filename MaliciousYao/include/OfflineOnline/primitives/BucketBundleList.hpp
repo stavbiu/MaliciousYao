@@ -17,6 +17,9 @@ private:
 	vector<shared_ptr<BucketBundle>> buckets;		// Arrays that stores all bundles.
 
 public:
+
+	BucketBundleList(){}
+
 	/**
 	* A constructor that initializes the list using the given execution parameters and bucketMapping.
 	* @param execution contains the number of buckets and bucket size.

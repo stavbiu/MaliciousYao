@@ -48,9 +48,9 @@ vector<byte>* getBinaryByteArray(vector<byte> bytes)
 	return binary;
 }
 
-vector<byte> readByteVectorFromString(string str)
+vector<byte> readByteVectorFromString(string str, const char separator)
 {
-	auto fromStr = explode(str, ' ');
+	auto fromStr = explode(str, separator);
 	int numBytes = fromStr.size();
 	vector<byte> resVec(numBytes);
 
@@ -62,9 +62,9 @@ vector<byte> readByteVectorFromString(string str)
 	return resVec;
 }
 
-vector<long> readLongVectorFromString(string str)
+vector<long> readLongVectorFromString(string str, const char separator)
 {
-	auto fromStr = explode(str, ' ');
+	auto fromStr = explode(str, separator);
 	int num = fromStr.size();
 	vector<long> resVec(num);
 
@@ -76,9 +76,9 @@ vector<long> readLongVectorFromString(string str)
 	return resVec;
 }
 
-vector<int> readIntVectorFromString(string str)
+vector<int> readIntVectorFromString(string str, const char separator)
 {
-	auto fromStr = explode(str, ' ');
+	auto fromStr = explode(str, separator);
 	int num = fromStr.size();
 	vector<int> resVec(num);
 
@@ -88,6 +88,12 @@ vector<int> readIntVectorFromString(string str)
 	}
 
 	return resVec;
+}
+
+vector<string> readStringVectorFromString(string str, const char separator)
+{
+	auto fromStr = explode(str, separator);
+	return fromStr;
 }
 
 bool equalBlocks(block & a, block & b)

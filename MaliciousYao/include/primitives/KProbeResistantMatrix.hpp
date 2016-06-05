@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class KProbeResistantMatrix
+class KProbeResistantMatrix : public NetworkSerialized
 {
 private:
 	const int KEY_SIZE = 128;
@@ -85,4 +85,8 @@ public:
 		 The read matrix.
 	*/
 	static shared_ptr<KProbeResistantMatrix> loadFromFile(string filename);
+
+	// Inherited via NetworkSerialized
+	virtual string toString() override;
+	virtual void initFromString(const string & raw) override;
 };

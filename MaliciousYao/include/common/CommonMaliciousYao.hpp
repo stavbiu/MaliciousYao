@@ -34,17 +34,17 @@ using namespace std;
 *********************************************/
 
 /*
- Basic function that take vector and make it in to a string with " " between every element.
+ Basic function that take vector and make it in to a string with separator char between every element.
 */
 template <typename T>
-string vectorToString(const vector<T>& vec) 
+string vectorToString(const vector<T>& vec, const char separator) 
 {
 	std::ostringstream oss;
 
 	if (!vec.empty()) {
-		// Convert all but the last element to avoid a trailing " "
+		// Convert all but the last element to avoid a trailing separator
 		std::copy(vec.begin(), vec.end() - 1,
-			std::ostream_iterator<T>(oss, " "));
+			std::ostream_iterator<T>(oss, &separator));
 
 		// Now add the last element with no delimiter
 		oss << vec.back();
@@ -57,14 +57,14 @@ string vectorToString(const vector<T>& vec)
 }
 
 template <typename T>
-string vectorToString(const vector<T>* vec)
+string vectorToString(const vector<T>* vec, const char separator)
 {
 	std::ostringstream oss;
 
 	if (!vec->empty()) {
 		// Convert all but the last element to avoid a trailing " "
 		std::copy(vec->begin(), vec->end() - 1,
-			std::ostream_iterator<T>(oss, " "));
+			std::ostream_iterator<T>(oss, &separator));
 
 		// Now add the last element with no delimiter
 		oss << vec->back();
@@ -121,17 +121,22 @@ vector<byte>* getBinaryByteArray(vector<byte> bytes);
 /*
  Read string that was made with vectorToString() to vector<byte>
 */
-vector<byte> readByteVectorFromString(string str);
+vector<byte> readByteVectorFromString(string str, const char separator);
 
 /*
 Read string that was made with vectorToString() to vector<long>
 */
-vector<long> readLongVectorFromString(string str);
+vector<long> readLongVectorFromString(string str, const char separator);
 
 /*
 Read string that was made with vectorToString() to vector<int>
 */
-vector<int> readIntVectorFromString(string str);
+vector<int> readIntVectorFromString(string str, const char separator);
+
+/*
+Read string that was made with vectorToString() to vector<string>
+*/
+vector<string> readStringVectorFromString(string str, const char separator);
 
 
 /*

@@ -76,27 +76,28 @@ string CommitmentsPackage::toString()
 {
 	//save evrey data as string in a vector
 	vector<string> vecS(13);
-	vecS[0] = vectorToString(this->seedCmt.get());
+	vecS[0] = vectorToString(this->seedCmt.get(), ' ');
 	vecS[1] = std::to_string(this->seedIds);
-	vecS[2] = vectorToString(this->maskCmt.get());
+	vecS[2] = vectorToString(this->maskCmt.get(), ' ');
 	vecS[3] = std::to_string(this->maskIds);
-	vecS[4] = vectorToString(this->commitmentsX.get());
-	vecS[5] = vectorToString(this->commitmentsXIds.get());
-	vecS[6] = vectorToString(this->commitmentsY1Extended.get());
-	vecS[7] = vectorToString(this->commitmentsY1ExtendedIds.get());
-	vecS[8] = vectorToString(this->commitmentsY2.get());
-	vecS[9] = vectorToString(this->commitmentsY2Ids.get());
-	vecS[10] = vectorToString(this->commitmentsOutputKeys.get());
-	vecS[11] = vectorToString(this->diffCommitments.get());
-	vecS[12] = vectorToString(this->diffCommitmentsIds.get());
+	vecS[4] = vectorToString(this->commitmentsX.get(), ' ');
+	vecS[5] = vectorToString(this->commitmentsXIds.get(), ' ');
+	vecS[6] = vectorToString(this->commitmentsY1Extended.get(), ' ');
+	vecS[7] = vectorToString(this->commitmentsY1ExtendedIds.get(), ' ');
+	vecS[8] = vectorToString(this->commitmentsY2.get(), ' ');
+	vecS[9] = vectorToString(this->commitmentsY2Ids.get(), ' ');
+	vecS[10] = vectorToString(this->commitmentsOutputKeys.get(), ' ');
+	vecS[11] = vectorToString(this->diffCommitments.get(), ' ');
+	vecS[12] = vectorToString(this->diffCommitmentsIds.get(), ' ');
 
 	string res;
 	//make one vector separated by ";"
-	for (int i = 0; i < 12; i++) {
+	/*for (int i = 0; i < 12; i++) {
 		res += vecS[i] + ';';
 	}
 	//last elemant
-	res += vecS[12];
+	res += vecS[12];*/
+	res = vectorToString(vecS, ';');
 
 	return res;
 }
@@ -104,20 +105,20 @@ string CommitmentsPackage::toString()
 void CommitmentsPackage::initFromString(const string & raw)
 {
 	//separate string by ";"
-	auto fromStr = explode(raw, ';');
+	auto fromStr = readStringVectorFromString(raw, ';');
 	//get every data
-	this->seedCmt = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[0]));
+	this->seedCmt = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[0], ' '));
 	this->seedIds = std::stol(fromStr[1]);
-	this->maskCmt = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[2]));
+	this->maskCmt = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[2], ' '));
 	this->maskIds = std::stol(fromStr[3]);
-	this->commitmentsX = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[4]));
-	this->commitmentsXIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[5]));
-	this->commitmentsY1Extended = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[6]));
-	this->commitmentsY1ExtendedIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[7]));
-	this->commitmentsY2 = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[8]));
-	this->commitmentsY2Ids = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[9]));
-	this->commitmentsOutputKeys = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[10]));
-	this->diffCommitments = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[11]));
-	this->diffCommitmentsIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[12]));
+	this->commitmentsX = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[4], ' '));
+	this->commitmentsXIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[5], ' '));
+	this->commitmentsY1Extended = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[6], ' '));
+	this->commitmentsY1ExtendedIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[7], ' '));
+	this->commitmentsY2 = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[8], ' '));
+	this->commitmentsY2Ids = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[9], ' '));
+	this->commitmentsOutputKeys = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[10], ' '));
+	this->diffCommitments = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[11], ' '));
+	this->diffCommitmentsIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[12], ' '));
 
 }

@@ -115,9 +115,8 @@ int main(int argc, char* argv[]) {
 	shared_ptr<GarbledBooleanCircuit> crGbc (GarbledCircuitFactory::createCircuit(CIRCUIT_CHEATING_RECOVERY,
 		GarbledCircuitFactory::CircuitType::FIXED_KEY_FREE_XOR_HALF_GATES, true));
 
-	//TODO - put ExecutionParameters in OfflineProtocolP1 directly, with out adding varibles.
-	ExecutionParameters mainExecution(mainCircuit, mainGbc, N1, s1, B1, p1);
-	ExecutionParameters crExecution(crCircuit, crGbc, N2, s2, B2, p2);
+	shared_ptr<ExecutionParameters> mainExecution (&ExecutionParameters(mainCircuit, mainGbc, N1, s1, B1, p1));
+	shared_ptr<ExecutionParameters> crExecution (&ExecutionParameters(crCircuit, crGbc, N2, s2, B2, p2));
 
 
 	//end commenication

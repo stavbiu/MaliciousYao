@@ -202,7 +202,7 @@ void KProbeResistantMatrix::saveToFile(shared_ptr<KProbeResistantMatrix> matrix,
 
 	//go over the rows and write to file
 	for (const auto& a : (*matrix->matrix)) {
-		outfile << vectorToString(a) << endl;
+		outfile << vectorToString(a, ' ') << endl;
 	}
 
 	outfile.close();
@@ -226,10 +226,19 @@ shared_ptr<KProbeResistantMatrix> KProbeResistantMatrix::loadFromFile(string fil
 		//read line
 		getline(infile, line);
 		//get vector<byte> out of the line
-		auto inputVector = readByteVectorFromString(line);
+		auto inputVector = readByteVectorFromString(line, ' ');
 		//set in matrix
 		(*matrix)[i] = inputVector;
 	}
 
 	return shared_ptr<KProbeResistantMatrix>( new KProbeResistantMatrix(matrix));
+}
+
+string KProbeResistantMatrix::toString()
+{
+	return string();
+}
+
+void KProbeResistantMatrix::initFromString(const string & raw)
+{
 }
