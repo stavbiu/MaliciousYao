@@ -2,6 +2,7 @@
 
 #include "../../include/common/CommonMaliciousYao.hpp"
 #include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
+#include <cereal/archives/xml.hpp>	// for variable name
 
 /**
 * This class represents one commitment in the difference protocol. 
@@ -49,4 +50,11 @@ public:
 			Else, return the decommitment on r.
 	*/
 	shared_ptr<CmtCDecommitmentMessage> getDecom(int i) { return (i == 0) ? this->d0 : this->d1; }
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		archive(CEREAL_NVP(c0), CEREAL_NVP(c1), CEREAL_NVP(d0), CEREAL_NVP(d1)); // serialize things by passing them to the archive
+	}
 };
