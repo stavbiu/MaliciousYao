@@ -3,6 +3,9 @@
 #include "../../include/common/CommonMaliciousYao.hpp"
 #include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
 #include <libscapi/include/infra/Common.hpp>
+#include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/memory.hpp>  // for smart pointers
 
 /**
  A CommitmentBundle is a struct that holds the parameters pf the commitments on the keys. 
@@ -22,6 +25,9 @@ private:
 	int keySize = 16;
 
 public:
+
+	CommitmentBundle(){}
+
 	/**
 	 A constructor that sets the given arguments.
 	 Inputs:
@@ -80,4 +86,13 @@ public:
 	  @throws CheatAttemptException in case the given bundle is different than this one.
 	 */
 	 bool operator==(const CommitmentBundle& b);
+
+	 // This method lets cereal know which data members to serialize
+	 template<class Archive>
+	 void serialize(Archive & archive)
+	 {
+		 // serialize things by passing them to the archive
+		 archive(CEREAL_NVP(commitments), CEREAL_NVP(commitmentIds), CEREAL_NVP(decommitments), 
+			 CEREAL_NVP(decommitmentRandoms), CEREAL_NVP(commitmentSize), CEREAL_NVP(keySize));
+	 }
 };

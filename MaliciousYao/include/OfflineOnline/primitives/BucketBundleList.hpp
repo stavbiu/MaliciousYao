@@ -1,5 +1,9 @@
 #pragma once
 
+#include <fstream>
+#include <cereal/archives/binary.hpp>
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/memory.hpp>  // for smart pointers
 #include "../../../include/common/CommonMaliciousYao.hpp"
 #include "../../../include/OfflineOnline/primitives/BucketBundle.hpp"
 #include "../../../include/OfflineOnline/primitives/BucketMapping.hpp"
@@ -67,6 +71,6 @@ public:
 	* @throws FileNotFoundException
 	* @throws IOException
 	*/
-	static vector<shared_ptr<BucketBundle>> loadBucketFromFile(string filename);
+	static shared_ptr<BucketBundle> loadBucketFromFile(string filename);
 
 };

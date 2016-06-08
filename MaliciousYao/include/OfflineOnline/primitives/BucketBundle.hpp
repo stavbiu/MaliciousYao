@@ -2,6 +2,9 @@
 
 #include "../../../include/common/CommonMaliciousYao.hpp"
 #include "../../../include/OfflineOnline/primitives/Bundle.hpp"
+#include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/memory.hpp>  // for smart pointers
 
 /*
  Class BucketBundle save all the bundle the belongs in one bucket
@@ -29,4 +32,11 @@ public:
 		this->numBundle++;
 	}
 
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		// serialize things by passing them to the archive
+		archive(CEREAL_NVP(numBundle), CEREAL_NVP(bucket));
+	}
 };

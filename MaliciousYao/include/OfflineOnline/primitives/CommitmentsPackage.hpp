@@ -2,6 +2,9 @@
 
 #include "../../../include/common/CommonMaliciousYao.hpp"
 #include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
+#include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/memory.hpp>  // for smart pointers
 
 /**
 * This package gathering together some objects that should be sent over the offline protocol.
@@ -33,6 +36,9 @@ class CommitmentsPackage: public NetworkSerialized {
 	shared_ptr<vector<long>> diffCommitmentsIds;
 
 public:
+
+	CommitmentsPackage(){}
+
 	/**
 	* A constructor that sets the given parameters.
 	* @param cmtSize Size of every commitment, in bytes.
@@ -109,5 +115,16 @@ public:
 	virtual string toString() override;
 
 	virtual void initFromString(const string & raw) override;
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		// serialize things by passing them to the archive
+		archive(CEREAL_NVP(cmtSize), CEREAL_NVP(s), CEREAL_NVP(seedCmt), CEREAL_NVP(seedIds), CEREAL_NVP(maskCmt), 
+			CEREAL_NVP(maskIds), CEREAL_NVP(commitmentsX), CEREAL_NVP(commitmentsXIds), CEREAL_NVP(commitmentsY1Extended), 
+			CEREAL_NVP(commitmentsY1ExtendedIds), CEREAL_NVP(commitmentsY2), CEREAL_NVP(commitmentsY2Ids), 
+			CEREAL_NVP(commitmentsOutputKeys), CEREAL_NVP(diffCommitments), CEREAL_NVP(diffCommitmentsIds));
+	}
 
 };

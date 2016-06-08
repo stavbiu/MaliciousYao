@@ -189,3 +189,36 @@ public:
 		archive(CEREAL_NVP(vecLevel1), CEREAL_NVP(vecBas2)); // serialize things by passing them to the archive
 	}
 };
+
+class uniqueLevel2 {
+	unique_ptr<level2> myLevel2;
+
+public:
+	uniqueLevel2() {
+		myLevel2 = make_unique<level2>(level2());
+	}
+
+	bool operator==(const uniqueLevel2& b) {
+		return (*this->myLevel2.get() == *b.myLevel2.get());
+	}
+
+	bool checkNull() { return myLevel2 == NULL; }
+
+	template<class Archive>
+	void save(Archive & archive) const {
+		archive(myLevel2);
+	}
+
+	template<class Archive>
+	void load(Archive & archive) {
+		archive(myLevel2);
+	}
+
+
+	// This method lets cereal know which data members to serialize
+	/*template<class Archive>
+	void serialize(Archive & archive)
+	{
+		archive(CEREAL_NVP(myLevel2)); // serialize things by passing them to the archive
+	}*/
+};

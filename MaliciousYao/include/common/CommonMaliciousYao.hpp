@@ -29,6 +29,16 @@ typedef pair<byte*, int> vec_byte;
 
 using namespace std;
 
+/*
+* For deleting block* in unique_ptr
+*/
+struct aligned_free {
+	void operator()(void* p) {
+		_aligned_free(p);
+	}
+};
+
+
 /********************************************
  Common functions for MaliciousYao protocol
 *********************************************/

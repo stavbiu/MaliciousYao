@@ -2,6 +2,9 @@
 
 #include "../../include/common/CommonMaliciousYao.hpp"
 #include "../../include/CommitmentWithZkProofOfDifference/SCom.hpp"
+#include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/memory.hpp>  // for smart pointers
 
 /**
 * This class holds the special commitment objects of the difference protocol. 
@@ -26,6 +29,8 @@ private:
 	vector<SCom> commitments;			//List of commitment pairs.
 
 public:
+
+	SC() {}
 
 	/**
 	* A constructor that sets the given parameters.
@@ -71,4 +76,13 @@ public:
 	* The id now contain the next available id that can be used for the next commitment.
 	*/
 	long getNextAvailableCommitmentId() { return this->commitmentId; }
+
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		// serialize things by passing them to the archive
+		archive(CEREAL_NVP(n), CEREAL_NVP(s), CEREAL_NVP(commitmentId), CEREAL_NVP(r), CEREAL_NVP(commitments));
+	}
 };

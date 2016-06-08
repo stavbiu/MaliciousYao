@@ -3,6 +3,7 @@
 #include "../../include/common/CommonMaliciousYao.hpp"
 #include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
 #include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/types/memory.hpp>  // for smart pointers
 
 /**
 * This class represents one commitment in the difference protocol. 
@@ -55,6 +56,7 @@ public:
 	template<class Archive>
 	void serialize(Archive & archive)
 	{
-		archive(CEREAL_NVP(c0), CEREAL_NVP(c1), CEREAL_NVP(d0), CEREAL_NVP(d1)); // serialize things by passing them to the archive
+		//TODO - add serialize when CmtCCommitmentMsg and CmtCDecommitmentMessage will have it.
+		//archive(CEREAL_NVP(c0), CEREAL_NVP(c1), CEREAL_NVP(d0), CEREAL_NVP(d1)); // serialize things by passing them to the archive
 	}
 };

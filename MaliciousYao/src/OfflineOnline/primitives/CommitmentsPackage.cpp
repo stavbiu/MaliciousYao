@@ -75,7 +75,7 @@ void CommitmentsPackage::setDiffCommitments(vector<vector<CmtCCommitmentMsg*>> d
 string CommitmentsPackage::toString()
 {
 	//save evrey data as string in a vector
-	vector<string> vecS(13);
+	vector<string> vecS(14);
 	vecS[0] = vectorToString(this->seedCmt.get(), ' ');
 	vecS[1] = std::to_string(this->seedIds);
 	vecS[2] = vectorToString(this->maskCmt.get(), ' ');
@@ -89,6 +89,8 @@ string CommitmentsPackage::toString()
 	vecS[10] = vectorToString(this->commitmentsOutputKeys.get(), ' ');
 	vecS[11] = vectorToString(this->diffCommitments.get(), ' ');
 	vecS[12] = vectorToString(this->diffCommitmentsIds.get(), ' ');
+	vecS[13] = std::to_string(this->cmtSize);
+	vecS[14] = std::to_string(this->s);
 
 	string res;
 	//make one vector separated by ";"
@@ -120,5 +122,7 @@ void CommitmentsPackage::initFromString(const string & raw)
 	this->commitmentsOutputKeys = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[10], ' '));
 	this->diffCommitments = shared_ptr<vector<byte>>(&readByteVectorFromString(fromStr[11], ' '));
 	this->diffCommitmentsIds = shared_ptr<vector<long>>(&readLongVectorFromString(fromStr[12], ' '));
+	this->cmtSize = std::stoi(fromStr[13]);
+	this->s = std::stoi(fromStr[14]);
 
 }

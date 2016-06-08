@@ -10,6 +10,7 @@
 //#include <cereal/archives/portable_binary.hpp>
 #include <cereal/archives/xml.hpp>
 #include <cereal/archives/json.hpp>
+#include <cereal/types/memory.hpp>
 
 using namespace std;
 
@@ -79,6 +80,8 @@ TEST_CASE("Common methods", "[]") {
 
 	SECTION("XML file test") {
 		level2 myLevel2;
+		myLevel2.initVectors(4, 2);
+
 		{
 			//writh to file
 			std::ofstream os("data.xml");
@@ -99,6 +102,8 @@ TEST_CASE("Common methods", "[]") {
 
 	SECTION("JSON file test") {
 		level2 myLevel2;
+		myLevel2.initVectors(4, 2);
+
 		{
 			//writh to file
 			std::ofstream os("dataJSON.json");
@@ -119,6 +124,8 @@ TEST_CASE("Common methods", "[]") {
 
 	SECTION("binary file test") {
 		level2 myLevel2;
+		myLevel2.initVectors(4, 2);
+
 		{
 			//writh to file
 			std::ofstream os("dataBinary");
@@ -135,6 +142,33 @@ TEST_CASE("Common methods", "[]") {
 		iarchive(inputLevel2);
 
 		REQUIRE(inputLevel2 == myLevel2);
+	}
+
+	SECTION("smart pointer test") {
+
+		uniqueLevel2 myUniqueLevel2;
+
+		{
+			//writh to file
+			std::ofstream os("smart_pointer_test");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(myUniqueLevel2);
+		}
+
+		REQUIRE(!myUniqueLevel2.checkNull());
+
+		//read from file
+		std::ifstream is("smart_pointer_test");
+		cereal::BinaryInputArchive iarchive(is);
+
+		uniqueLevel2 inputUniqueLevel2;
+
+		iarchive(inputUniqueLevel2);
+
+		REQUIRE(!inputUniqueLevel2.checkNull());
+
+		REQUIRE(inputUniqueLevel2 == myUniqueLevel2);
 	}
 
 }

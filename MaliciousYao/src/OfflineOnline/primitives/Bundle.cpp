@@ -1,6 +1,6 @@
 #include "../../../include/OfflineOnline/primitives/Bundle.hpp"
 
-Bundle::Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues,
+Bundle::Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCircuit, block * wireValues, int numberOfOutputs,
 	shared_ptr<vector<byte>> placementMask, shared_ptr<vector<byte>> commitmentMask, shared_ptr<vector<int>> inputLabelsX,
 	shared_ptr<vector<int>> inputLabelsY1Extended, shared_ptr<vector<int>> inputLabelsY2, shared_ptr<vector<int>> outputLabels,
 	shared_ptr<vector<byte>> inputWiresX, shared_ptr<vector<byte>> inputWiresY1Extended, shared_ptr<vector<byte>> inputWiresY2,
@@ -24,7 +24,8 @@ Bundle::Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCir
 	this->inputWiresX = inputWiresX;
 	this->inputWiresY1Extended = inputWiresY1Extended;
 	this->inputWiresY2 = inputWiresY2;
-	this->outputWires = wireValues;
+	this->numberOfOutputs = numberOfOutputs;
+	this->outputWires = unique_ptr<block, aligned_free>(wireValues);
 
 	this->commitmentsX = commitmentsX;
 	this->commitmentsY1Extended = commitmentsY1Extended;

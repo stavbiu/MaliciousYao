@@ -44,12 +44,30 @@ void BucketBundleList::saveToFiles(string prefix)
 		formatter % prefix;
 		formatter % j;
 		string filename = formatter.str();
+
+		//new scope because BinaryOutputArchive flash in distractor
+		{
+			//write to binary file
+			std::ofstream os(filename);
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			//oarchive(*buckets[j].get());
+		}
 	}
-	//TODO - saveToFiles
 }
 
-vector<shared_ptr<BucketBundle>> BucketBundleList::loadBucketFromFile(string filename)
+shared_ptr<BucketBundle> BucketBundleList::loadBucketFromFile(string filename)
 {
-	//TOSO - loadBucketFromFile
-	return vector<shared_ptr<BucketBundle>>();
+	//read from file
+	std::ifstream is(filename);
+	cereal::BinaryInputArchive iarchive(is);
+
+	shared_ptr<BucketBundle> bucket;
+
+	//iarchive(*bucket.get());
+
+	Bundle temp;
+	iarchive(temp);
+
+	return bucket;
 }
