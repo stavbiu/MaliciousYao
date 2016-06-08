@@ -1,7 +1,10 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <cereal/archives/xml.hpp>
+#include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/string.hpp>  // string recognition
+
 
 typedef unsigned char byte;
 
