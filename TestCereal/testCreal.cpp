@@ -2,15 +2,20 @@
 
 #include "catch.hpp"
 #include "classes.h"
+#include "aligned_allocator.hpp"
+#include "aligned_allocator_no_destructor.hpp"
 #include <sstream>
 #include <vector>
 #include <string>
 #include <fstream>
 #include <cereal/archives/binary.hpp>
-//#include <cereal/archives/portable_binary.hpp>
 #include <cereal/archives/xml.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/memory.hpp>
+
+#include <algorithm>
+
+#define SIZE_OF_BLOCK 16//size in bytes
 
 using namespace std;
 
@@ -170,5 +175,165 @@ TEST_CASE("Common methods", "[]") {
 
 		REQUIRE(inputUniqueLevel2 == myUniqueLevel2);
 	}
+
+	SECTION("test block") {
+		/*int16_t num = 12;
+		__m128i test= _mm_set1_epi16(num);
+		unique_ptr<byte> testByte((byte*)&test);
+		{
+			//writh to file
+			std::ofstream os("blockTest");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(testByte);
+		}
+		//read from file
+		std::ifstream is("blockTest");
+		cereal::BinaryInputArchive iarchive(is);
+
+		__m128i readTest;
+		unique_ptr<byte> readTestByte;
+
+		iarchive(readTestByte);
+
+		REQUIRE(*readTestByte == *testByte);
+
+		readTest = *(__m128i*)readTestByte.get();
+
+		__m128i neq = _mm_xor_si128(readTest, test);
+		REQUIRE(_mm_test_all_zeros(neq, neq));*/
+
+		blockU test;
+		test.mm = _mm_set1_epi16(12);
+
+		{
+			//writh to file
+			std::ofstream os("blockTest");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(test.bytes);
+		}
+
+		//read from file
+		std::ifstream is("blockTest");
+		cereal::BinaryInputArchive iarchive(is);
+
+		blockU readTest;
+
+		iarchive(readTest.bytes);
+
+		__m128i neq = _mm_xor_si128(readTest.mm, test.mm);
+		REQUIRE(_mm_test_all_zeros(neq, neq));
+	}
+
+	SECTION("test unique_ptr<block>") {
+		/*unique_ptr<block[]> test((block *)_mm_malloc(sizeof(block) * 2, SIZE_OF_BLOCK));
+
+		test[0].mm = _mm_set1_epi16(12);
+		test[0].mm = _mm_set1_epi16(10);
+		*/
+
+		/*block_ptr test;
+	    test.mm = (__m128i *)_mm_malloc(sizeof(block) * 2, SIZE_OF_BLOCK);
+
+		test.mm[0] = _mm_set1_epi16(12);
+		test.mm[1] = _mm_set1_epi16(10);
+
+		unique_ptr<byte> temp(test.bytes);
+
+		{
+			//writh to file
+			std::ofstream os("blockTestUnique");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			
+
+			oarchive(temp);
+		}
+
+		//read from file
+		std::ifstream is("blockTestUnique");
+		cereal::BinaryInputArchive iarchive(is);
+
+		block_ptr readTest;
+
+		iarchive(temp);
+
+		readTest.bytes = temp.release();
+
+		__m128i neq = _mm_xor_si128(readTest.mm[0], test.mm[0]);
+		REQUIRE(_mm_test_all_zeros(neq, neq));
+
+		neq = _mm_xor_si128(readTest.mm[1], test.mm[1]);
+		REQUIRE(_mm_test_all_zeros(neq, neq));
+		*/
+	}
+
+	SECTION("test block to vector") {
+		block* test = (block *)_mm_malloc(sizeof(block) * 2, SIZE_OF_BLOCK);
+		test[0] = _mm_set1_epi16(12);
+		test[1] = _mm_set1_epi16(10);
+
+
+		int byteNum = 2 * SIZE_OF_BLOCK;
+		byte* temp = (byte*)test;
+		//make byte vector of block*
+		vector<byte> toSend(temp, temp + byteNum);
+		
+		{
+
+			//writh to file
+			std::ofstream os("blockTestToByte");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(toSend);
+		}
+
+		//read from file
+		std::ifstream is("blockTestToByte");
+		cereal::BinaryInputArchive iarchive(is);
+
+		//vector<byte, aligned_allocator<byte, SIZE_OF_BLOCK>> readFile;
+		vector<byte, aligned_allocator_no_destructor<byte, SIZE_OF_BLOCK>> readFile;
+
+		iarchive(readFile);
+
+		//from vector to block*
+		block* readTest = (block*)&readFile[0];
+
+		__m128i neq = _mm_xor_si128(readTest[0], test[0]);
+		REQUIRE(_mm_test_all_zeros(neq, neq));
+
+		neq = _mm_xor_si128(readTest[1], test[1]);
+		REQUIRE(_mm_test_all_zeros(neq, neq));
+
+		_aligned_free(test);
+		_aligned_free(readTest);
+
+	}
+
+	SECTION("inheritance") {
+		level2Son test;
+
+		{
+			//writh to file
+			std::ofstream os("inheritance");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(test);
+		}
+
+		//read from file
+		std::ifstream is("inheritance");
+		cereal::BinaryInputArchive iarchive(is);
+
+		level2 readFile;
+
+		iarchive(readFile);
+
+		level2* temp = &test;
+		REQUIRE(*temp == readFile);
+	}
+
 
 }

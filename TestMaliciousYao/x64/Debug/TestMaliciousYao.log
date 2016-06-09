@@ -1,2 +1,2 @@
 ﻿  test.cpp
-  TestMaliciousYao.vcxproj -> c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\TestMaliciousYao.exe
+LINK : fatal error LNK1104: cannot open file 'c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\TestMaliciousYao.exe'

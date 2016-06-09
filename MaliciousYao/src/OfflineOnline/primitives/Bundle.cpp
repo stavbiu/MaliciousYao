@@ -25,7 +25,8 @@ Bundle::Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCir
 	this->inputWiresY1Extended = inputWiresY1Extended;
 	this->inputWiresY2 = inputWiresY2;
 	this->numberOfOutputs = numberOfOutputs;
-	this->outputWires = unique_ptr<block, aligned_free>(wireValues);
+	//this->outputWires = unique_ptr<block, aligned_free>(wireValues);
+	this->outputWires = wireValues;
 
 	this->commitmentsX = commitmentsX;
 	this->commitmentsY1Extended = commitmentsY1Extended;

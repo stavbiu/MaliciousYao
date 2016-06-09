@@ -11,119 +11,187 @@ c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(830): error C2338: cereal 
      } 
   
    
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::processImpl<__m128i,0>(const T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<std::shared_ptr<Bundle>,0>(const T &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive,
-              T=__m128i
+              ArchiveType=cereal::BinaryInputArchive,
+              T=std::shared_ptr<Bundle>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::processImpl<__m128i,0>(const T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<std::shared_ptr<Bundle>,0>(const T &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive,
-              T=__m128i
+              ArchiveType=cereal::BinaryInputArchive,
+              T=std::shared_ptr<Bundle>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::XMLInputArchive,0>::process<__m128i&>(T)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<std::shared_ptr<Bundle>&>(T)' being compiled
           with
           [
-              T=__m128i &
+              T=std::shared_ptr<Bundle> &
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::XMLInputArchive,0>::process<__m128i&>(T)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<std::shared_ptr<Bundle>&>(T)' being compiled
           with
           [
-              T=__m128i &
+              T=std::shared_ptr<Bundle> &
           ]
-  c:\users\stav\cereal\cereal\include\cereal\archives\xml.hpp(828): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::operator ()<__m128i&>(__m128i &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\types\vector.hpp(83): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<std::shared_ptr<Bundle>&>(std::shared_ptr<Bundle> &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive
+              ArchiveType=cereal::BinaryInputArchive
           ]
-  c:\users\stav\cereal\cereal\include\cereal\archives\xml.hpp(828): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::operator ()<__m128i&>(__m128i &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\types\vector.hpp(83): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<std::shared_ptr<Bundle>&>(std::shared_ptr<Bundle> &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive
+              ArchiveType=cereal::BinaryInputArchive
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(778): note: see reference to function template instantiation 'void cereal::load<__m128i&>(cereal::XMLInputArchive &,cereal::NameValuePair<__m128i &> &)' being compiled
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::processImpl<T,0>(T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(778): note: see reference to function template instantiation 'void cereal::load<AA,std::shared_ptr<Bundle>,std::allocator<_Ty>>(Archive &,std::vector<_Ty,std::allocator<_Ty>> &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive,
-              T=cereal::NameValuePair<__m128i &>
+              AA=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>,
+              Archive=cereal::BinaryInputArchive
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::processImpl<T,0>(T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>,0>(T &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive,
-              T=cereal::NameValuePair<__m128i &>
+              ArchiveType=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>,
+              T=std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::XMLInputArchive,0>::process<_Ty>(T &&)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>,0>(T &)' being compiled
           with
           [
-              _Ty=cereal::NameValuePair<__m128i &>,
-              T=cereal::NameValuePair<__m128i &>
+              ArchiveType=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>,
+              T=std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::XMLInputArchive,0>::process<_Ty>(T &&)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>&>(T)' being compiled
           with
           [
-              _Ty=cereal::NameValuePair<__m128i &>,
-              T=cereal::NameValuePair<__m128i &>
+              _Ty=std::shared_ptr<Bundle>,
+              T=std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &
           ]
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\include\offlineonline\primitives\bundle.hpp(180): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::operator ()<cereal::NameValuePair<__m128i &>>(cereal::NameValuePair<__m128i &> &&)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>&>(T)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive
+              _Ty=std::shared_ptr<Bundle>,
+              T=std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &
           ]
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\include\offlineonline\primitives\bundle.hpp(180): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::operator ()<cereal::NameValuePair<__m128i &>>(cereal::NameValuePair<__m128i &> &&)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\archives\binary.hpp(132): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>&>(std::vector<_Ty,std::allocator<_Ty>> &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive
+              ArchiveType=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\access.hpp(241): note: see reference to function template instantiation 'void Bundle::load<Archive>(Archive &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\archives\binary.hpp(132): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>&>(std::vector<_Ty,std::allocator<_Ty>> &)' being compiled
           with
           [
-              Archive=cereal::XMLInputArchive
+              ArchiveType=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(770): note: see reference to function template instantiation 'void cereal::access::member_load<AA,TT>(Archive &,T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(762): note: see reference to function template instantiation 'void cereal::serialize<AA,std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>>&>(Archive &,cereal::NameValuePair<std::vector<_Ty,std::allocator<_Ty>> &> &)' being compiled
           with
           [
-              AA=cereal::XMLInputArchive,
-              TT=Bundle,
-              Archive=cereal::XMLInputArchive,
-              T=Bundle
+              AA=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>,
+              Archive=cereal::BinaryInputArchive
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::processImpl<Bundle,0>(T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<T,0>(T &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive,
-              T=Bundle
+              ArchiveType=cereal::BinaryInputArchive,
+              T=cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::processImpl<Bundle,0>(T &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<T,0>(T &)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive,
-              T=Bundle
+              ArchiveType=cereal::BinaryInputArchive,
+              T=cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::XMLInputArchive,0>::process<Bundle&>(T)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(710): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<_Ty>(T &&)' being compiled
           with
           [
-              T=Bundle &
+              _Ty=cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>,
+              T=cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>
           ]
-  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::XMLInputArchive,0>::process<Bundle&>(T)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(710): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<_Ty>(T &&)' being compiled
           with
           [
-              T=Bundle &
+              _Ty=cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>,
+              T=cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>
           ]
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\offlineonline\primitives\bucketbundlelist.cpp(71): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::operator ()<Bundle&>(Bundle &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<_Ty,cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>>(T &&,cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &> &&)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive
+              _Ty=cereal::NameValuePair<int &>,
+              T=cereal::NameValuePair<int &>
           ]
-  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\offlineonline\primitives\bucketbundlelist.cpp(71): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,0>::operator ()<Bundle&>(Bundle &)' being compiled
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<_Ty,cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &>>(T &&,cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<std::shared_ptr<Bundle>>> &> &&)' being compiled
           with
           [
-              ArchiveType=cereal::XMLInputArchive
+              _Ty=cereal::NameValuePair<int &>,
+              T=cereal::NameValuePair<int &>
+          ]
+  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\include\offlineonline\primitives\bucketbundle.hpp(40): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<cereal::NameValuePair<int &>,cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>> &>>(cereal::NameValuePair<int &> &&,cereal::NameValuePair<std::vector<_Ty,std::allocator<_Ty>> &> &&)' being compiled
+          with
+          [
+              ArchiveType=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>
+          ]
+  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\include\offlineonline\primitives\bucketbundle.hpp(40): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<cereal::NameValuePair<int &>,cereal::NameValuePair<std::vector<std::shared_ptr<Bundle>,std::allocator<_Ty>> &>>(cereal::NameValuePair<int &> &&,cereal::NameValuePair<std::vector<_Ty,std::allocator<_Ty>> &> &&)' being compiled
+          with
+          [
+              ArchiveType=cereal::BinaryInputArchive,
+              _Ty=std::shared_ptr<Bundle>
+          ]
+  c:\users\stav\cereal\cereal\include\cereal\access.hpp(229): note: see reference to function template instantiation 'void BucketBundle::serialize<Archive>(Archive &)' being compiled
+          with
+          [
+              Archive=cereal::BinaryInputArchive
+          ]
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(754): note: see reference to function template instantiation 'void cereal::access::member_serialize<AA,TT>(Archive &,T &)' being compiled
+          with
+          [
+              AA=cereal::BinaryInputArchive,
+              TT=BucketBundle,
+              Archive=cereal::BinaryInputArchive,
+              T=BucketBundle
+          ]
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<BucketBundle,0>(T &)' being compiled
+          with
+          [
+              ArchiveType=cereal::BinaryInputArchive,
+              T=BucketBundle
+          ]
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(701): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::processImpl<BucketBundle,0>(T &)' being compiled
+          with
+          [
+              ArchiveType=cereal::BinaryInputArchive,
+              T=BucketBundle
+          ]
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<BucketBundle&>(T)' being compiled
+          with
+          [
+              T=BucketBundle &
+          ]
+  c:\users\stav\cereal\cereal\include\cereal\cereal.hpp(604): note: see reference to function template instantiation 'void cereal::InputArchive<cereal::BinaryInputArchive,1>::process<BucketBundle&>(T)' being compiled
+          with
+          [
+              T=BucketBundle &
+          ]
+  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\offlineonline\primitives\bucketbundlelist.cpp(70): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<BucketBundle&>(BucketBundle &)' being compiled
+          with
+          [
+              ArchiveType=cereal::BinaryInputArchive
+          ]
+  c:\users\stav\documents\visual studio 2015\projects\maliciousyao\maliciousyao\src\offlineonline\primitives\bucketbundlelist.cpp(70): note: see reference to function template instantiation 'ArchiveType &cereal::InputArchive<ArchiveType,1>::operator ()<BucketBundle&>(BucketBundle &)' being compiled
+          with
+          [
+              ArchiveType=cereal::BinaryInputArchive
           ]
   Generating Code...
   Compiling...
-  OfflineProtocolP1.cpp
+  Bundle.cpp
   Generating Code...
+  Skipping... (no relevant changes detected)
+  CommitmentBundle.cpp
+  OfflineProtocolP1.cpp

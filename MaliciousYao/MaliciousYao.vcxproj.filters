@@ -169,5 +169,11 @@
     <ClInclude Include="include\OfflineOnline\primitives\BucketBundleList.hpp">
       <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
+    <ClInclude Include="include\common\aligned_allocator_no_destructor.hpp">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\aligned_allocator.hpp">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -148,9 +148,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="aligned_allocator_no_destructor.hpp" />
     <ClInclude Include="classes.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aligned_allocator.hpp" />
     <ClCompile Include="testCreal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

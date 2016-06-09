@@ -66,8 +66,8 @@ shared_ptr<BucketBundle> BucketBundleList::loadBucketFromFile(string filename)
 
 	//iarchive(*bucket.get());
 
-	Bundle temp;
-	iarchive(temp);
+	BucketBundle b;
+	iarchive(b);
 
 	return bucket;
 }

@@ -176,6 +176,8 @@
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.hpp" />
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\SC.hpp" />
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\SCom.hpp" />
+    <ClInclude Include="include\common\aligned_allocator.hpp" />
+    <ClInclude Include="include\common\aligned_allocator_no_destructor.hpp" />
     <ClInclude Include="include\common\CommonMaliciousYao.hpp" />
     <ClInclude Include="include\common\Preconditions.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\BucketBundle.hpp" />

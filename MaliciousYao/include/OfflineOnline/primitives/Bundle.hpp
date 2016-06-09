@@ -4,6 +4,7 @@
 #include "../../../include/primitives/CommitmentBundle.hpp"
 #include "../../../include/CommitmentWithZkProofOfDifference/DifferenceCommitmentCommitterBundle.hpp"
 #include "../../../include/OfflineOnline/primitives/CommitmentsPackage.hpp"
+#include "../../../include/common/aligned_allocator_no_destructor.hpp"
 #include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 #include <libscapi/include/CryptoInfra/Key.hpp>
 #include <cereal/archives/xml.hpp>	// for variable name
@@ -38,8 +39,8 @@ private:
 	shared_ptr<vector<byte>> inputWiresY1Extended;
 	shared_ptr<vector<byte>> inputWiresY2;
 	int numberOfOutputs;
-	unique_ptr<block, aligned_free> outputWires;
-	//block* outputWires;
+	//unique_ptr<block, aligned_free> outputWires;
+	block* outputWires;
 
 	//Commitments on the keys.
 	shared_ptr<CommitmentBundle> commitmentsX;
@@ -73,9 +74,9 @@ public:
 	/*
 	* A distructor.
 	*/
-	/*~Bundle() {
+	~Bundle() {
 		_aligned_free(this->outputWires);
-	}*/
+	}
 
 	shared_ptr<vector<byte>> getSeed() { return this->seed; }
 	shared_ptr<vector<byte>> getTranslationTable() { return this->translationTable;	}
@@ -89,7 +90,7 @@ public:
 	shared_ptr<vector<byte>> getInputWiresY1Extended() { return this->inputWiresY1Extended; }
 	shared_ptr<vector<byte>> getInputWiresY2() { return this->inputWiresY2; }
 	//unique_ptr<block> getOutputWires() { return this->outputWires; }
-	block getOutputWiresAt(int index) { return this->outputWires.get()[index]; }
+	block getOutputWiresAt(int index) { return this->outputWires[index]; }
 	shared_ptr<CommitmentBundle> getCommitmentsX() { return this->commitmentsX; }
 	shared_ptr<CommitmentBundle> getCommitmentsY1Extended() { return this->commitmentsY1Extended; }
 	shared_ptr<CommitmentBundle> getCommitmentsY2() { return commitmentsY2; }
@@ -128,21 +129,6 @@ public:
 
 	virtual void initFromString(const string & raw) override;
 
-	// This method lets cereal know which data members to serialize
-	/*template<class Archive>
-	void serialize(Archive & archive)
-	{
-		// serialize things by passing them to the archive
-		archive(CEREAL_NVP(seed), CEREAL_NVP(placementMask), CEREAL_NVP(commitmentMask), 
-			CEREAL_NVP(inputLabelsX), CEREAL_NVP(inputLabelsY1Extended), CEREAL_NVP(inputLabelsY2), 
-			CEREAL_NVP(outputLabels), CEREAL_NVP(commitmentsX), CEREAL_NVP(commitmentsY1Extended), 
-			CEREAL_NVP(commitmentsY2),  CEREAL_NVP(diffCommitments), CEREAL_NVP(keySize)
-			, CEREAL_NVP(outputWires));
-		//TODO - add , CEREAL_NVP(secret) when SecretKey will have serialize
-		//TODO - add serialize when CmtCCommitmentMsg and CmtCDecommitmentMessage will have it.
-		// CEREAL_NVP(commitment), CEREAL_NVP(decommit),
-	}*/
-
 	// This method lets cereal know which data members to save to file
 	template<class Archive>
 	void save(Archive & archive) const;
@@ -155,12 +141,19 @@ public:
 template<class Archive>
 inline void Bundle::save(Archive & archive) const
 {
+	//in order to send ouptutWires - block*, we need to make vector byte and send it.
+	int byteNum = SIZE_OF_BLOCK * 2 * this->numberOfOutputs;
+	byte* temp = (byte*)outputWires;
+	//make byte vector of block*
+	vector<byte> outputWiresToSend(temp, temp + byteNum);
+
 	// serialize things by passing them to the archive
-	/*archive(CEREAL_NVP(seed), CEREAL_NVP(placementMask), CEREAL_NVP(commitmentMask),
+	archive(CEREAL_NVP(seed), CEREAL_NVP(placementMask), CEREAL_NVP(commitmentMask),
 		CEREAL_NVP(inputLabelsX), CEREAL_NVP(inputLabelsY1Extended), CEREAL_NVP(inputLabelsY2),
 		CEREAL_NVP(outputLabels), CEREAL_NVP(commitmentsX), CEREAL_NVP(commitmentsY1Extended),
 		CEREAL_NVP(commitmentsY2), CEREAL_NVP(diffCommitments), CEREAL_NVP(keySize), CEREAL_NVP(numberOfOutputs)
-		, CEREAL_NVP(outputWires));*/
+		, CEREAL_NVP(outputWiresToSend));
+
 	//TODO - add , CEREAL_NVP(secret) when SecretKey will have serialize
 	//TODO - add serialize when CmtCCommitmentMsg and CmtCDecommitmentMessage will have it.
 	// CEREAL_NVP(commitment), CEREAL_NVP(decommit),
@@ -169,22 +162,21 @@ inline void Bundle::save(Archive & archive) const
 template<class Archive>
 inline void Bundle::load(Archive & archive)
 {
-	__m128i temp;
+	//read outputWires to vector<byte> align to 16 with no destractor
+	vector<byte, aligned_allocator_no_destructor<byte, SIZE_OF_BLOCK>> readOutputWires;
+
 	// serialize things by passing them to the archive
-	/*archive(CEREAL_NVP(seed), CEREAL_NVP(placementMask), CEREAL_NVP(commitmentMask),
+	archive(CEREAL_NVP(seed), CEREAL_NVP(placementMask), CEREAL_NVP(commitmentMask),
 		CEREAL_NVP(inputLabelsX), CEREAL_NVP(inputLabelsY1Extended), CEREAL_NVP(inputLabelsY2),
 		CEREAL_NVP(outputLabels), CEREAL_NVP(commitmentsX), CEREAL_NVP(commitmentsY1Extended),
 		CEREAL_NVP(commitmentsY2), CEREAL_NVP(diffCommitments), CEREAL_NVP(keySize), CEREAL_NVP(numberOfOutputs)
-		, CEREAL_NVP(outputWires));
-	*/
-	archive(CEREAL_NVP(temp));
+		, CEREAL_NVP(readOutputWires));
+
+	//convert from vector<byte> to block*
+	block* readTest = (block*)&readOutputWires[0];
+
 	//TODO - add , CEREAL_NVP(secret) when SecretKey will have serialize
 	//TODO - add serialize when CmtCCommitmentMsg and CmtCDecommitmentMessage will have it.
 	// CEREAL_NVP(commitment), CEREAL_NVP(decommit),
 
-	//copy outputWires to align block*;
-	/*block * temp = outputWires.release();
-	block *allOutputWireValues = (block *)_aligned_malloc(sizeof(block) * 2 * numberOfOutputs, SIZE_OF_BLOCK);
-	std::copy(temp, allOutputWireValues + (2 * numberOfOutputs), allOutputWireValues);
-	outputWires.reset(allOutputWireValues);*/
 }

@@ -18,9 +18,15 @@
     <ClInclude Include="classes.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="aligned_allocator_no_destructor.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="testCreal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aligned_allocator.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

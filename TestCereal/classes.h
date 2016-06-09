@@ -5,8 +5,10 @@
 #include <cereal/types/vector.hpp>	// vector recognition
 #include <cereal/types/string.hpp>  // string recognition
 
+#include <cereal/types/base_class.hpp> // for inheritance
 
 typedef unsigned char byte;
+typedef __m128i block;
 
 using namespace std;
 
@@ -154,6 +156,7 @@ public:
 };
 
 class level2 {
+
 	vector<level1> vecLevel1;
 	vector<basic2> vecBas2;
 
@@ -188,6 +191,7 @@ public:
 	{
 		archive(CEREAL_NVP(vecLevel1), CEREAL_NVP(vecBas2)); // serialize things by passing them to the archive
 	}
+
 };
 
 class uniqueLevel2 {
@@ -221,4 +225,40 @@ public:
 	{
 		archive(CEREAL_NVP(myLevel2)); // serialize things by passing them to the archive
 	}*/
+};
+
+union blockU {
+	__m128i mm;
+	byte bytes[16];
+};
+
+union block_ptr {
+	__m128i* mm = nullptr;
+	byte* bytes;
+};
+
+class level2Son : public level2 {
+private:
+	basic1 sonBasic1;
+
+public:
+	level2Son() :level2(){
+		this->sonBasic1.setStr("In son!!");
+	}
+
+	bool operator==(const level2Son& b) {
+		if (!(this->sonBasic1 == b.sonBasic1))
+			return false;
+		else
+			return level2::operator==(b);
+
+	}
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		archive(cereal::base_class<level2>(this),CEREAL_NVP(sonBasic1)); // serialize things by passing them to the archive
+	}
+
 };
