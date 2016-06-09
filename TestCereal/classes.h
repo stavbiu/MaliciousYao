@@ -262,3 +262,79 @@ public:
 	}
 
 };
+
+class level3 {
+	shared_ptr<vector<level1>> vecLevel1;
+	vector<shared_ptr<basic2>> vecBas2;
+
+public:
+	level3() { initVectors(4, 2); }
+
+	//vector<level1> getLevel1Vec() { return this->vecLevel1; }
+	//vector<basic2> getBasic2Vec() { return this->vecBas2; }
+
+	void initVectors(unsigned int level1Num, unsigned int basic2Num) {
+		this->vecLevel1 = shared_ptr<vector<level1>>(new vector<level1>(level1Num));
+		this->vecLevel1->at(level1Num - 1).addBas1(basic1());
+		this->vecLevel1->at(level1Num - 1).getVecBas1()[0].setVal(2);
+		this->vecLevel1->at(level1Num - 1).getVecBas1()[0].initVec();
+
+		this->vecBas2 = vector<shared_ptr<basic2>>(basic2Num);
+		for (int i = 0; i < basic2Num; i++) {
+			this->vecBas2[i] = shared_ptr<basic2>(new basic2());
+		}
+		this->vecBas2[basic2Num - 1]->initVecs(2, 2, 2);
+	}
+
+	bool operator==(const level3& b) {
+		if (!std::equal(this->vecLevel1->begin(), this->vecLevel1->end(), b.vecLevel1->begin()))
+			return false;
+		else if (b.vecBas2.size() != this->vecBas2.size())
+			return false;
+		else 
+			for (int i = 0; i < this->vecBas2.size(); i++) {
+				if (!this->vecBas2[i]->operator==(*b.vecBas2[i]))
+					return false;
+			}
+		return true;
+	}
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		archive(CEREAL_NVP(vecLevel1), CEREAL_NVP(vecBas2)); // serialize things by passing them to the archive
+	}
+
+};
+
+class level4 {
+	shared_ptr<vector<shared_ptr<level3>>> p;
+
+public:
+
+	level4() {
+		p = shared_ptr<vector<shared_ptr<level3>>>(new vector<shared_ptr<level3>>(3));
+		p->at(0) = shared_ptr<level3>(new level3());
+		p->at(1) = shared_ptr<level3>(new level3());
+		p->at(2) = shared_ptr<level3>(new level3());
+
+		p->at(1)->initVectors(1, 1);
+		p->at(2)->initVectors(3, 3);
+	}
+
+	bool operator==(const level4& b) {
+		for (int i = 0; i < 3; i++) {
+			if (!p->at(i)->operator==(*b.p->at(i)))
+				return false;
+		}
+		return true;
+	}
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		archive(CEREAL_NVP(p)); // serialize things by passing them to the archive
+	}
+};

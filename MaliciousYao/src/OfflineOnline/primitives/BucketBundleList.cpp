@@ -51,7 +51,7 @@ void BucketBundleList::saveToFiles(string prefix)
 			std::ofstream os(filename);
 			cereal::BinaryOutputArchive  oarchive(os);
 
-			//oarchive(*buckets[j].get());
+			oarchive(buckets[j]);
 		}
 	}
 }
@@ -64,10 +64,8 @@ shared_ptr<BucketBundle> BucketBundleList::loadBucketFromFile(string filename)
 
 	shared_ptr<BucketBundle> bucket;
 
-	//iarchive(*bucket.get());
+	iarchive(bucket);
 
-	BucketBundle b;
-	iarchive(b);
 
 	return bucket;
 }

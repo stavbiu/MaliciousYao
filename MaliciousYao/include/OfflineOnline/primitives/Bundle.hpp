@@ -58,7 +58,8 @@ private:
 
 
 public:
-	Bundle():outputWires(nullptr){}
+	//Bundle():outputWires(nullptr){}
+	Bundle(){}
 
 	/**
 	* A constructor.

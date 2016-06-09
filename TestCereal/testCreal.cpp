@@ -4,7 +4,6 @@
 #include "classes.h"
 #include "aligned_allocator.hpp"
 #include "aligned_allocator_no_destructor.hpp"
-#include <sstream>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -333,6 +332,75 @@ TEST_CASE("Common methods", "[]") {
 
 		level2* temp = &test;
 		REQUIRE(*temp == readFile);
+	}
+
+	SECTION("shared_ptr") {
+		shared_ptr<level2> test(new level2());
+
+		{
+			//writh to file
+			std::ofstream os("shared_ptr");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(test);
+		}
+
+		//read from file
+		std::ifstream is("shared_ptr");
+		cereal::BinaryInputArchive iarchive(is);
+
+		shared_ptr<level2> readFile;
+
+		iarchive(readFile);
+
+		REQUIRE(test->operator==(*readFile.get()));
+	}
+
+	SECTION("object with smart_ptr") {
+		vector<shared_ptr<level3>> test(2);
+		test[0] = shared_ptr<level3>(new level3());
+		test[1] = shared_ptr<level3>(new level3());
+
+		{
+			//writh to file
+			std::ofstream os("shared_ptr");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(test);
+		}
+
+		//read from file
+		std::ifstream is("shared_ptr");
+		cereal::BinaryInputArchive iarchive(is);
+
+		vector<shared_ptr<level3>> readFile;
+
+		iarchive(readFile);
+
+		REQUIRE(test[0]->operator==(*readFile[0].get()));
+		REQUIRE(test[1]->operator==(*readFile[1].get()));
+	}
+
+	SECTION("2 hierarchy smart_ptr ") {
+		level4 test;
+
+		{
+			//writh to file
+			std::ofstream os("shared_ptr");
+			cereal::BinaryOutputArchive  oarchive(os);
+
+			oarchive(test);
+		}
+
+		//read from file
+		std::ifstream is("shared_ptr");
+		cereal::BinaryInputArchive iarchive(is);
+
+		level4 readFile;
+
+		iarchive(readFile);
+
+		REQUIRE(test == readFile);
 	}
 
 
