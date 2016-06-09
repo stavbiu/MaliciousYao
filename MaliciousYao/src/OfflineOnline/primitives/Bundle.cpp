@@ -39,21 +39,19 @@ Bundle::Bundle(shared_ptr<vector<byte>> seed, GarbledBooleanCircuit * garbledCir
 	this->keySize = keySize;
 }
 
+SecretKey * Bundle::getProbeResistantWire(int wireIndex, int sigma)
+{
+	{
+		Preconditions::checkBinary(sigma);
+		//return new SecretKey(inputWiresY1Extended, (wireIndex * 2 + sigma)*keySize, keySize, "");
+		return new SecretKey(*inputWiresY1Extended.get(), "");
+	}
+}
+
 void Bundle::getCommitments(shared_ptr<CommitmentsPackage> pack)
 {
 	pack->setCommitmentsX(this->commitmentsX->getCommitments(), this->commitmentsX->getCommitmentsIds());
 	pack->setCommitmentsY1Extended(this->commitmentsY1Extended->getCommitments(), this->commitmentsY1Extended->getCommitmentsIds());
 	pack->setCommitmentsY2(this->commitmentsY2->getCommitments(), this->commitmentsY2->getCommitmentsIds());
 	pack->setCommitmentsOutputKeys(this->commitment.get());
-}
-
-string Bundle::toString()
-{
-	//TODO - toString in Bundle
-	return string();
-}
-
-void Bundle::initFromString(const string & raw)
-{
-	//TODO - initFromString in Bundle
 }

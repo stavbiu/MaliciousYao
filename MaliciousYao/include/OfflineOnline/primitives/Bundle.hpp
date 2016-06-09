@@ -18,7 +18,7 @@
 
  The bundle is used during the offline and the online phases of the protocol.
 */
-class Bundle : public NetworkSerialized {
+class Bundle {
 private:
 	shared_ptr<vector<byte>> seed;
 	block* garbledTables;  	// The underlying garbled circuit.
@@ -107,10 +107,7 @@ public:
 	}
 
 	//TODO - getProbeResistantWire() , SecretKeySpec ?
-	/*SecretKey* getProbeResistantWire(int wireIndex, int sigma) {
-		Preconditions::checkBinary(sigma);
-		return new SecretKeySpec(inputWiresY1Extended, (wireIndex * 2 + sigma)*keySize, keySize, "");
-	}*/
+	SecretKey* getProbeResistantWire(int wireIndex, int sigma);
 
 	/**
 	* Put in the commitment package the commitments on X, Y1Extended, Y2 and ouptut keys.
@@ -123,12 +120,6 @@ public:
 	shared_ptr<DifferenceCommitmentCommitterBundle> getDifferenceCommitmentBundle() { return this->diffCommitments; }
 
 	shared_ptr<SecretKey> getSecret() { return this->secret; }
-
-
-	// Inherited via NetworkSerialized
-	virtual string toString() override;
-
-	virtual void initFromString(const string & raw) override;
 
 	// This method lets cereal know which data members to save to file
 	template<class Archive>
