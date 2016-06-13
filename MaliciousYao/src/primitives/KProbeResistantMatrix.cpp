@@ -197,7 +197,7 @@ vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> KProbeResistantMatrix::re
 
 void KProbeResistantMatrix::saveToFile(shared_ptr<KProbeResistantMatrix> matrix, string filename)
 {
-	// clean the file
+	/*// clean the file
 	remove(filename.c_str());
 	//open file
 	std::ofstream outfile(filename.c_str());
@@ -211,12 +211,19 @@ void KProbeResistantMatrix::saveToFile(shared_ptr<KProbeResistantMatrix> matrix,
 		outfile << vectorToString(a, ' ') << endl;
 	}
 
-	outfile.close();
+	outfile.close();*/
+
+	//USE CEREAL
+	//write to binary file
+	std::ofstream os(filename);
+	cereal::BinaryOutputArchive  oarchive(os);
+
+	oarchive(matrix);
 }
 
 shared_ptr<KProbeResistantMatrix> KProbeResistantMatrix::loadFromFile(string filename)
 {
-	//open file
+	/*//open file
 	ifstream infile(filename.c_str());
 	//read n - number of rows
 	string line;
@@ -236,6 +243,20 @@ shared_ptr<KProbeResistantMatrix> KProbeResistantMatrix::loadFromFile(string fil
 		//set in matrix
 		(*matrix)[i] = inputVector;
 	}
-
+	
+	
 	return shared_ptr<KProbeResistantMatrix>( new KProbeResistantMatrix(matrix));
+	*/
+
+	//USE CEREAL
+	//read from file
+	std::ifstream is(filename);
+	cereal::BinaryInputArchive iarchive(is);
+
+	shared_ptr<KProbeResistantMatrix> matrix;
+
+	iarchive(matrix);
+
+	return matrix;
+
 }

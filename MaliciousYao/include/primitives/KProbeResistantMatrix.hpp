@@ -8,6 +8,10 @@
 #include "../../include/common/CommonMaliciousYao.hpp"
 #include "../../include/primitives/CircuitInput.hpp"
 #include "../../include/common/CommonMaliciousYao.hpp"
+#include <cereal/archives/xml.hpp>	// for variable name
+#include <cereal/archives/binary.hpp> // binary file save
+#include <cereal/types/vector.hpp>	// vector recognition
+#include <cereal/types/memory.hpp>  // for smart pointers
 
 using namespace std;
 
@@ -25,6 +29,8 @@ private:
 	int getNumberOfShares(int i, vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> &probeResistantKeys, int* shares, int* lastShare);
 
 public:
+	KProbeResistantMatrix(){}
+
 	/**
 	 A constructor that sets the given matrix.
 	*/
@@ -85,4 +91,13 @@ public:
 		 The read matrix.
 	*/
 	static shared_ptr<KProbeResistantMatrix> loadFromFile(string filename);
+
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive & archive)
+	{
+		// serialize things by passing them to the archive
+		archive(CEREAL_NVP(n), CEREAL_NVP(m), CEREAL_NVP(matrix));
+	}
 };
