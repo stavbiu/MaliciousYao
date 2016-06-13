@@ -58,6 +58,12 @@
     <Filter Include="Source Files\OfflineOnline\primitives">
       <UniqueIdentifier>{dd8238f8-c5f1-4450-8000-2ee0b189d7a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OfflineOnline\subroutines">
+      <UniqueIdentifier>{b6777ae8-9578-459a-9e2e-b6bb4fb073d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OfflineOnline\subroutines">
+      <UniqueIdentifier>{176dfbea-c590-4d72-b9df-504364940e78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\conf\PartiesConfig.txt">
@@ -109,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="src\OfflineOnline\primitives\BucketBundleList.cpp">
       <Filter>Source Files\OfflineOnline\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OfflineOnline\subroutines\OfflineOtSenderRoutine.cpp">
+      <Filter>Source Files\OfflineOnline\subroutines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\KeyUtils.cpp">
+      <Filter>Source Files\common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +185,12 @@
       <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="include\common\aligned_allocator.hpp">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OfflineOnline\subroutines\OfflineOtSenderRoutine.hpp">
+      <Filter>Header Files\OfflineOnline\subroutines</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\KeyUtils.hpp">
       <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
