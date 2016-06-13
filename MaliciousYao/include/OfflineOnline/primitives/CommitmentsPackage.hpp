@@ -14,7 +14,7 @@
 * @author Cryptography and Computer Security Research Group Department of Computer Science Bar-Ilan University 
 *
 */
-class CommitmentsPackage: public NetworkSerialized {
+class CommitmentsPackage {
 	int cmtSize = 20;				//Size of every commitment, in bytes.
 	int s;							//Security parameter.
 
@@ -112,9 +112,9 @@ public:
 	void setDiffCommitments(vector<vector<CmtCCommitmentMsg*>> diffCommitments);
 
 	// Inherited via NetworkSerialized
-	virtual string toString() override;
+	//virtual string toString() override;
+	//virtual void initFromString(const string & raw) override;
 
-	virtual void initFromString(const string & raw) override;
 
 	// This method lets cereal know which data members to serialize
 	template<class Archive>

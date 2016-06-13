@@ -72,6 +72,7 @@ void CommitmentsPackage::setDiffCommitments(vector<vector<CmtCCommitmentMsg*>> d
 	}
 }
 
+/*
 string CommitmentsPackage::toString()
 {
 	//save evrey data as string in a vector
@@ -98,12 +99,13 @@ string CommitmentsPackage::toString()
 		res += vecS[i] + ';';
 	}
 	//last elemant
-	res += vecS[12];*/
-	res = vectorToString(vecS, ';');
+	res += vecS[12];*//*
+	char temp = ';';
+	res = vectorToString(vecS, &temp);
 
 	return res;
 }
-
+*//*
 void CommitmentsPackage::initFromString(const string & raw)
 {
 	//separate string by ";"
@@ -125,4 +127,4 @@ void CommitmentsPackage::initFromString(const string & raw)
 	this->cmtSize = std::stoi(fromStr[13]);
 	this->s = std::stoi(fromStr[14]);
 
-}
+}*/

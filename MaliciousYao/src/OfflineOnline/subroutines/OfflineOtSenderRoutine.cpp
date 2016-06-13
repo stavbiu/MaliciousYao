@@ -14,10 +14,22 @@ vector<byte> OfflineOtSenderRoutine::buildInput(int bucketId, int b)
 			shared_ptr<Bundle> bundle = buckets->getBundle(bucketId, j);
 
 			//Get the xor of the key and commitment mask.
-			SecretKey xorKeyWithCmtMask;
+			SecretKey xorKeyWithCmtMask = KeyUtils::xorKeys(bundle->getProbeResistantWire(i,b),
+				&SecretKey(*bundle->getCommitmentMask().get(),""));
 
-			//TODO - KeyUtils
+			vector<byte> key = xorKeyWithCmtMask.getEncoded();
 
+			//Get the random value of the decommitment for this wire.
+			CmtCDecommitmentMessage* decom = bundle->getCommitmentsY1Extended()->getDecommitment(i, b);
+			//TODO -CmtSimpleHashDecommitmentMessage , vector<byte> r = decom->getR()->getR();
+			vector<byte> r;
+
+			//Put in the input array the key and random. The receiver will use them to verify the commitments of Y1 extended keys.
+			memcpy(&inputArr[pos], &key[0], this->keySize);
+			pos += this->keySize;
+			memcpy(&inputArr[pos], &r[0], this->hashSize);
+			pos += this->hashSize;
+			
 		}
 	}
 
@@ -28,6 +40,16 @@ vector<byte> OfflineOtSenderRoutine::buildInput(int bucketId, int b)
 void OfflineOtSenderRoutine::runOtExtensionTransfer(int bucketId)
 {
 	//TODO - OfflineOtSenderRoutine::runOtExtensionTransfer
+
+	//Get the garbled inputs of each party.
+	vector<byte> x0Arr = buildInput(bucketId, 0);
+	vector<byte> x1Arr = buildInput(bucketId, 1);
+
+	//Create the input for the OT sender.
+	OTBatchSInput* input = new OTExtensionGeneralSInput(&x0Arr[0], x0Arr.size(), &x1Arr[0], x1Arr.size(), m);
+
+	//Execute the OT protocol.
+	//TODO - maliciousOtSender.transfer(null, input);
 }
 
 OfflineOtSenderRoutine::OfflineOtSenderRoutine(ExecutionParameters execution, CryptoPrimitives primitives, KProbeResistantMatrix matrix, shared_ptr<BucketBundleList> buckets)

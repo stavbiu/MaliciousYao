@@ -48,15 +48,16 @@ struct aligned_free {
 /*
  Basic function that take vector and make it in to a string with separator char between every element.
 */
+//TODO - vectorToString ****DOES NOT WORK****
 template <typename T>
-string vectorToString(const vector<T>& vec, const char separator) 
+string vectorToString(const vector<T>& vec, const char* separator) 
 {
 	std::ostringstream oss;
 
 	if (!vec.empty()) {
 		// Convert all but the last element to avoid a trailing separator
 		std::copy(vec.begin(), vec.end() - 1,
-			std::ostream_iterator<T>(oss, &separator));
+			std::ostream_iterator<T>(oss, separator));
 
 		// Now add the last element with no delimiter
 		oss << vec.back();

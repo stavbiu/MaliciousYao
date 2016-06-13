@@ -1,9 +1,12 @@
 #pragma once
 
+#include <libscapi/include/interactive_mid_protocols/OTSemiHonestExtension.hpp>
+
 #include "../../../include/OfflineOnline/primitives/BucketBundleList.hpp"
 #include "../../../include/primitives/KProbeResistantMatrix.hpp"
 #include "../../../include/primitives/ExecutionParameters.hpp"
 #include "../../../include/primitives/CryptoPrimitives.hpp"
+#include "../../../include/common/KeyUtils.hpp"
 
 using namespace std;
 
