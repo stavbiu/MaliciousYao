@@ -5,6 +5,8 @@
 #include <libscapi/include/circuits/GarbledBooleanCircuit.h>
 
 #include "../../include/common/Preconditions.hpp"
+#include "../../include/common/aligned_allocator.hpp"
+#include "../../include/common/aligned_allocator_no_destructor.hpp"
 
 #include <vector>
 #include <string>
@@ -166,7 +168,8 @@ public:
 	}
 
 	~VecBlock() {
-		_aligned_free(this->blockArray);
+		//_aligned_free(this->blockArray);
+		_mm_free(this->blockArray);
 	}
 	/*
 	 Create block* from vector of bytes

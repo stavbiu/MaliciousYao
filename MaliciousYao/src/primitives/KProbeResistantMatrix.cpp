@@ -1,6 +1,6 @@
 #include "../../include/primitives/KProbeResistantMatrix.hpp"
 
-void KProbeResistantMatrix::allocateKeys(VecBlock & probeResistantKeys, block & originalKey0, block & originalKey1, int i, block & newKey)
+void KProbeResistantMatrix::allocateKeys(vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> & probeResistantKeys, block & originalKey0, block & originalKey1, int i, block & newKey)
 {
 	//Get the delta between the keys.
 	block delta = _mm_xor_si128(originalKey0, originalKey1);
@@ -44,7 +44,7 @@ void KProbeResistantMatrix::allocateKeys(VecBlock & probeResistantKeys, block & 
 
 }
 
-int KProbeResistantMatrix::getNumberOfShares(int i, VecBlock &probeResistantKeys, int* shares, int* lastShare)
+int KProbeResistantMatrix::getNumberOfShares(int i, vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> &probeResistantKeys, int* shares, int* lastShare)
 {
 	bool allSharesAreAlreadyAssigned = true;
 	block zero = _mm_setzero_si128();
@@ -89,20 +89,26 @@ vector<int> KProbeResistantMatrix::getProbeResistantLabels()
 	return res;
 }
 
-VecBlock KProbeResistantMatrix::transformKeys(VecBlock originalKeys, AES* mes)
+vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> KProbeResistantMatrix::transformKeys(vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> originalKeys, AES* mes)
 {
 	int keySize = mes->getBlockSize();
-	Preconditions::checkArgument(originalKeys.getSize()/keySize/2 == this->n);
+	Preconditions::checkArgument(originalKeys.size()/keySize/2 == this->n);
 
 	//Create vector to hold the new keys. There are two keys for each of the matrix columns.
-	VecBlock probeResistantKeys(m * 2 * keySize);
+	vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> probeResistantKeys(m * 2 * keySize);
 
 	//Generate new keys using the encryption scheme.
-	VecBlock seed(mes->generateKey(KEY_SIZE).getEncoded());
+	auto seedByte = mes->generateKey(KEY_SIZE).getEncoded();
+	//vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> seed(&(mes->generateKey(KEY_SIZE).getEncoded()[0]));
+
+	int* seedInt = (int*)&seedByte[0];
 
 	//For each pair of original keys allocate new keys and put them in the probeResistantKeys array.
 	for (int i = 0; i < n; i++) {
-		allocateKeys(probeResistantKeys, originalKeys[i * 2], originalKeys[i * 2 + 1], i, seed[i]);
+		//copy to aligned seed
+		//TODO - faster? (block*) seed = (block*)&seedByte[0].
+		block seed = _mm_set_epi32(seedInt[i*4+3], seedInt[i * 4 + 2], seedInt[i * 4 + 1], seedInt[i * 4]);
+		allocateKeys(probeResistantKeys, originalKeys[i * 2], originalKeys[i * 2 + 1], i, seed);
 	}
 
 	return probeResistantKeys;
@@ -160,13 +166,13 @@ CircuitInput* KProbeResistantMatrix::transformInput(const CircuitInput& original
 	return new CircuitInput(shared_ptr<vector<byte>>(newInput));
 }
 
-VecBlock KProbeResistantMatrix::restoreKeys(VecBlock receivedKeys)
+vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> KProbeResistantMatrix::restoreKeys(vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> &receivedKeys)
 {
-	Preconditions::checkArgument(receivedKeys.getSize() / 16 == this->m);
+	Preconditions::checkArgument(receivedKeys.size() / 16 == this->m);
 
 	//Allocate space for the original keys.
 
-	VecBlock restoredKeysArray(n);
+	vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> restoredKeysArray(n);
 
 	block xorOfShares;
 	for (int i = 0; i < n; i++) {
@@ -232,13 +238,4 @@ shared_ptr<KProbeResistantMatrix> KProbeResistantMatrix::loadFromFile(string fil
 	}
 
 	return shared_ptr<KProbeResistantMatrix>( new KProbeResistantMatrix(matrix));
-}
-
-string KProbeResistantMatrix::toString()
-{
-	return string();
-}
-
-void KProbeResistantMatrix::initFromString(const string & raw)
-{
 }

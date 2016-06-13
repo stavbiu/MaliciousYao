@@ -1,6 +1,16 @@
-﻿  BucketBundleList.cpp
+﻿  CommonMaliciousYao.cpp
   Generating Code...
   Compiling...
+  KProbeResistantMatrix.cpp
+  CommitmentBundle.cpp
+  CircuitInput.cpp
   OfflineProtocolP1.cpp
+  CommitmentsPackage.cpp
+  Bundle.cpp
+  BucketMapping.cpp
+  BucketBundleList.cpp
+  SCom.cpp
+  SC.cpp
+  DifferenceCommitmentCommitterBundle.cpp
   Generating Code...
   MaliciousYao.vcxproj -> c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\x64\Debug\MaliciousYao.lib

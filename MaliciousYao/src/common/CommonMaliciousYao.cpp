@@ -107,3 +107,4 @@ bool equalBlocks(block & a, block & b)
 		return true;
 	}
 }
+

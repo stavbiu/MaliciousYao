@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class KProbeResistantMatrix : public NetworkSerialized
+class KProbeResistantMatrix
 {
 private:
 	const int KEY_SIZE = 128;
@@ -20,9 +20,9 @@ private:
 	int n;							//Number of matrix's rows.
 	int m;							//Number of matrix's columns.
 
-	void allocateKeys(VecBlock & probeResistantKeys, block &originalKey0, block &originalKey1, int i, block &newKey);
+	void allocateKeys(vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> & probeResistantKeys, block &originalKey0, block &originalKey1, int i, block &newKey);
 
-	int getNumberOfShares(int i, VecBlock &probeResistantKeys, int* shares, int* lastShare);
+	int getNumberOfShares(int i, vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> &probeResistantKeys, int* shares, int* lastShare);
 
 public:
 	/**
@@ -48,7 +48,7 @@ public:
 	 Return
 		 the transformed keys, that matched the columns of the matrix.
 	*/
-	VecBlock transformKeys(VecBlock originalKeys, AES* mes);
+	vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> transformKeys(vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> originalKeys, AES* mes);
 
 	/**
 	 Gets a original inputs and transform them into inputs that corresponds to the matrix columns.
@@ -67,7 +67,7 @@ public:
 	 Return:
 		 the original restored keys.
 	*/
-	VecBlock restoreKeys(VecBlock receivedKeys);
+	vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> restoreKeys(vector<block, aligned_allocator<block, SIZE_OF_BLOCK>> &receivedKeys);
 
 	/**
 	 Saves the matrix to a file.
@@ -85,8 +85,4 @@ public:
 		 The read matrix.
 	*/
 	static shared_ptr<KProbeResistantMatrix> loadFromFile(string filename);
-
-	// Inherited via NetworkSerialized
-	virtual string toString() override;
-	virtual void initFromString(const string & raw) override;
 };
