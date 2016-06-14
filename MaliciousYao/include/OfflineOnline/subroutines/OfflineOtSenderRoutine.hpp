@@ -1,6 +1,7 @@
 #pragma once
 
 #include <libscapi/include/interactive_mid_protocols/OTBatch.hpp>
+#include <libscapi/include/interactive_mid_protocols/OTExtensionMalicious.hpp>
 
 #include "../../../include/OfflineOnline/primitives/BucketBundleList.hpp"
 #include "../../../include/primitives/KProbeResistantMatrix.hpp"
@@ -19,8 +20,7 @@ using namespace std;
 class OfflineOtSenderRoutine 
 {
 private:
-	//TODO - OTExtensionMaliciousSender
-	//OTExtensionMaliciousSender maliciousOtSender;			// The inner malicious OT sender object.
+	shared_ptr<OTExtensionMaliciousSender> maliciousOtSender;			// The inner malicious OT sender object.
 	shared_ptr<BucketBundleList> buckets;							// Contain the circuits.
 
 	/*
@@ -54,10 +54,8 @@ public:
 	* @param matrix The matrix to convert the original Y1 input to the Y1 extended inputs.
 	* @param buckets Contain the circuits.
 	*/
-	//TODO - OTExtensionMaliciousSender in constractor
-	//public OfflineOtSenderRoutine(ExecutionParameters execution, CryptoPrimitives primitives, OTExtensionMaliciousSender maliciousOtSender,
-		//KProbeResistantMatrix matrix, BucketBundleList buckets);
-	OfflineOtSenderRoutine(ExecutionParameters execution, CryptoPrimitives primitives, KProbeResistantMatrix matrix, shared_ptr<BucketBundleList> buckets);
+	OfflineOtSenderRoutine(ExecutionParameters execution, CryptoPrimitives primitives, KProbeResistantMatrix matrix, 
+		shared_ptr<BucketBundleList> buckets, shared_ptr<OTExtensionMaliciousSender> maliciousOtSender);
 
 	/**
 	* Runs the sender side of the malicious OT protocol for each bucket.

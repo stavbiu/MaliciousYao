@@ -1,5 +1,6 @@
 #pragma once
 
+#include <libscapi/include/interactive_mid_protocols/OTExtensionMalicious.hpp>
 #include "../../../include/common/CommonMaliciousYao.hpp"
 #include "../../../include/primitives/CommunicationConfig.hpp"
 #include "../../../include/primitives/ExecutionParameters.hpp"
@@ -28,8 +29,7 @@ private:
 	shared_ptr<KProbeResistantMatrix> crMatrix;				//The probe-resistant matrix that used to extend the ceating recovery circuit's keys.
 	shared_ptr<BucketBundleList> mainBuckets;							//Contain the main circuits.
 	shared_ptr<BucketBundleList> crBuckets;				//Contain the cheating recovery circuits.
-	//***********************************
-	//TODO - OTExtensionMaliciousSender maliciousOtSender;	//The malicious OT used to transfer the keys.
+	shared_ptr<OTExtensionMaliciousSender> maliciousOtSender;	//The malicious OT used to transfer the keys.
 
 public:
 	/**
@@ -39,12 +39,8 @@ public:
 	* @param primitives Contains the low level instances to use.
 	* @param communication Configuration of communication between parties.
 	*/
-	//TODO - add OTExtensionMaliciousSender and remove temp declertion
-	//OfflineProtocolP1(shared_ptr<ExecutionParameters> mainExecution, shared_ptr<ExecutionParameters> crExecution,
-	//	shared_ptr<CryptoPrimitives> primitives, shared_ptr<CommunicationConfig> communication, OTExtensionMaliciousSender maliciousOtSender);
-	//*************** temp declertion *************************
 	OfflineProtocolP1(shared_ptr<ExecutionParameters> mainExecution, shared_ptr<ExecutionParameters> crExecution,
-		shared_ptr<CryptoPrimitives> primitives, shared_ptr<CommunicationConfig> communication);
+		shared_ptr<CryptoPrimitives> primitives, shared_ptr<CommunicationConfig> communication, shared_ptr<OTExtensionMaliciousSender> maliciousOtSender);
 
 	/**
 	* Runs the first party in the offline phase of the malicious Yao protocol.

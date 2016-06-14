@@ -21,8 +21,7 @@ vector<byte> OfflineOtSenderRoutine::buildInput(int bucketId, int b)
 
 			//Get the random value of the decommitment for this wire.
 			CmtCDecommitmentMessage* decom = bundle->getCommitmentsY1Extended()->getDecommitment(i, b);
-			//TODO -CmtSimpleHashDecommitmentMessage , vector<byte> r = decom->getR()->getR();
-			vector<byte> r;
+			vector<byte> r =(static_pointer_cast<ByteArrayRandomValue>( decom->getR()))->getR();
 
 			//Put in the input array the key and random. The receiver will use them to verify the commitments of Y1 extended keys.
 			memcpy(&inputArr[pos], &key[0], this->keySize);
@@ -39,8 +38,6 @@ vector<byte> OfflineOtSenderRoutine::buildInput(int bucketId, int b)
 
 void OfflineOtSenderRoutine::runOtExtensionTransfer(int bucketId)
 {
-	//TODO - OfflineOtSenderRoutine::runOtExtensionTransfer
-
 	//Get the garbled inputs of each party.
 	vector<byte> x0Arr = buildInput(bucketId, 0);
 	vector<byte> x1Arr = buildInput(bucketId, 1);
@@ -49,13 +46,13 @@ void OfflineOtSenderRoutine::runOtExtensionTransfer(int bucketId)
 	OTBatchSInput* input = new OTExtensionGeneralSInput(x0Arr, x1Arr, m);
 
 	//Execute the OT protocol.
-	//TODO - maliciousOtSender.transfer(null, input);
+	this->maliciousOtSender->transfer(input);
 }
 
-OfflineOtSenderRoutine::OfflineOtSenderRoutine(ExecutionParameters execution, CryptoPrimitives primitives, KProbeResistantMatrix matrix, shared_ptr<BucketBundleList> buckets)
+OfflineOtSenderRoutine::OfflineOtSenderRoutine(ExecutionParameters execution, CryptoPrimitives primitives, KProbeResistantMatrix matrix, shared_ptr<BucketBundleList> buckets, shared_ptr<OTExtensionMaliciousSender> maliciousOtSender)
 {
 	//Sets the parameters.
-	//this->maliciousOtSender = maliciousOtSender;
+	this->maliciousOtSender = maliciousOtSender;
 	this->buckets = buckets;
 	this->numBuckets = execution.getNumberOfExecutions();
 	this->bucketSize = execution.getBucketSize();

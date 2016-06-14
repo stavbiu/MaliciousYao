@@ -105,7 +105,7 @@
       <WarningLevel>Level1</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WIN32_WINNT=0x06030000;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\stav\cereal\cereal\include;C:\Program Files\OpenSSL-Win64\include;C:\Users\stav\;C:\local\boost_1_60_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\stav\libscapi\lib\MiraclWin64\source;C:\Users\stav\libscapi\lib;C:\Users\stav\cereal\cereal\include;C:\Program Files\OpenSSL-Win64\include;C:\Users\stav\;C:\local\boost_1_60_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
