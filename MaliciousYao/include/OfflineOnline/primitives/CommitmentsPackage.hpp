@@ -2,6 +2,7 @@
 
 #include "../../../include/common/CommonMaliciousYao.hpp"
 #include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
+#include <libscapi/include/interactive_mid_protocols/CommitmentSchemeSimpleHash.hpp>
 #include <cereal/archives/xml.hpp>	// for variable name
 #include <cereal/types/vector.hpp>	// vector recognition
 #include <cereal/types/memory.hpp>  // for smart pointers
@@ -55,8 +56,7 @@ public:
 	 Create new CmtCCommitmentMsg.
 	*** Caller needs to Delete. ***
 	*/
-	CmtCCommitmentMsg* getSeedCmt() { //TODO - return new CmtSimpleHashCommitmentMessage(seedCmt, seedIds); 
-	}
+	CmtCCommitmentMsg* getSeedCmt() { return new CmtSimpleHashCommitmentMessage(seedCmt, seedIds); }
 
 	void setMaskCmt(CmtCCommitmentMsg* maskCommitment);
 
@@ -64,8 +64,7 @@ public:
 	Create new CmtCCommitmentMsg.
 	*** Caller needs to Delete. ***
 	*/
-	CmtCCommitmentMsg* getMaskCmt() { //TODO - return new CmtSimpleHashCommitmentMessage(maskCmt, maskIds);
-	}
+	CmtCCommitmentMsg* getMaskCmt() { return new CmtSimpleHashCommitmentMessage(maskCmt, maskIds); }
 
 	shared_ptr<vector<byte>> getCommitmentsX() { return this->commitmentsX; }
 
@@ -89,15 +88,13 @@ public:
 	Create and return a CmtCCommitmentMsg from the commitmentsOutputKeys.
 	*** Caller needs to Delete. ***
 	*/
-	CmtCCommitmentMsg* getCommitmentsOutputKeys() {//TODO - return new CmtSimpleHashCommitmentMessage(commitmentsOutputKeys, 0);
-	}
+	CmtCCommitmentMsg* getCommitmentsOutputKeys() {return new CmtSimpleHashCommitmentMessage(commitmentsOutputKeys, 0); }
 
 	/*
 	 Set the given commitmentsX in the commitmentsOutputKeys and commitmentsOutputKeysIds members.
 	*/
 	void setCommitmentsOutputKeys(CmtCCommitmentMsg* output) {
-		//TODO - getCommitment() return shared_ptr<void> need casting to CmtSimpleHashCommitmentMessage
-		//this->commitmentsOutputKeys = output->getCommitment();
+		this->commitmentsOutputKeys = std::static_pointer_cast<vector<byte>>(output->getCommitment());
 	}
 
 	/*

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <libscapi/include/interactive_mid_protocols/OTSemiHonestExtension.hpp>
+#include <libscapi/include/interactive_mid_protocols/OTBatch.hpp>
 
 #include "../../../include/OfflineOnline/primitives/BucketBundleList.hpp"
 #include "../../../include/primitives/KProbeResistantMatrix.hpp"

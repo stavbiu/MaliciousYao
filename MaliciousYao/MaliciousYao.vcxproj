@@ -164,12 +164,12 @@
     <ClCompile Include="src\OfflineOnline\primitives\BucketBundleList.cpp" />
     <ClCompile Include="src\OfflineOnline\primitives\BucketMapping.cpp" />
     <ClCompile Include="src\OfflineOnline\primitives\Bundle.cpp" />
+    <ClCompile Include="src\OfflineOnline\primitives\CommitmentBundle.cpp" />
     <ClCompile Include="src\OfflineOnline\primitives\CommitmentsPackage.cpp" />
     <ClCompile Include="src\OfflineOnline\specs\OfflineProtocolP1.cpp" />
     <ClCompile Include="src\OfflineOnline\subroutines\OfflineOtSenderRoutine.cpp" />
     <ClCompile Include="src\primitives\CheatingRecoveryCircuitCreator.cpp" />
     <ClCompile Include="src\primitives\CircuitInput.cpp" />
-    <ClCompile Include="src\primitives\CommitmentBundle.cpp" />
     <ClCompile Include="src\primitives\CommunicationConfig.cpp" />
     <ClCompile Include="src\primitives\KProbeResistantMatrix.cpp" />
     <ClCompile Include="src\primitives\UnlockP1InputCircuitCreator.cpp" />
@@ -187,12 +187,12 @@
     <ClInclude Include="include\OfflineOnline\primitives\BucketBundleList.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\BucketMapping.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\Bundle.hpp" />
+    <ClInclude Include="include\OfflineOnline\primitives\CommitmentBundle.hpp" />
     <ClInclude Include="include\OfflineOnline\primitives\CommitmentsPackage.hpp" />
     <ClInclude Include="include\OfflineOnline\specs\OfflineProtocolP1.hpp" />
     <ClInclude Include="include\OfflineOnline\subroutines\OfflineOtSenderRoutine.hpp" />
     <ClInclude Include="include\primitives\CheatingRecoveryCircuitCreator.hpp" />
     <ClInclude Include="include\primitives\CircuitInput.hpp" />
-    <ClInclude Include="include\primitives\CommitmentBundle.hpp" />
     <ClInclude Include="include\primitives\CommunicationConfig.hpp" />
     <ClInclude Include="include\primitives\CryptoPrimitives.hpp" />
     <ClInclude Include="include\primitives\ExecutionParameters.hpp" />

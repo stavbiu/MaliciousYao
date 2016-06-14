@@ -92,9 +92,6 @@
     <ClCompile Include="src\primitives\KProbeResistantMatrix.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\primitives\CommitmentBundle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="src\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.cpp">
       <Filter>Source Files\CommitmentWithZkProofOfDifference</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="src\common\KeyUtils.cpp">
       <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OfflineOnline\primitives\CommitmentBundle.cpp">
+      <Filter>Source Files\OfflineOnline\primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +152,6 @@
       <Filter>Header Files\OfflineOnline\specs</Filter>
     </ClInclude>
     <ClInclude Include="include\primitives\KProbeResistantMatrix.hpp">
-      <Filter>Header Files\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="include\primitives\CommitmentBundle.hpp">
       <Filter>Header Files\primitives</Filter>
     </ClInclude>
     <ClInclude Include="include\CommitmentWithZkProofOfDifference\DifferenceCommitmentCommitterBundle.hpp">
@@ -192,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="include\common\KeyUtils.hpp">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OfflineOnline\primitives\CommitmentBundle.hpp">
+      <Filter>Header Files\OfflineOnline\primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

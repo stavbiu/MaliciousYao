@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../include/common/CommonMaliciousYao.hpp"
-#include "../../../include/primitives/CommitmentBundle.hpp"
+#include "../../../include/OfflineOnline/primitives/CommitmentBundle.hpp"
 #include "../../../include/CommitmentWithZkProofOfDifference/DifferenceCommitmentCommitterBundle.hpp"
 #include "../../../include/OfflineOnline/primitives/CommitmentsPackage.hpp"
 #include "../../../include/common/aligned_allocator_no_destructor.hpp"

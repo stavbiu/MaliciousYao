@@ -1,4 +1,4 @@
-#include "../../include/primitives/CommitmentBundle.hpp"
+#include "../../../include/OfflineOnline/primitives/CommitmentBundle.hpp"
 
 CommitmentBundle::CommitmentBundle(shared_ptr<vector<byte>> commitmentsVec, shared_ptr<vector<long>> commitmentsIdsVec, shared_ptr<vector<byte>> decommitmentsVec, shared_ptr<vector<byte>> decommitmentRandomsVec)
 {
@@ -14,15 +14,9 @@ CmtCCommitmentMsg * CommitmentBundle::getCommitment(int wireIndex, int sigma) co
 	Preconditions::checkBinary(sigma);
 
 	//Return the commitment that matches the given sigma of the given wire index.
-
-	//TODO -CmtSimpleHashCommitmentMessage
-	//Return the commitment that matches the given sigma of the given wire index.
-	/*byte[] commitment = new byte[commitmentSize];
-	System.arraycopy(commitments, wireIndex * 2 * commitmentSize + sigma*commitmentSize, commitment, 0, commitmentSize);
-	return new CmtSimpleHashCommitmentMessage(commitment, commitmentIds[wireIndex * 2 + sigma]);
-	*/
-
-	return nullptr;
+	shared_ptr<vector<byte>> commitment(new vector<byte>(this->commitmentSize));
+	memcpy(&commitment->at(0), &this->commitments->at(wireIndex * 2 * commitmentSize + sigma*commitmentSize), commitmentSize);
+	return new CmtSimpleHashCommitmentMessage(commitment, commitmentIds->at(wireIndex * 2 + sigma));
 }
 
 CmtCDecommitmentMessage * CommitmentBundle::getDecommitment(int wireIndex, int sigma)
@@ -30,18 +24,15 @@ CmtCDecommitmentMessage * CommitmentBundle::getDecommitment(int wireIndex, int s
 	//Check that the sigma is 0 or 1.
 	Preconditions::checkBinary(sigma);
 
-	//TODO - CmtSimpleHashDecommitmentMessage
 	//Return the decommitment that matches the given sigma of the given wire index.
-	/*byte[] r = new byte[commitmentSize];
-	byte[] x = new byte[keySize];
-	System.arraycopy(decommitmentRandoms, wireIndex * 2 * commitmentSize + sigma*commitmentSize, r, 0, commitmentSize);
-	System.arraycopy(decommitments, wireIndex * 2 * keySize + sigma*keySize, x, 0, keySize);
+	vector<byte> r(this->commitmentSize);
+	vector<byte> x(this->keySize);
 
-	//Create and return a CmtCDecommitmentMessage from the copied x, r.
-	return new CmtSimpleHashDecommitmentMessage(new ByteArrayRandomValue(r), x);
-	*/
+	memcpy(&r[0], &this->decommitmentRandoms->at(wireIndex * 2 * commitmentSize + sigma*commitmentSize), 
+		this->commitmentSize);
+	memcpy(&x[0], &this->decommitments->at(wireIndex * 2 * keySize + sigma*keySize), this->keySize);
 
-	return nullptr;
+	return new CmtSimpleHashDecommitmentMessage(shared_ptr<ByteArrayRandomValue>(new ByteArrayRandomValue(r)), x);
 }
 
 bool CommitmentBundle::operator==(const CommitmentBundle & b)

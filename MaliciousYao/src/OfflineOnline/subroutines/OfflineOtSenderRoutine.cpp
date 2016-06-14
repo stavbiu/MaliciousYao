@@ -46,7 +46,7 @@ void OfflineOtSenderRoutine::runOtExtensionTransfer(int bucketId)
 	vector<byte> x1Arr = buildInput(bucketId, 1);
 
 	//Create the input for the OT sender.
-	OTBatchSInput* input = new OTExtensionGeneralSInput(&x0Arr[0], x0Arr.size(), &x1Arr[0], x1Arr.size(), m);
+	OTBatchSInput* input = new OTExtensionGeneralSInput(x0Arr, x1Arr, m);
 
 	//Execute the OT protocol.
 	//TODO - maliciousOtSender.transfer(null, input);

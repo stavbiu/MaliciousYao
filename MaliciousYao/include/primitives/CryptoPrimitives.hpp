@@ -27,7 +27,7 @@ private:
 public:
 	//constructor
 	CryptoPrimitives(string dlogfile) : kdf(&OpenSSLHMAC()) {
-		dlog = new OpenSSLDlogECF2m(dlogfile, string("K-233"),this->random);
+		dlog = new OpenSSLDlogECF2m(dlogfile, string("K-233"));
 	};	
 
 	//distructor

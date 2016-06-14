@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../../include/common/CommonMaliciousYao.hpp"
+#include "../../../include/common/CommonMaliciousYao.hpp"
 #include <libscapi/include/interactive_mid_protocols/CommitmentScheme.hpp>
+#include <libscapi/include/interactive_mid_protocols/CommitmentSchemeSimpleHash.hpp>
 #include <libscapi/include/infra/Common.hpp>
 #include <cereal/archives/xml.hpp>	// for variable name
 #include <cereal/types/vector.hpp>	// vector recognition
