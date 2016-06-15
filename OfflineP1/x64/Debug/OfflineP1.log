@@ -1,3 +1,0 @@
-﻿  AppOfflineP1.cpp
-c:\users\stav\documents\visual studio 2015\projects\maliciousyao\offlinep1\appofflinep1.cpp : fatal error C1041: cannot open program database 'c:\Users\stav\Documents\Visual Studio 2015\Projects\MaliciousYao\OfflineP1\x64\Debug\vc140.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
